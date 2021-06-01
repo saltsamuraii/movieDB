@@ -1,0 +1,19 @@
+{
+  "name": "epam-project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://saltsamuraii@bitbucket.org/saltsamuraii/epam-project.git"
+  },
+  "author": "Kirill",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://bitbucket.org/saltsamuraii/epam-project/issues"
+  },
+  "homepage": "https://bitbucket.org/saltsamuraii/epam-project#readme"
+}
