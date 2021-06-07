@@ -21,19 +21,15 @@
         }
     }
 
+    const reactElement = React.createElement('button', null, 'React createElement');
+
     class App extends React.Component {
 
         render() {
-            const element = React.createElement(
-                'button',
-                null,
-                'React createElement'
-            );
-
             return (
                 <div>
                     <button>React Component</button>
-                    {element}
+                    {reactElement}
                     <Welcome name="component"/>
                     <Header/>
                 </div>
