@@ -2,44 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Movies DB</title>
-    <script src="https://unpkg.com/react@17/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js" crossorigin></script>
-    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title><%= htmlWebpackPlugin.options.title %></title>
 </head>
 <body>
 <div id="root"></div>
-<script type="text/babel">
-
-    function Welcome(props) {
-        return <button>functional {props.name}</button>
-    }
-
-    class Header extends React.PureComponent {
-        render() {
-            return <button>React PureComponent</button>
-        }
-    }
-
-    const reactElement = React.createElement('button', null, 'React createElement');
-
-    class App extends React.Component {
-
-        render() {
-            return (
-                <div>
-                    <button>React Component</button>
-                    {reactElement}
-                    <Welcome name="component"/>
-                    <Header/>
-                </div>
-            );
-        };
-    }
-
-
-    ReactDOM.render(<App />, document.getElementById('root'));
-</script>
-
 </body>
 </html>
