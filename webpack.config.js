@@ -15,17 +15,26 @@ module.exports = {
                 exclude: /node_modules/,
                 use: ["babel-loader"]
             },
+            //
+            // Loading styles
+            //
             {
                 test: /\.css$/,
                 use: ["style-loader", "css-loader"]
             },
+            //
+            // Loading styles
+            //
             {
                 test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
-                type: 'asset/resource',
+                type: "asset/resource",
             },
+            //
+            // Loading fonts
+            //
             {
                 test: /\.(woff(2)?|eot|ttf|otf|svg|)$/,
-                type: 'asset/inline',
+                type: "asset/inline",
             },
         ]
     },
