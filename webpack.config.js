@@ -5,15 +5,15 @@ module.exports = {
     mode: "development",
     entry: "./src/index.js",
     output: {
-        filename: "main.bundle.js",
+        filename: "main.js",
         path: path.resolve(__dirname, "dist")
     },
     module: {
         rules: [
             {
                 test: /\.js$/,
-                exports: /node_modules/,
-                use: "babel-loader"
+                exclude: /node_modules/,
+                use: ["babel-loader"]
             },
             {
                 test: /\.css$/,
@@ -37,7 +37,7 @@ module.exports = {
         }),
     ],
     devServer: {
-        contentBase: path.resolve(__dirname, 'dist'),
+        contentBase: path.resolve(__dirname, "dist"),
         open: true,
         compress: true,
         port: 8000,
