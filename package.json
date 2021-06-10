@@ -6,7 +6,8 @@
   "scripts": {
     "test": "jest",
     "start": "webpack serve",
-    "build": "webpack"
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development"
   },
   "repository": {
     "type": "git",
@@ -14,6 +15,11 @@
   },
   "author": "Kirill",
   "license": "ISC",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions",
+    "last 1 edge versions"
+  ],
   "bugs": {
     "url": "https://bitbucket.org/saltsamuraii/epam-project/issues"
   },
