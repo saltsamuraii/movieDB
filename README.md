@@ -1,2 +1,2 @@
 ## What is it?
-A movies database application.
+A web application.

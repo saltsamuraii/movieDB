@@ -23,7 +23,7 @@ module.exports = {
                 use: ["style-loader", "css-loader"]
             },
             //
-            // Loading styles
+            // Loading images
             //
             {
                 test: /\.(?:ico|gif|png|jpg|jpeg)$/i,
@@ -40,7 +40,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Movies DB",
+            title: "Web app",
             template: path.resolve(__dirname, "public/index.html"),
             filename: "index.html",
         }),
