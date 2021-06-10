@@ -1,7 +1,9 @@
 const path = require("path");
+const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
+    devtool: "source-map",
     mode: "development",
     entry: "./src/index.js",
     output: {
@@ -44,6 +46,7 @@ module.exports = {
             template: path.resolve(__dirname, "public/index.html"),
             filename: "index.html",
         }),
+        new webpack.HotModuleReplacementPlugin(),
     ],
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
