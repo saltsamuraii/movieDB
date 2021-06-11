@@ -1,0 +1,17 @@
+h1 {
+    font-size: 40px;
+    color: #000;
+    text-align: center;
+}
+
+p {
+    text-align: center;
+    font-size: 30px;
+    color: aqua;
+}
+
+input {
+    text-align: center;
+    font-size: 15px;
+    color: #ff00d5;
+}

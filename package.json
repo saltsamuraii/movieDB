@@ -1,10 +1,13 @@
 {
-  "name": "movies-database-app",
+  "name": "movie-finder",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start": "webpack serve",
+    "build": "cross-env NODE_ENV=production webpack",
+    "dev": "webpack"
   },
   "repository": {
     "type": "git",
@@ -12,8 +15,36 @@
   },
   "author": "Kirill",
   "license": "ISC",
+  "browserslist": [
+    "last 2 chrome versions",
+    "last 2 firefox versions",
+    "last 1 edge versions"
+  ],
   "bugs": {
     "url": "https://bitbucket.org/saltsamuraii/epam-project/issues"
   },
-  "homepage": "https://bitbucket.org/saltsamuraii/epam-project#readme"
+  "homepage": "https://bitbucket.org/saltsamuraii/epam-project#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.14.3",
+    "@babel/core": "^7.14.3",
+    "@babel/preset-env": "^7.14.4",
+    "@babel/preset-react": "^7.13.13",
+    "babel-loader": "^8.2.2",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.6",
+    "html-webpack-plugin": "^5.3.1",
+    "jest": "^27.0.4",
+    "mini-css-extract-plugin": "^1.6.0",
+    "normalize.css": "^8.0.1",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.38.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^3.11.2"
+  },
+  "dependencies": {
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0"
+  }
 }
