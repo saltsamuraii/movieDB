@@ -1,18 +1,23 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const isDev = process.env.NODE_ENV === "development";
 const isProd = process.env.NODE_ENV === "production";
+const styleLoader = () => {
+    if (isProd) return MiniCssExtractPlugin.loader;
+    return "style-loader";
+};
 
 module.exports = {
     mode: isProd ? "production" : "development",
-    devtool: isDev ? "eval" : "source-map",
+    devtool: isProd ? "source-map" : "eval",
 
     entry: "./src/index.js",
     output: {
         filename: "main.js",
-        path: path.resolve(__dirname, "dist")
+        path: path.resolve(__dirname, "dist"),
+        clean: true
     },
     module: {
         rules: [
@@ -26,7 +31,7 @@ module.exports = {
             //
             {
                 test: /\.css$/,
-                use: ["style-loader", "css-loader"]
+                use: [ styleLoader() , "css-loader"]
             },
             //
             // Loading images
@@ -51,6 +56,7 @@ module.exports = {
             filename: "index.html",
         }),
         new webpack.HotModuleReplacementPlugin(),
+        new MiniCssExtractPlugin()
     ],
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
