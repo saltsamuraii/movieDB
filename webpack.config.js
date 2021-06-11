@@ -4,10 +4,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
-const styleLoader = () => {
-    if (isProd) return MiniCssExtractPlugin.loader;
-    return "style-loader";
-};
+
 
 module.exports = {
     mode: isProd ? "production" : "development",
@@ -31,7 +28,7 @@ module.exports = {
             //
             {
                 test: /\.css$/,
-                use: [ styleLoader() , "css-loader"]
+                use: [ isProd ? MiniCssExtractPlugin.loader : "style-loader", "css-loader"]
             },
             //
             // Loading images
@@ -55,8 +52,10 @@ module.exports = {
             template: path.resolve(__dirname, "public/index.html"),
             filename: "index.html",
         }),
+        new MiniCssExtractPlugin({
+            filename: "style.css"
+        }),
         new webpack.HotModuleReplacementPlugin(),
-        new MiniCssExtractPlugin()
     ],
     devServer: {
         contentBase: path.resolve(__dirname, "dist"),
