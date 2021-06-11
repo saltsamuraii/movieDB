@@ -1,2 +1,2 @@
 ## What is it?
-A web application.
+A movie application for search a movie in database by a title or genre.

@@ -2,9 +2,13 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 
+const isDev = process.env.NODE_ENV === "development";
+const isProd = process.env.NODE_ENV === "production";
+
 module.exports = {
-    devtool: "source-map",
-    mode: "development",
+    mode: isProd ? "production" : "development",
+    devtool: isDev ? "eval" : "source-map",
+
     entry: "./src/index.js",
     output: {
         filename: "main.js",
@@ -42,7 +46,7 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: "Web app",
+            title: "Movie Finder",
             template: path.resolve(__dirname, "public/index.html"),
             filename: "index.html",
         }),
@@ -56,4 +60,4 @@ module.exports = {
         historyApiFallback: true,
         hot: true,
     },
-}
+};
