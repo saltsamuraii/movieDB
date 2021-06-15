@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 
 import ErrorBoundary from '../error-boundary/errorboundry';
 import Header from '../header/header';
-import MovieList from '../movie-list/movie-list';
+import MoviesList from '../movies-list/movies-list';
 import Footer from '../footer/footer';
+//import SwaggerService from '../services/swagger-service';
 
 class App extends Component {
     render() {
         return (
-            <div>
-                <ErrorBoundary>
+            <ErrorBoundary>
                 <Header/>
-                <MovieList/>
+                    <MoviesList/>
                 <Footer/>
-                </ErrorBoundary>
-            </div>
+            </ErrorBoundary>
         )
     }
 }
