@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 
+import Logo from '../logo/logo';
+import SearchBar from '../search-bar/search-bar';
+
+import './header.css'
+
 class Header extends Component {
     render() {
         return (
-            <div>
-            </div>
+            <header className="container">
+                <Logo/>
+                <SearchBar/>
+            </header>
         );
     }
 }

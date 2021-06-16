@@ -1,0 +1,7 @@
+.container {
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.5), #000
+    ),
+    url("https://i.redd.it/4fxxbm4opjd31.jpg") center, no-repeat;
+    background-size: cover;
+}
