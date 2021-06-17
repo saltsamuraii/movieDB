@@ -1,56 +1,39 @@
-import React, {Component} from 'react';
+export default class SwaggerService {
 
-class SwaggerService extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            error: null,
-            isLoaded: false,
-            data: []
-        };
-    }
+    apiBase = 'https://reactjs-cdp.herokuapp.com';
 
-    apiBase = 'https://reactjs-cdp.herokuapp.com/movies'
+    async getResource(url) {
+        const res = await fetch(`${this.apiBase}${url}`);
 
-    componentDidMount() {
-        fetch(this.apiBase)
-            .then(res => res.json())
-            .then(
-                (result) => {
-                    this.setState({
-                        isLoaded: true,
-                        items: result.data
-                    });
-                },
-                (error) => {
-                    this.setState({
-                        isLoaded: true,
-                        error
-                    });
-                }
-            )
-    }
-
-    render() {
-        const {error, isLoaded, items} = this.state;
-
-        if (error) {
-            return <div>Error: {error.message}</div>;
-        } if (!isLoaded) {
-            return <div>Loading....</div>
+        if (!res.ok) {
+            throw new Error(`Could not fetch ${url}` +
+                `, received ${res.status}`)
         }
-        return (
-            <ul>
-                {items.map(item => (
-                    <li key={item.id}>
-                        <img src={item.poster_path} alt="poster"/>
-                        <p>{item.title}</p>
-                        <p>{item.genres}</p>
-                    </li>
-                ))}
-            </ul>
-        );
+        return await res.json();
+    };
+
+    async getAllMovies() {
+        const res = await this.getResource(`/movies/`)
+        return res.data.map(this.transformMovie);
     }
+
+    async getMovie(id) {
+      const movie = await this.getResource(`/movies/${id}/`)
+        return this.transformMovie(movie);
+    }
+
+    transformMovie(movie) {
+        return {
+            id,
+            title: movie.title,
+            rating: movie.vote_average,
+            year: movie.release_date,
+            cover: movie.poster_path,
+            description: movie.overview,
+            genre: movie.genre,
+            runtime: movie.runtime
+        };
+    };
 }
 
-export default SwaggerService;
+
