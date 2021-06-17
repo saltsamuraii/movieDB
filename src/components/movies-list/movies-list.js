@@ -1,21 +1,21 @@
 import React, {Component} from 'react';
 
+import MovieCard from '../movie-card/movie-card';
+import Results from '../results/results';
+
 import './movies-list.css'
+import SwaggerService from "../services/swagger-service";
 
 class MoviesList extends Component {
     render() {
         return (
-            <>
-                <div className="result__filters">
-                    <span className="result__text">0 movies found</span>
-                    <div>
-                        <span className="result__text">Sort by</span>
-                        <span className="result__text result__text-date active">release date</span>
-                        <span className="result__text result__text-rating">rating</span>
-                    </div>
-                </div>
-                <h2 className="result__title">No films found</h2>
-            </>
+            <main>
+                <Results/>
+                <SwaggerService>
+                    {/*<h2 className="results__title">No movies found</h2>*/}
+                    <MovieCard/>
+</SwaggerService>
+            </main>
         );
     }
 }

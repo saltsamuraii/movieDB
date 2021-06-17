@@ -1,29 +1,4 @@
-.result__filters {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 10px 0;
-    background: #afafaf;
-}
-
-.result__text {
-    margin: 0 10px;
-    font-size: 20px;
-    font-weight: bold;
-    color: #000;
-}
-
-.result__text-date.active {
-    color: #ff4f4f;
-}
-
-.result__text-rating:hover,
-.result__text-date:hover {
-    cursor: pointer;
-    color: #ff4f4f;
-}
-
-.result__title {
+.results__title {
     font-size: 40px;
     text-align: center;
     color: #000;
