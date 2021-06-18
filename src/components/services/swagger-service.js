@@ -22,15 +22,15 @@ export default class SwaggerService {
         return this.transformMovie(movie);
     }
 
-    transformMovie(movie) {
+    transformMovie = (movie) => {
         return {
-            id,
+            id: movie.id,
             title: movie.title,
             rating: movie.vote_average,
             year: movie.release_date,
             cover: movie.poster_path,
             description: movie.overview,
-            genre: movie.genre,
+            genre: movie.genres,
             runtime: movie.runtime
         };
     };
