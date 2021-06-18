@@ -27,10 +27,10 @@ export default class SwaggerService {
             id: movie.id,
             title: movie.title,
             rating: movie.vote_average,
-            year: movie.release_date,
+            year: movie.release_date.slice(0, 4),
             cover: movie.poster_path,
             description: movie.overview,
-            genre: movie.genres,
+            genre: movie.genres[0],
             runtime: movie.runtime
         };
     };

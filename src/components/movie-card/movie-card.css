@@ -4,11 +4,45 @@
     color: #000;
 }
 
-.movie-cards {
-    width: 100%;
-    margin: 10px;
+.movies {
+    width: 1200px;
+    margin: 30px auto;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+.movie__card {
+    cursor: pointer;
+    margin: 10px 15px;
 }
 
 .movie__poster {
-    width: 200px;
+    width: 250px;
 }
+
+.movie__content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.movie__title {
+    margin: 5px 0;
+    text-transform: uppercase;
+}
+
+.movie__year {
+    font-size: 15px;
+    padding: 0 10px;
+    border: 1px #000 solid;
+
+}
+
+.movie__genre {
+    margin: 0;
+    font-size: 16px;
+    color: #8d8d8d;
+}
+
