@@ -5,11 +5,10 @@
 }
 
 .movies {
-    width: 1200px;
-    margin: 30px auto;
-    padding: 0;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    padding: 0;
     list-style: none;
 }
 
@@ -19,7 +18,7 @@
 }
 
 .movie__poster {
-    width: 250px;
+    width: 325px;
 }
 
 .movie__content {
