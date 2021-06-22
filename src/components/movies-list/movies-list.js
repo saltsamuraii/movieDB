@@ -3,11 +3,11 @@ import React from 'react';
 import MovieCard from '../movie-card/movie-card';
 import Results from '../results/results';
 
-function MoviesList() {
+const MoviesList = (props) => {
         return (
             <main>
                 <Results/>
-                <MovieCard/>
+                <MovieCard onMovieSelected={props.onMovieSelected}/>
             </main>
         );
 }

@@ -14,7 +14,7 @@ class App extends Component {
         selectedMovie: null
     }
 
-    onMovieSelected(id) {
+    onMovieSelected = (id) => {
         this.setState({
             selectedMovie: id
         });

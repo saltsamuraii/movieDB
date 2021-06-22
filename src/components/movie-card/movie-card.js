@@ -29,7 +29,10 @@ class MovieCard extends Component {
     renderItems(arr) {
         return arr.map(({id, title, cover, genre, year}) => {
             return (
-                <li className="movie__card" key={id}>
+                <li className="movie__card"
+                    key={id}
+                    onClick={() => this.props.onMovieSelected(id)}
+                >
                     <img className="movie__poster" src={cover} onError={this.handleErrorImage} alt="no image"/>
                         <div className="movie__content">
                             <h5 className="movie__title">{title}</h5>
