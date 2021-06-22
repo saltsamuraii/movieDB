@@ -1,0 +1,50 @@
+.details__container {
+    display: flex;
+    background: linear-gradient(
+            rgba(0, 0, 0, 0.8), #000000
+    ),
+    url("https://i.redd.it/4fxxbm4opjd31.jpg") center, no-repeat;
+    background-size: cover;
+}
+
+.details__content {
+    margin-left: 30px;
+}
+
+.details__title {
+    font-size: 40px;
+    color: #ff0000;
+}
+
+.details__rating {
+    margin: 0 30px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+    padding: 7px;
+    border: 1px #fff solid;
+    border-radius: 30px;
+}
+
+.details__genre {
+    font-size: 20px;
+    color: #a5a5a5;
+}
+
+.details__year {
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.details__duration {
+    margin-left: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.details__description {
+    font-size: 25px;
+    color: #a5a5a5;
+}

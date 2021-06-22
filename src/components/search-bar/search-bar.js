@@ -3,7 +3,24 @@ import React, {Component} from 'react';
 import './search-bar.css'
 
 class SearchBar extends Component {
+
+    state = {
+        isActive: false,
+    }
+
+    handleOnSearch(e) {
+        e.preventDefault();
+        console.log('click');
+    };
+
+    handleToggleFilter = (e) => {
+        e.preventDefault()
+        this.setState({ isActive: !this.state.isActive });
+    }
+
     render() {
+        const isActive = this.state.isActive
+
         return (
             <>
                 <h1 className="title">Find your movie</h1>
@@ -12,10 +29,22 @@ class SearchBar extends Component {
                     <div className="filters">
                         <div>
                             <span className="text">search by</span>
-                            <button className="btn active">Title</button>
-                            <button className="btn">Genre</button>
+                            <button
+                                onClick={this.handleToggleFilter}
+                                className={isActive ? "btn" : "btn active"}>
+                                Title
+                            </button>
+                            <button
+                                onClick={this.handleToggleFilter}
+                                className={isActive ? "btn active" : "btn"}>
+                                Genre
+                            </button>
                         </div>
-                            <button className="btn btn__big-red">Search</button>
+                        <button
+                            className="btn btn__big-red"
+                            onClick={this.handleOnSearch}>
+                            Search
+                        </button>
                     </div>
                 </form>
             </>

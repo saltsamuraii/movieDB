@@ -31,7 +31,7 @@ export default class SwaggerService {
             cover: movie.poster_path,
             description: movie.overview,
             genre: movie.genres[0],
-            runtime: movie.runtime
+            runtime: movie.runtime,
         };
     };
 }
