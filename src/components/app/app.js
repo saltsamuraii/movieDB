@@ -1,17 +1,30 @@
 import React, { Component } from 'react';
 
 import ErrorBoundary from '../error-boundary/errorboundry';
-import Header from '../header/header';
+import MovieDetails from '../movie-details/movie-details';
 import MoviesList from '../movies-list/movies-list';
-import Footer from '../footer/footer';
+
 
 import './app.css'
-import MovieDetails from '../movie-details/movie-details';
+
+import SwaggerService from '../services/swagger-service';
+
 
 class App extends Component {
 
+    swaggerService = new SwaggerService()
+
     state = {
-        selectedMovie: null
+        selectedMovie: null,
+        searchResults: '',
+    }
+
+    handleClick = (e) => {
+        e.preventDefault()
+        console.log('back', this.state.selectedMovie)
+        this.setState({
+            selectedMovie: null
+        })
     }
 
     onMovieSelected = (id) => {
@@ -21,12 +34,16 @@ class App extends Component {
     }
 
     render() {
+
         return (
             <ErrorBoundary>
-                <Header/>
-                <MovieDetails movieId={this.state.selectedMovie}/>
-                <MoviesList onMovieSelected={this.onMovieSelected}/>
-                <Footer/>
+                <MovieDetails
+                    movieId={this.state.selectedMovie}
+                    handleBack={this.handleClick}
+                />
+                <MoviesList
+                    onMovieSelected={this.onMovieSelected}
+                />
             </ErrorBoundary>
         );
     }

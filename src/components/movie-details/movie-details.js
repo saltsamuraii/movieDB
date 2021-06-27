@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 
 import './movie-details.css'
 
-import Header from '../header/header.js';
 import SwaggerService from '../services/swagger-service';
+import SearchBar from "../search-bar/search-bar";
+import Results from "../results/results";
 
 class MovieDetails extends Component {
 
@@ -24,16 +25,20 @@ class MovieDetails extends Component {
     }
 
     updateMovie() {
-        const { movieId } = this.props;
+        const {movieId} = this.props;
         if (!movieId) {
+            this.setState({
+                movieId: null,
+                movie: null
+            });
             return;
         }
 
         this.swaggerService
             .getMovie(movieId)
             .then((movie) => {
-                this.setState({ movie });
-            })
+                this.setState({movie});
+            });
     }
 
     handleErrorImage(e) {
@@ -42,11 +47,11 @@ class MovieDetails extends Component {
 
     render() {
 
-        if(!this.state.movie) {
-            return <Header/>
+        if (!this.state.movie) {
+            return <SearchBar />
         }
 
-        const { cover, title, rating, genre, year, duration, description } = this.state.movie
+        const {cover, title, rating, genre, year, duration, description} = this.state.movie
 
         return (
             <div className="details__container">
@@ -59,7 +64,11 @@ class MovieDetails extends Component {
                     <span className="details__year">{year}</span>
                     <span className="details__duration">{duration}</span>
                     <p className="details__description">{description}</p>
-                    <button className="btn btn__big-red">Return</button>
+                    <button
+                        className="btn btn__big-red"
+                        onClick={this.props.handleBack.bind(this)}>
+                        Return
+                    </button>
                 </div>
             </div>
         );

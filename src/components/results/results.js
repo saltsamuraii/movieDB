@@ -5,13 +5,12 @@ import './results.css'
 class Results extends Component {
 
     state = {
-        isActive: false,
-        movieNumbers: 10
+        isActive: true,
     }
 
-    handleActiveFilter = (e) => {
+    handleClass = (e) => {
         e.preventDefault()
-        this.setState({ isActive: !this.state.isActive });
+        this.setState({isActive: !this.state.isActive});
     }
 
     render() {
@@ -20,15 +19,15 @@ class Results extends Component {
         return (
             <>
                 <div className="result__filters">
-                    <span className="result__text">{this.state.movieNumbers} movies found</span>
+                    <span className="result__text">{this.props.movieLength} movies found</span>
                     <div>
                         <span className="result__text">Sort by</span>
                         <span
-                            onClick={this.handleActiveFilter}
-                            className={isActive ? "result__filter" : "result__filter active"}>release date</span>
+                            onClick={this.handleClass}
+                            className={isActive ? "result__filter active" : "result__filter" }>release date</span>
                         <span
-                            onClick={this.handleActiveFilter}
-                            className={isActive ? "result__filter active" : "result__filter"}>rating</span>
+                            onClick={this.handleClass}
+                            className={isActive ? "result__filter" : "result__filter active" }>rating</span>
                     </div>
                 </div>
             </>

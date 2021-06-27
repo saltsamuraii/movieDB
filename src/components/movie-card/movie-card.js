@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import './movie-card.css'
 
 import SwaggerService from '../services/swagger-service';
+import Results from "../results/results";
+
 
 class MovieCard extends Component {
 
@@ -55,6 +57,7 @@ class MovieCard extends Component {
 
         return (
             <ul className="movies">
+                <Results movieLength={movies.length}/>
                 {movies}
             </ul>
         );
