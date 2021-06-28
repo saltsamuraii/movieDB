@@ -1,10 +1,7 @@
 import React, {Component} from 'react';
 
 import './movie-details.css'
-
 import SwaggerService from '../services/swagger-service';
-import SearchBar from "../search-bar/search-bar";
-import Results from "../results/results";
 
 class MovieDetails extends Component {
 
@@ -16,13 +13,13 @@ class MovieDetails extends Component {
 
     componentDidMount() {
         this.updateMovie();
-    }
+    };
 
     componentDidUpdate(prevProps) {
         if (this.props.movieId !== prevProps.movieId) {
             this.updateMovie();
         }
-    }
+    };
 
     updateMovie() {
         const {movieId} = this.props;
@@ -37,18 +34,17 @@ class MovieDetails extends Component {
         this.swaggerService
             .getMovie(movieId)
             .then((movie) => {
-                this.setState({movie});
+                this.setState({ movie });
             });
     }
 
     handleErrorImage(e) {
         e.target.src = 'https://allmovies.tube/assets/img/no-poster.png'
-    }
+    };
 
     render() {
-
         if (!this.state.movie) {
-            return <SearchBar />
+            return null;
         }
 
         const {cover, title, rating, genre, year, duration, description} = this.state.movie
@@ -57,6 +53,7 @@ class MovieDetails extends Component {
             <div className="details__container">
                 <img className="movie__poster" src={cover}
                      onError={this.handleErrorImage} alt="no image"/>
+
                 <div className="details__content">
                     <span className="details__title">{title}</span>
                     <span className="details__rating">{rating}</span>

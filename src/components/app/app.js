@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 
 import ErrorBoundary from '../error-boundary/errorboundry';
 import MovieDetails from '../movie-details/movie-details';
 import MoviesList from '../movies-list/movies-list';
 
+import SwaggerService from '../services/swagger-service';
+import SearchBar from "../search-bar/search-bar";
 
 import './app.css'
-
-import SwaggerService from '../services/swagger-service';
-
 
 class App extends Component {
 
@@ -16,15 +15,22 @@ class App extends Component {
 
     state = {
         selectedMovie: null,
-        searchResults: '',
+        movieList: [],
+        searchMovie: ''
     }
 
-    handleClick = (e) => {
+    handleInput = (e) => {
+        this.setState({
+            searchMovie: e.target.value
+        });
+    }
+
+    handleBack = (e) => {
         e.preventDefault()
-        console.log('back', this.state.selectedMovie)
+
         this.setState({
             selectedMovie: null
-        })
+        });
     }
 
     onMovieSelected = (id) => {
@@ -33,17 +39,32 @@ class App extends Component {
         });
     }
 
+    componentDidMount() {
+        this.swaggerService.getAllMovies()
+            .then((movieList) => {
+                this.setState({
+                    movieList
+                });
+            });
+    }
+
     render() {
+        const filteredMovies = this.state.movieList.filter((movie) => {
+            return movie.title.toLowerCase().includes(this.state.searchMovie.toLowerCase())
+        });
 
         return (
             <ErrorBoundary>
+                <h1>Movie Finder</h1>
+                <SearchBar
+                    handleInput={this.handleInput}
+                />
                 <MovieDetails
                     movieId={this.state.selectedMovie}
-                    handleBack={this.handleClick}
-                />
+                    handleBack={this.handleBack}/>
                 <MoviesList
-                    onMovieSelected={this.onMovieSelected}
-                />
+                    movieList={filteredMovies}
+                    onMovieSelected={this.onMovieSelected}/>
             </ErrorBoundary>
         );
     }

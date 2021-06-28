@@ -2,30 +2,12 @@ import React, {Component} from 'react';
 
 import './movie-card.css'
 
-import SwaggerService from '../services/swagger-service';
 import Results from "../results/results";
-
 
 class MovieCard extends Component {
 
-    swaggerService = new SwaggerService();
-
-    state = {
-        movieList: null,
-    };
-
     handleErrorImage(e) {
         e.target.src = 'https://allmovies.tube/assets/img/no-poster.png'
-    }
-
-    componentDidMount() {
-        this.swaggerService
-            .getAllMovies()
-            .then((movieList) => {
-                this.setState({
-                    movieList
-                });
-            });
     }
 
     renderItems(arr) {
@@ -33,8 +15,7 @@ class MovieCard extends Component {
             return (
                 <li className="movie__card"
                     key={id}
-                    onClick={() => this.props.onMovieSelected(id)}
-                >
+                    onClick={() => this.props.onMovieSelected(id)}>
                     <img className="movie__poster" src={cover} onError={this.handleErrorImage} alt="no image"/>
                         <div className="movie__content">
                             <h5 className="movie__title">{title}</h5>
@@ -47,10 +28,10 @@ class MovieCard extends Component {
     }
 
     render() {
-        const { movieList } = this.state;
+        const { movieList } = this.props;
 
         if (!movieList) {
-            return <p>Loading...</p>
+            return <p>Loading....</p>
         }
 
         const movies = this.renderItems(movieList);

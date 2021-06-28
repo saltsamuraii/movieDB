@@ -4,9 +4,11 @@ import MovieCard from '../movie-card/movie-card';
 
 const MoviesList = (props) => {
         return (
-            <main>
-                <MovieCard onMovieSelected={props.onMovieSelected}/>
-            </main>
+            <>
+                <MovieCard
+                    movieList={props.movieList}
+                    onMovieSelected={props.onMovieSelected}/>
+            </>
         );
 }
 

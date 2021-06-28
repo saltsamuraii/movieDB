@@ -6,21 +6,19 @@ class SearchBar extends Component {
 
     state = {
         isActive: false,
-        title: 'title',
-        genre: 'genre',
-        search: ''
-    }
-
-    handleChange = (e) => {
-        console.log(e.target.value)
-        this.setState({
-            search: e.target.value
-        });
+        title: 'Title',
+        genre: 'Genre'
     }
 
     handleToggleFilter = (e) => {
         e.preventDefault()
-        console.log(e.target.value)
+
+        if (e.target.value === 'Title') {
+            console.log('Filtered by Title')
+        }
+        if (e.target.value === 'Genre') {
+            console.log('Filtered by Genre')
+        }
 
         this.setState({
             isActive: !this.state.isActive,
@@ -32,14 +30,13 @@ class SearchBar extends Component {
 
         return (
             <>
-                <h1 className="title">Find your movie</h1>
                 <form>
                     <input
                         className="search"
                         type="text"
-                        placeholder="Enter your movie"
-                        value={this.state.search}
-                        onChange={this.handleChange}/>
+                        placeholder="Search..."
+                        onChange={this.props.handleInput}
+                    />
 
                     <div className="filters">
                         <div>
@@ -59,8 +56,7 @@ class SearchBar extends Component {
                         </div>
                         <button
                             className="btn btn__big-red"
-                            type="submit"
-                        >
+                            type="submit">
                             Search
                         </button>
                     </div>
