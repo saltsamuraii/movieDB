@@ -21,33 +21,10 @@ class App extends Component {
         filteredMoviesGenre: [],
         searchMovie: '',
         isActive: true,
+        isSorted: true,
         title: 'title',
-        genre: 'genre'
+        genre: 'genre',
     }
-
-
-    /*filteredBy() {
-        const { isActive, movieList, searchMovie, title, genre } = this.state
-
-        const movieByTitle = movieList.filter((title) => {
-            return title.title.toLowerCase().includes(searchMovie.toLowerCase());
-        });
-
-        const movieByGenre = movieList.filter((genre) => {
-            return genre.genre.toLowerCase().includes(searchMovie.toLowerCase())
-        });
-
-            // 1 // Если кнопка активна и равна Title, то при запросе фильтровать фильм по названию и искать,
-        if (isActive === title) {
-            return movieByTitle;
-        } if (isActive === genre) {
-            // 2 // Если кнопка активан и равна Genre - то по жанру.
-            return movieByGenre;
-        }
-
-        // 3 //
-        //Если /~~/ равна rating или release_date, то сортировать по активной нажатой кнопке.
-    }*/
 
     handleSubmit = (e) => {
         e.preventDefault()
@@ -55,22 +32,29 @@ class App extends Component {
         const {movieList, searchMovie, isActive, title, genre} = this.state
 
         const filteredMoviesTitle = movieList.filter((movie) => {
-            return movie.title.toLowerCase().includes(searchMovie.toLowerCase())
+            return movie.title.toLowerCase().includes(searchMovie.toLowerCase());
         });
 
         const filteredMoviesGenre = movieList.filter((movie) => {
-            return movie.genre.toLowerCase().includes(searchMovie.toLowerCase())
+            return movie.genre.toLowerCase().includes(searchMovie.toLowerCase());
         });
 
-        if (isActive === title) return filteredMoviesTitle
-        if (isActive === genre) return filteredMoviesGenre
+        if (isActive === title) return filteredMoviesTitle;
+        if (isActive === genre) return filteredMoviesGenre;
 
         this.setState({
             filteredMoviesTitle,
             filteredMoviesGenre
+        });
+    }
+
+
+    handleSort = (e) => {
+        e.preventDefault()
+
+        this.setState({
+            isSorted: !this.state.isSorted
         })
-
-
     }
 
     handleFilterToggle = (e) => {
@@ -111,7 +95,7 @@ class App extends Component {
     }
 
     render() {
-        const {searchMovie, isActive, filteredMoviesTitle, filteredMoviesGenre} = this.state
+        const {searchMovie, isActive, isSorted, filteredMoviesTitle, filteredMoviesGenre, movieList} = this.state
 
         return (
             <ErrorBoundary>
@@ -126,9 +110,10 @@ class App extends Component {
                     handleFilter={this.handleFilterToggle}
                 />
                 <Results
-                    moviesLength={isActive
-                        ? `${filteredMoviesTitle.length} movies found `
-                        : `${filteredMoviesGenre.length} movies found by ${searchMovie} genre`}
+                    isActive={isActive}
+                    isSorted={isSorted}
+                    moviesLengthTitle={filteredMoviesTitle.length > 0 ? `${filteredMoviesTitle.length} movies found` : "No movies found"}
+                    moviesLengthGenre={filteredMoviesGenre.length > 0 ? `${filteredMoviesGenre.length} movies found by ${searchMovie} genre` : "No movies found"}
                     handleSort={this.handleSort}
                 />
                 <MovieDetails

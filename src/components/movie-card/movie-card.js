@@ -26,7 +26,7 @@ class MovieCard extends Component {
     }
 
     render() {
-        const { movieList } = this.props;
+        const { movieList, filteredMovies } = this.props;
 
         if (!movieList) {
             return <p>Loading....</p>
@@ -37,6 +37,7 @@ class MovieCard extends Component {
         return (
             <ul className="movies">
                 {movies}
+                {filteredMovies}
             </ul>
         );
     };

@@ -18,13 +18,10 @@
     font-size: 20px;
     font-weight: bold;
     color: #000;
+
+    cursor: pointer;
 }
 
 .result__filter.active {
-    color: #ff4f4f;
-}
-
-.result__filter:hover {
-    cursor: pointer;
     color: #ff4f4f;
 }

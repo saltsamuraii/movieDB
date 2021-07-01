@@ -1,48 +1,46 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import './search-bar.css'
 
-class SearchBar extends Component {
-    render() {
-        const {isActive} = this.props
+function SearchBar(props) {
+    const {isActive, title, genre} = props
 
-        return (
-            <>
-                <form onSubmit={this.props.handleSubmit}>
-                    <input
-                        className="search"
-                        type="text"
-                        placeholder="Search..."
-                        onChange={this.props.handleChange}
-                    />
+    return (
+        <>
+            <form onSubmit={props.handleSubmit}>
+                <input
+                    className="search"
+                    type="text"
+                    placeholder="Search..."
+                    onChange={props.handleChange}
+                />
 
-                    <div className="filters">
-                        <div>
-                            <span className="text">search by</span>
-                            <button
-                                type="button"
-                                value={this.props.title}
-                                onClick={this.props.handleFilter}
-                                className={isActive ? "btn active" : "btn"}>
-                                Title
-                            </button>
-                            <button
-                                type="button"
-                                value={this.props.genre}
-                                onClick={this.props.handleFilter}
-                                className={isActive === false ? "btn active" : "btn"}>
-                                Genre
-                            </button>
-                        </div>
+                <div className="filters">
+                    <div>
+                        <span className="text">search by</span>
                         <button
-                            className="btn btn__big-red">
-                            Search
+                            type="button"
+                            value={title}
+                            onClick={props.handleFilter}
+                            className={isActive ? "btn active" : "btn"}>
+                            Title
+                        </button>
+                        <button
+                            type="button"
+                            value={genre}
+                            onClick={props.handleFilter}
+                            className={isActive === false ? "btn active" : "btn"}>
+                            Genre
                         </button>
                     </div>
-                </form>
-            </>
-        );
-    };
+                    <button
+                        className="btn btn__big-red">
+                        Search
+                    </button>
+                </div>
+            </form>
+        </>
+    );
 }
 
 export default SearchBar;
