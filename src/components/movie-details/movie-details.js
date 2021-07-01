@@ -23,6 +23,7 @@ class MovieDetails extends Component {
 
     updateMovie() {
         const {movieId} = this.props;
+
         if (!movieId) {
             this.setState({
                 movieId: null,
@@ -31,8 +32,7 @@ class MovieDetails extends Component {
             return;
         }
 
-        this.swaggerService
-            .getMovie(movieId)
+        this.swaggerService.getMovie(movieId)
             .then((movie) => {
                 this.setState({ movie });
             });

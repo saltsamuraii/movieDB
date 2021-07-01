@@ -3,60 +3,39 @@ import React, {Component} from 'react';
 import './search-bar.css'
 
 class SearchBar extends Component {
-
-    state = {
-        isActive: false,
-        title: 'Title',
-        genre: 'Genre'
-    }
-
-    handleToggleFilter = (e) => {
-        e.preventDefault()
-
-        if (e.target.value === 'Title') {
-            console.log('Filtered by Title')
-        }
-        if (e.target.value === 'Genre') {
-            console.log('Filtered by Genre')
-        }
-
-        this.setState({
-            isActive: !this.state.isActive,
-        });
-    }
-
     render() {
-        const isActive = this.state.isActive
+        const {isActive} = this.props
 
         return (
             <>
-                <form>
+                <form onSubmit={this.props.handleSubmit}>
                     <input
                         className="search"
                         type="text"
                         placeholder="Search..."
-                        onChange={this.props.handleInput}
+                        onChange={this.props.handleChange}
                     />
 
                     <div className="filters">
                         <div>
                             <span className="text">search by</span>
                             <button
-                                value={this.state.title}
-                                onClick={this.handleToggleFilter}
-                                className={isActive ? "btn" : "btn active"}>
+                                type="button"
+                                value={this.props.title}
+                                onClick={this.props.handleFilter}
+                                className={isActive ? "btn active" : "btn"}>
                                 Title
                             </button>
                             <button
-                                value={this.state.genre}
-                                onClick={this.handleToggleFilter}
-                                className={isActive ? "btn active" : "btn"}>
+                                type="button"
+                                value={this.props.genre}
+                                onClick={this.props.handleFilter}
+                                className={isActive === false ? "btn active" : "btn"}>
                                 Genre
                             </button>
                         </div>
                         <button
-                            className="btn btn__big-red"
-                            type="submit">
+                            className="btn btn__big-red">
                             Search
                         </button>
                     </div>

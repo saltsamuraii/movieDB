@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 
 import './movie-card.css'
 
-import Results from "../results/results";
-
 class MovieCard extends Component {
 
     handleErrorImage(e) {
@@ -38,7 +36,6 @@ class MovieCard extends Component {
 
         return (
             <ul className="movies">
-                <Results movieLength={movies.length}/>
                 {movies}
             </ul>
         );

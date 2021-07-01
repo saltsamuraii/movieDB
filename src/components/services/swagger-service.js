@@ -15,12 +15,12 @@ export default class SwaggerService {
     async getAllMovies() {
         const res = await this.getResource(`/movies/`)
         return res.data.map(this.transformMovie);
-    }
+    };
 
     async getMovie(id) {
       const movie = await this.getResource(`/movies/${id}/`)
         return this.transformMovie(movie);
-    }
+    };
 
     transformMovie = (movie) => {
         return {
