@@ -1,11 +1,8 @@
 import React, {Component} from 'react';
 
 import './movie-details.css'
-import SwaggerService from '../services/swagger-service';
 
 class MovieDetails extends Component {
-
-    swaggerService = new SwaggerService();
 
     state = {
         movie: null,
@@ -22,7 +19,7 @@ class MovieDetails extends Component {
     };
 
     updateMovie() {
-        const {movieId} = this.props;
+        const { movieId } = this.props;
 
         if (!movieId) {
             this.setState({
@@ -32,14 +29,21 @@ class MovieDetails extends Component {
             return;
         }
 
-        this.swaggerService.getMovie(movieId)
-            .then((movie) => {
-                this.setState({ movie });
+        fetch(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`)
+            .then((response) => response.json())
+            .then((movie) =>{
+                console.log(movie)
+                this.setState({
+                    movie
+                });
+            })
+            .catch((error) => {
+                console.log("Error " + error.message)
             });
     }
 
     handleErrorImage(e) {
-        e.target.src = 'https://allmovies.tube/assets/img/no-poster.png'
+       e.target.src = "https://allmovies.tube/assets/img/no-poster.png"
     };
 
     render() {
@@ -47,20 +51,20 @@ class MovieDetails extends Component {
             return null;
         }
 
-        const {cover, title, rating, genre, year, duration, description} = this.state.movie
+        const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = this.state.movie
 
         return (
             <div className="details__container">
-                <img className="movie__poster" src={cover}
-                     onError={this.handleErrorImage} alt="no image"/>
+                <img className="movie__poster" src={poster_path}
+                     onError={this.handleErrorImage.bind(this)} alt="no image"/>
 
                 <div className="details__content">
                     <span className="details__title">{title}</span>
-                    <span className="details__rating">{rating}</span>
-                    <p className="details__genre">{genre}</p>
-                    <span className="details__year">{year}</span>
-                    <span className="details__duration">{duration}</span>
-                    <p className="details__description">{description}</p>
+                    <span className="details__rating">{vote_average}</span>
+                    <p className="details__genre">{genres[0]}</p>
+                    <span className="details__year">{release_date.slice(0, 4)}</span>
+                    <span className="details__duration">{runtime} min</span>
+                    <p className="details__description">{overview}</p>
                     <button
                         className="btn btn__big-red"
                         onClick={this.props.handleBack.bind(this)}>

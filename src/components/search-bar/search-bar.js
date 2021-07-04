@@ -3,13 +3,15 @@ import React from 'react';
 import './search-bar.css'
 
 function SearchBar(props) {
-    const {isActive, title, genre} = props
+    const {isActive, value} = props
 
     return (
         <>
-            <form onSubmit={props.handleSubmit}>
+            <h1>Movie Finder</h1>
+            <form onSubmit={props.handleSubmit.bind(this)}>
                 <input
                     className="search"
+                    value={value}
                     type="text"
                     placeholder="Search..."
                     onChange={props.handleChange}
@@ -20,14 +22,14 @@ function SearchBar(props) {
                         <span className="text">search by</span>
                         <button
                             type="button"
-                            value={title}
+                            value="title"
                             onClick={props.handleFilter}
                             className={isActive ? "btn active" : "btn"}>
                             Title
                         </button>
                         <button
                             type="button"
-                            value={genre}
+                            value="genre"
                             onClick={props.handleFilter}
                             className={isActive === false ? "btn active" : "btn"}>
                             Genre

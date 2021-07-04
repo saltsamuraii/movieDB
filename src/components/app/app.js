@@ -5,61 +5,52 @@ import MovieDetails from '../movie-details/movie-details';
 import MoviesList from '../movies-list/movies-list';
 import SearchBar from '../search-bar/search-bar';
 
-import SwaggerService from '../services/swagger-service';
-
 import './app.css'
 import Results from "../results/results";
 
 class App extends Component {
 
-    swaggerService = new SwaggerService()
-
     state = {
+        movies: [],
         selectedMovie: null,
-        movieList: [],
-        filteredMoviesTitle: [],
-        filteredMoviesGenre: [],
         searchMovie: '',
         isActive: true,
-        isSorted: true,
-        title: 'title',
-        genre: 'genre',
+        isSortedActive: true,
     }
 
     handleSubmit = (e) => {
         e.preventDefault()
 
-        const {movieList, searchMovie, isActive, title, genre} = this.state
+        const {isActive, searchMovie, isSortedActive} = this.state
 
-        const filteredMoviesTitle = movieList.filter((movie) => {
-            return movie.title.toLowerCase().includes(searchMovie.toLowerCase());
-        });
+        fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${isSortedActive === true ? 'release_date' : 'vote_average'}&sortOrder=${isSortedActive === true ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${isActive === true ? 'title' : 'genres'}`)
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error(`Could not fetch ${response.url} status: ${response.status}`)
+                }
+                return response.json();
 
-        const filteredMoviesGenre = movieList.filter((movie) => {
-            return movie.genre.toLowerCase().includes(searchMovie.toLowerCase());
-        });
-
-        if (isActive === title) return filteredMoviesTitle;
-        if (isActive === genre) return filteredMoviesGenre;
-
-        this.setState({
-            filteredMoviesTitle,
-            filteredMoviesGenre
-        });
+            })
+            .then((result) => {
+                console.log("On submit ", result)
+                this.setState({
+                    movies: result.data
+                });
+            })
+            .catch((error) => {
+                console.log(`Error: ${error.message}`)
+            });
     }
 
-
     handleSort = (e) => {
-        e.preventDefault()
-
+        console.log(e.target.value)
         this.setState({
-            isSorted: !this.state.isSorted
-        })
+            isSortedActive: !this.state.isSortedActive
+        });
     }
 
     handleFilterToggle = (e) => {
-        e.preventDefault()
-
+        console.log(e.target.value)
         this.setState({
             isActive: !this.state.isActive
         });
@@ -86,41 +77,48 @@ class App extends Component {
     }
 
     componentDidMount() {
-        this.swaggerService.getAllMovies()
-            .then((movieList) => {
+
+        fetch(`https://reactjs-cdp.herokuapp.com/movies`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((result) => {
+                console.log("Component did mount", result)
                 this.setState({
-                    movieList
-                });
-            });
+                    movies: result.data
+                })
+            })
+            .catch((error) => {
+                console.log("Fetch problem" + error.message)
+            })
     }
 
     render() {
-        const {searchMovie, isActive, isSorted, filteredMoviesTitle, filteredMoviesGenre, movieList} = this.state
+        const {movies, searchMovie, isActive, isSortedActive, selectedMovie} = this.state
 
         return (
             <ErrorBoundary>
-                <h1>Movie Finder</h1>
-                <SearchBar
-                    movieList={this.state.movieList}
-                    isActive={this.state.isActive}
-                    title={this.state.title}
-                    genre={this.state.genre}
-                    handleChange={this.handleChange}
-                    handleSubmit={this.handleSubmit}
-                    handleFilter={this.handleFilterToggle}
-                />
+                {!selectedMovie ? (
+                    <SearchBar
+                        movies={movies}
+                        isActive={isActive}
+                        value={searchMovie}
+                        handleChange={this.handleChange}
+                        handleSubmit={this.handleSubmit}
+                        handleFilter={this.handleFilterToggle}
+                    />
+                ) : (
+                    <MovieDetails
+                        movieId={this.state.selectedMovie}
+                        handleBack={this.handleBack}/>
+                )}
                 <Results
-                    isActive={isActive}
-                    isSorted={isSorted}
-                    moviesLengthTitle={filteredMoviesTitle.length > 0 ? `${filteredMoviesTitle.length} movies found` : "No movies found"}
-                    moviesLengthGenre={filteredMoviesGenre.length > 0 ? `${filteredMoviesGenre.length} movies found by ${searchMovie} genre` : "No movies found"}
                     handleSort={this.handleSort}
+                    isSortedActive={isSortedActive}
+                    moviesLength={`${movies.length} movies found`}
                 />
-                <MovieDetails
-                    movieId={this.state.selectedMovie}
-                    handleBack={this.handleBack}/>
                 <MoviesList
-                    movieList={isActive ? filteredMoviesTitle : filteredMoviesGenre}
+                    movies={movies}
                     onMovieSelected={this.onMovieSelected}/>
             </ErrorBoundary>
         );

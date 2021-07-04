@@ -4,22 +4,24 @@ import './results.css'
 
 function Results(props) {
 
-    const {isActive, isSorted, moviesLengthTitle, moviesLengthGenre} = props
+    const {moviesLength, isSortedActive} = props
 
     return (
         <>
             <div className="result__filters">
-                   <span className="result__text">{isActive ? moviesLengthTitle : moviesLengthGenre}</span>
+                   <span className="result__text">{moviesLength}</span>
                 <div>
                     <span className="result__text">Sort by</span>
-                    <span
+                    <button
                         onClick={props.handleSort}
-                        className={isSorted === true ? "result__filter active" : "result__filter"}>release date
-                    </span>
-                    <span
+                        value="release_date"
+                        className={ isSortedActive ? "result__filter active" : "result__filter"}>release date
+                    </button>
+                    <button
                         onClick={props.handleSort}
-                        className={isSorted ? "result__filter" : "result__filter active"}>rating
-                    </span>
+                        value="vote_average"
+                        className={ isSortedActive === false ? "result__filter active" : "result__filter"}>rating
+                    </button>
                 </div>
             </div>
         </>

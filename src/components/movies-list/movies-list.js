@@ -6,7 +6,7 @@ const MoviesList = (props) => {
         return (
             <>
                 <MovieCard
-                    movieList={props.movieList}
+                    movies={props.movies}
                     onMovieSelected={props.onMovieSelected}/>
             </>
         );

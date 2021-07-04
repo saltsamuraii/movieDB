@@ -20,6 +20,8 @@
     color: #000;
 
     cursor: pointer;
+    background: none;
+    border: none;
 }
 
 .result__filter.active {
