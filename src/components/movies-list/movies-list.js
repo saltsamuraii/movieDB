@@ -1,15 +1,19 @@
-import React from 'react';
-
+import React, {Component} from 'react';
 import MovieCard from '../movie-card/movie-card';
 
-const MoviesList = (props) => {
+class MoviesList extends Component {
+    render() {
+        const {movies, handleErrorImage, onMovieSelected} = this.props
+
         return (
             <>
                 <MovieCard
-                    movies={props.movies}
-                    onMovieSelected={props.onMovieSelected}/>
+                    movies={movies}
+                    handleErrorImage={handleErrorImage}
+                    onMovieSelected={onMovieSelected}/>
             </>
         );
+    }
 }
 
 export default MoviesList;

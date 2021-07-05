@@ -17,11 +17,11 @@
     margin: 10px 15px;
 }
 
-.movie__poster {
+.movie-card__poster {
     width: 325px;
 }
 
-.movie__content {
+.movie-card__content {
     display: flex;
     align-items: center;
     justify-content: space-between;

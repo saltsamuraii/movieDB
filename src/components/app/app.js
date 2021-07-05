@@ -1,12 +1,10 @@
 import React, {Component} from 'react';
-
 import ErrorBoundary from '../error-boundary/errorboundry';
-import MovieDetails from '../movie-details/movie-details';
-import MoviesList from '../movies-list/movies-list';
 import SearchBar from '../search-bar/search-bar';
-
-import './app.css'
 import Results from "../results/results";
+import MoviesList from '../movies-list/movies-list';
+import MovieDetails from '../movie-details/movie-details';
+import './app.css'
 
 class App extends Component {
 
@@ -15,15 +13,30 @@ class App extends Component {
         selectedMovie: null,
         searchMovie: '',
         isActive: true,
-        isSortedActive: true,
+        isSorted: true,
     }
 
-    handleSubmit = (e) => {
+    componentDidMount() {
+        fetch(`https://reactjs-cdp.herokuapp.com/movies`)
+            .then((response) => {
+                return response.json();
+            })
+            .then((result) => {
+                this.setState({
+                    movies: result.data
+                });
+            })
+            .catch((error) => {
+                console.log(error + error.message)
+            });
+    };
+
+    handleSubmit(e) {
         e.preventDefault()
+        const {isActive, searchMovie, isSorted} = this.state
+        const requestUlr = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${isSorted ? 'release_date' : 'vote_average'}&sortOrder=${isSorted ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${isActive ? 'title' : 'genres'}`
 
-        const {isActive, searchMovie, isSortedActive} = this.state
-
-        fetch(`https://reactjs-cdp.herokuapp.com/movies?sortBy=${isSortedActive === true ? 'release_date' : 'vote_average'}&sortOrder=${isSortedActive === true ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${isActive === true ? 'title' : 'genres'}`)
+        fetch(requestUlr)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Could not fetch ${response.url} status: ${response.status}`)
@@ -32,69 +45,52 @@ class App extends Component {
 
             })
             .then((result) => {
-                console.log("On submit ", result)
                 this.setState({
                     movies: result.data
                 });
             })
             .catch((error) => {
-                console.log(`Error: ${error.message}`)
+                console.log(Error + error.message + error.status)
             });
-    }
+    };
 
-    handleSort = (e) => {
-        console.log(e.target.value)
+    handleSort() {
+        this.setState(prevState => ({
+            isSorted: !prevState.isSorted
+        }));
+    };
+
+    handleFilterToggle() {
+        this.setState(prevState => ({
+            isActive: !prevState.isActive
+        }));
+    };
+
+    handleSearchMovie(e) {
+        const value = e.target.value
         this.setState({
-            isSortedActive: !this.state.isSortedActive
+            searchMovie: value
         });
-    }
+    };
 
-    handleFilterToggle = (e) => {
-        console.log(e.target.value)
-        this.setState({
-            isActive: !this.state.isActive
-        });
-    }
-
-    handleChange = (e) => {
-        this.setState({
-            searchMovie: e.target.value
-        });
-    }
-
-    handleBack = (e) => {
-        e.preventDefault()
-
+    handleBack() {
         this.setState({
             selectedMovie: null
         });
-    }
+    };
 
-    onMovieSelected = (id) => {
+    onMovieSelected(id) {
         this.setState({
             selectedMovie: id
         });
-    }
+    };
 
-    componentDidMount() {
-
-        fetch(`https://reactjs-cdp.herokuapp.com/movies`)
-            .then((response) => {
-                return response.json();
-            })
-            .then((result) => {
-                console.log("Component did mount", result)
-                this.setState({
-                    movies: result.data
-                })
-            })
-            .catch((error) => {
-                console.log("Fetch problem" + error.message)
-            })
-    }
+    handleErrorImage(e) {
+        e.target.src = 'https://allmovies.tube/assets/img/no-poster.png'
+    };
 
     render() {
-        const {movies, searchMovie, isActive, isSortedActive, selectedMovie} = this.state
+        const {movies, searchMovie, isActive, isSorted, selectedMovie} = this.state
 
         return (
             <ErrorBoundary>
@@ -102,24 +98,31 @@ class App extends Component {
                     <SearchBar
                         movies={movies}
                         isActive={isActive}
-                        value={searchMovie}
-                        handleChange={this.handleChange}
-                        handleSubmit={this.handleSubmit}
-                        handleFilter={this.handleFilterToggle}
+                        searchMovie={searchMovie}
+                        handleSearchMovie={this.handleSearchMovie.bind(this)}
+                        handleSubmit={this.handleSubmit.bind(this)}
+                        handleFilter={this.handleFilterToggle.bind(this)}
                     />
                 ) : (
                     <MovieDetails
-                        movieId={this.state.selectedMovie}
-                        handleBack={this.handleBack}/>
+                        movieId={selectedMovie}
+                        handleErrorImage={this.handleErrorImage.bind(this)}
+                        handleBack={this.handleBack.bind(this)}/>
                 )}
                 <Results
-                    handleSort={this.handleSort}
-                    isSortedActive={isSortedActive}
-                    moviesLength={`${movies.length} movies found`}
+                    isSorted={isSorted}
+                    handleSort={this.handleSort.bind(this)}
+                    moviesLength={`${movies.length} movie(s) found`}
                 />
-                <MoviesList
-                    movies={movies}
-                    onMovieSelected={this.onMovieSelected}/>
+                {movies.length ? (
+                    <MoviesList
+                        movies={movies}
+                        onMovieSelected={this.onMovieSelected.bind(this)}
+                        handleErrorImage={this.handleErrorImage.bind(this)}
+                    />
+                ) : (
+                    <h2 className='header__text'>No movies found</h2>
+                )}
             </ErrorBoundary>
         );
     }

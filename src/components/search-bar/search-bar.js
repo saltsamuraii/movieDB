@@ -1,48 +1,49 @@
-import React from 'react';
-
+import React, {Component} from 'react';
 import './search-bar.css'
 
-function SearchBar(props) {
-    const {isActive, value} = props
+class SearchBar extends Component {
+    render() {
+        const {isActive, searchMovie, handleSubmit, handleSearchMovie, handleFilter} = this.props
 
-    return (
-        <>
-            <h1>Movie Finder</h1>
-            <form onSubmit={props.handleSubmit.bind(this)}>
-                <input
-                    className="search"
-                    value={value}
-                    type="text"
-                    placeholder="Search..."
-                    onChange={props.handleChange}
-                />
+        return (
+            <>
+                <h1>Movie Finder</h1>
+                <form onSubmit={handleSubmit}>
+                    <input
+                        className="search-bar"
+                        value={searchMovie}
+                        type="text"
+                        placeholder="Search..."
+                        onChange={handleSearchMovie}
+                    />
 
-                <div className="filters">
-                    <div>
-                        <span className="text">search by</span>
+                    <div className="search-bar__filters">
+                        <div>
+                            <span className="search-bar__text">search by</span>
+                            <button
+                                type="button"
+                                value="title"
+                                onClick={handleFilter}
+                                className={isActive ? "btn active" : "btn"}>
+                                Title
+                            </button>
+                            <button
+                                type="button"
+                                value="genre"
+                                onClick={handleFilter}
+                                className={!isActive ? "btn active" : "btn"}>
+                                Genre
+                            </button>
+                        </div>
                         <button
-                            type="button"
-                            value="title"
-                            onClick={props.handleFilter}
-                            className={isActive ? "btn active" : "btn"}>
-                            Title
-                        </button>
-                        <button
-                            type="button"
-                            value="genre"
-                            onClick={props.handleFilter}
-                            className={isActive === false ? "btn active" : "btn"}>
-                            Genre
+                            className="btn btn__big-red">
+                            Search
                         </button>
                     </div>
-                    <button
-                        className="btn btn__big-red">
-                        Search
-                    </button>
-                </div>
-            </form>
-        </>
-    );
+                </form>
+            </>
+        );
+    }
 }
 
 export default SearchBar;
