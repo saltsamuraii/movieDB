@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ErrorBoundary from '../error-boundary/errorboundry';
 import SearchBar from '../search-bar/search-bar';
-import Results from "../results/results";
+import Results from '../results/results';
 import MoviesList from '../movies-list/movies-list';
 import MovieDetails from '../movie-details/movie-details';
 import './app.css'
