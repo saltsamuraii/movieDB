@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import ErrorBoundary from '../error-boundary/errorboundry';
+import ErrorBoundary from '../error-boundary/error-boundary';
 import SearchBar from '../search-bar/search-bar';
 import Results from '../results/results';
 import MoviesList from '../movies-list/movies-list';
@@ -112,7 +112,7 @@ class App extends Component {
                 <Results
                     isSorted={isSorted}
                     handleSort={this.handleSort.bind(this)}
-                    moviesLength={`${movies.length} movie(s) found`}
+                    moviesLength={ movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found` }
                 />
                 {movies.length ? (
                     <MoviesList
