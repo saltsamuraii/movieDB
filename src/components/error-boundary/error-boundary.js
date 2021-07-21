@@ -3,19 +3,17 @@ import React, { Component } from 'react';
 class ErrorBoundary extends Component {
         state = {
             error: false,
-            errorInfo: null,
         };
 
-    componentDidCatch(error, errorInfo) {
+    componentDidCatch(error) {
        this.setState({
            error: error,
-           errorInfo: errorInfo
        });
-       console.log(errorInfo)
+       console.error(error)
     }
 
     render() {
-        const error = this.state.error
+        const { error } = this.state
 
         if (error) {
             return (
