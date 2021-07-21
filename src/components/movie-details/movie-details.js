@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import './movie-details.css'
 
 class MovieDetails extends Component {
+    constructor(props) {
+        super(props);
+    }
 
        state = {
             movie: null,
@@ -31,13 +34,12 @@ class MovieDetails extends Component {
         fetch(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`)
             .then((response) => response.json())
             .then((movie) =>{
-                console.log(movie)
                 this.setState({
                     movie
                 });
             })
             .catch((error) => {
-                console.log("Error " + error.message)
+                console.error(error + error.message)
             });
     }
 
@@ -47,12 +49,12 @@ class MovieDetails extends Component {
         }
 
         const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = this.state.movie
-        const {handleErrorImage, handleBack} = this.props
+        const {onErrorImage, onBack} = this.props
 
         return (
             <div className="movie-details__container">
                 <img className="movie__poster" src={poster_path}
-                     onError={handleErrorImage}
+                     onError={onErrorImage}
                      alt="no image"
                 />
                 <div className="movie-details__content">
@@ -64,7 +66,7 @@ class MovieDetails extends Component {
                     <p className="movie-details__description">{overview}</p>
                     <button
                         className="btn btn__big-red"
-                        onClick={handleBack}>
+                        onClick={onBack}>
                         Return
                     </button>
                 </div>

@@ -3,13 +3,13 @@ import MovieCard from '../movie-card/movie-card';
 
 class MoviesList extends Component {
     render() {
-        const {movies, handleErrorImage, onMovieSelected} = this.props
+        const {movies, onErrorImage, onMovieSelected} = this.props
 
         return (
             <>
                 <MovieCard
                     movies={movies}
-                    handleErrorImage={handleErrorImage}
+                    onErrorImage={onErrorImage}
                     onMovieSelected={onMovieSelected}/>
             </>
         );

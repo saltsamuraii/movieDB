@@ -2,19 +2,23 @@ import React, {Component} from 'react';
 import './search-bar.css'
 
 class SearchBar extends Component {
+    constructor(props) {
+        super(props);
+    }
+
     render() {
-        const {isActive, searchMovie, handleSubmit, handleSearchMovie, handleFilter} = this.props
+        const {isActive, searchMovie, onSubmit, onSearchMovie, onFilter} = this.props
 
         return (
             <>
                 <h1>Movie Finder</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={onSubmit}>
                     <input
                         className="search-bar"
                         value={searchMovie}
                         type="text"
                         placeholder="Search..."
-                        onChange={handleSearchMovie}
+                        onChange={onSearchMovie}
                     />
 
                     <div className="search-bar__filters">
@@ -23,14 +27,14 @@ class SearchBar extends Component {
                             <button
                                 type="button"
                                 value="title"
-                                onClick={handleFilter}
+                                onClick={onFilter}
                                 className={isActive ? "btn active" : "btn"}>
                                 Title
                             </button>
                             <button
                                 type="button"
                                 value="genre"
-                                onClick={handleFilter}
+                                onClick={onFilter}
                                 className={!isActive ? "btn active" : "btn"}>
                                 Genre
                             </button>

@@ -3,16 +3,16 @@ import './movie-card.css'
 
 class MovieCard extends Component {
     render() {
-        const {onMovieSelected, handleErrorImage} = this.props
+        const {onMovieSelected, onErrorImage} = this.props
 
         const movieList = this.props.movies.map(({id, poster_path, title, release_date, genres}) => {
             return (
                 <li className="movie__card"
                     key={id}
-                    onClick={onMovieSelected.bind(this, id)}>
+                    onClick={() => onMovieSelected(id)}>
                     <img className="movie-card__poster"
                          src={poster_path}
-                         onError={handleErrorImage}
+                         onError={onErrorImage}
                          alt="no image"
                     />
                     <div className="movie-card__content">
@@ -26,7 +26,7 @@ class MovieCard extends Component {
 
         return (
             <ul className="movies">
-                {movieList}
+                 {movieList}
             </ul>
         )
 

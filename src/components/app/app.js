@@ -7,13 +7,25 @@ import MovieDetails from '../movie-details/movie-details';
 import './app.css'
 
 class App extends Component {
+    constructor(props) {
+        super(props);
 
-    state = {
-        movies: [],
-        selectedMovie: null,
-        searchMovie: '',
-        isActive: true,
-        isSorted: true,
+        this.state = {
+            movies: [],
+            selectedMovie: null,
+            searchMovie: '',
+            isActive: true,
+            isSorted: true,
+            loading: true,
+        }
+
+        this.handleSearch = this.handleSearchMovie.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleFilterToggle = this.handleFilterToggle.bind(this);
+        this.handleErrorImage = this.handleErrorImage.bind(this);
+        this.handleBack = this.handleBack.bind(this);
+        this.handleSort = this.handleSort.bind(this);
+        this.handleMovieSelected = this.handleMovieSelected.bind(this);
     }
 
     componentDidMount() {
@@ -23,20 +35,21 @@ class App extends Component {
             })
             .then((result) => {
                 this.setState({
-                    movies: result.data
+                    movies: result.data,
                 });
             })
-            .catch((error) => {
-                console.log(error + error.message)
+            .catch(() => {
+                const error = new Error('some error')
+                console.error(error)
             });
     };
 
-    handleSubmit(e) {
-        e.preventDefault()
+    handleSubmit(event) {
+        event.preventDefault()
         const {isActive, searchMovie, isSorted} = this.state
-        const requestUlr = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${isSorted ? 'release_date' : 'vote_average'}&sortOrder=${isSorted ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${isActive ? 'title' : 'genres'}`
+        const url = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${isSorted ? 'release_date' : 'vote_average'}&sortOrder=${isSorted ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${isActive ? 'title' : 'genres'}`
 
-        fetch(requestUlr)
+        fetch(url)
             .then((response) => {
                 if (!response.ok) {
                     throw new Error(`Could not fetch ${response.url} status: ${response.status}`)
@@ -46,11 +59,12 @@ class App extends Component {
             })
             .then((result) => {
                 this.setState({
-                    movies: result.data
+                    movies: result.data,
                 });
             })
-            .catch((error) => {
-                console.log(Error + error.message + error.status)
+            .catch(() => {
+                const error = new Error('Error')
+                console.error(error)
             });
     };
 
@@ -66,10 +80,9 @@ class App extends Component {
         }));
     };
 
-    handleSearchMovie(e) {
-        const value = e.target.value
+    handleSearchMovie(event) {
         this.setState({
-            searchMovie: value
+            searchMovie: event.target.value
         });
     };
 
@@ -79,14 +92,14 @@ class App extends Component {
         });
     };
 
-    onMovieSelected(id) {
+    handleMovieSelected(id) {
         this.setState({
             selectedMovie: id
         });
     };
 
-    handleErrorImage(e) {
-        e.target.src = 'https://allmovies.tube/assets/img/no-poster.png'
+    handleErrorImage(event) {
+        event.target.src = 'https://allmovies.tube/assets/img/no-poster.png'
     };
 
     render() {
@@ -99,26 +112,26 @@ class App extends Component {
                         movies={movies}
                         isActive={isActive}
                         searchMovie={searchMovie}
-                        handleSearchMovie={this.handleSearchMovie.bind(this)}
-                        handleSubmit={this.handleSubmit.bind(this)}
-                        handleFilter={this.handleFilterToggle.bind(this)}
+                        onSearchMovie={this.handleSearch}
+                        onSubmit={this.handleSubmit}
+                        onFilter={this.handleFilterToggle}
                     />
                 ) : (
                     <MovieDetails
                         movieId={selectedMovie}
-                        handleErrorImage={this.handleErrorImage.bind(this)}
-                        handleBack={this.handleBack.bind(this)}/>
+                        onErrorImage={this.handleErrorImage}
+                        onBack={this.handleBack}/>
                 )}
                 <Results
                     isSorted={isSorted}
-                    handleSort={this.handleSort.bind(this)}
-                    moviesLength={ movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found` }
+                    onHSort={this.handleSort}
+                    moviesLength={movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found`}
                 />
                 {movies.length ? (
                     <MoviesList
                         movies={movies}
-                        onMovieSelected={this.onMovieSelected.bind(this)}
-                        handleErrorImage={this.handleErrorImage.bind(this)}
+                        onMovieSelected={this.handleMovieSelected}
+                        onErrorImage={this.handleErrorImage}
                     />
                 ) : (
                     <h2 className='header__text'>No movies found</h2>
