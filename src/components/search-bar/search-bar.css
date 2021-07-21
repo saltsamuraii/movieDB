@@ -28,31 +28,3 @@
     text-transform: uppercase;
 }
 
-.btn {
-    width: 60px;
-    height: auto;
-    margin: 0 7px;
-    padding: 5px;
-    cursor: pointer;
-    text-transform: uppercase;
-    border: none;
-    color: #fff;
-    font-weight: bold;
-    background-color: #585858;
-}
-
-.btn.active {
-    background-color: #ff4f4f;
-}
-
-.btn__big-red {
-    width: 200px;
-    padding: 10px 15px;
-    margin: 0;
-    color: #fff;
-    background-color: #ff4f4f;
-}
-
-.btn__big-red:hover {
-    background-color: #ff1515;
-}

@@ -16,7 +16,6 @@ class App extends Component {
             searchMovie: '',
             isActive: true,
             isSorted: true,
-            loading: true,
         }
 
         this.handleSearch = this.handleSearchMovie.bind(this);

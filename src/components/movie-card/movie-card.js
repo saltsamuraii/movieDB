@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {PureComponent} from 'react';
 import './movie-card.css'
 
-class MovieCard extends Component {
+class MovieCard extends PureComponent {
     render() {
-        const {onMovieSelected, onErrorImage} = this.props
+        const {onMovieSelected, onErrorImage, movies} = this.props
 
-        const movieList = this.props.movies.map(({id, poster_path, title, release_date, genres}) => {
+        const movieList = movies.map(({id, poster_path, title, release_date, genres}) => {
             return (
                 <li className="movie-card"
                     key={id}

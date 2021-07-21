@@ -5,7 +5,6 @@ class MovieDetails extends Component {
     constructor(props) {
         super(props);
     }
-
        state = {
             movie: null,
         };
@@ -26,7 +25,6 @@ class MovieDetails extends Component {
         if (!movieId) {
             this.setState({
                 movieId: null,
-                movie: null
             });
             return;
         }
@@ -44,11 +42,13 @@ class MovieDetails extends Component {
     }
 
     render() {
-        if (!this.state.movie) {
+        const {movie} = this.state
+
+        if (!movie) {
             return null;
         }
 
-        const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = this.state.movie
+        const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = movie
         const {onErrorImage, onBack} = this.props
 
         return (
@@ -65,7 +65,7 @@ class MovieDetails extends Component {
                     <span className="movie-details__duration">{runtime} min</span>
                     <p className="movie-details__description">{overview}</p>
                     <button
-                        className="btn btn__big-red"
+                        className="btn btn-large"
                         onClick={onBack}>
                         Return
                     </button>
