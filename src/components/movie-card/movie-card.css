@@ -12,7 +12,7 @@
     list-style: none;
 }
 
-.movie__card {
+.movie-card {
     cursor: pointer;
     margin: 10px 15px;
 }
@@ -27,19 +27,19 @@
     justify-content: space-between;
 }
 
-.movie__title {
+.movie-card__title {
     margin: 5px 0;
     text-transform: uppercase;
 }
 
-.movie__year {
+.movie-card__year {
     font-size: 15px;
     padding: 0 10px;
     border: 1px #000 solid;
 
 }
 
-.movie__genre {
+.movie-card__genre {
     margin: 0;
     font-size: 16px;
     color: #8d8d8d;

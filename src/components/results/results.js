@@ -3,7 +3,7 @@ import './results.css'
 
 class Results extends Component {
     render() {
-        const {moviesLength, isSorted, handleSort} = this.props
+        const {moviesLength, isSorted, onSort} = this.props
 
         return (
             <>
@@ -12,12 +12,12 @@ class Results extends Component {
                     <div>
                         <span className="result__text">Sort by</span>
                         <button
-                            onClick={handleSort}
+                            onClick={onSort}
                             value="release_date"
                             className={isSorted ? "result__filter active" : "result__filter"}>release date
                         </button>
                         <button
-                            onClick={handleSort}
+                            onClick={onSort}
                             value="vote_average"
                             className={!isSorted ? "result__filter active" : "result__filter"}>rating
                         </button>

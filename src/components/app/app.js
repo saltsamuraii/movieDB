@@ -124,7 +124,7 @@ class App extends Component {
                 )}
                 <Results
                     isSorted={isSorted}
-                    onHSort={this.handleSort}
+                    onSort={this.handleSort}
                     moviesLength={movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found`}
                 />
                 {movies.length ? (
