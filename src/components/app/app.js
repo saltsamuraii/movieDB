@@ -14,6 +14,7 @@ class App extends Component {
             movies: [],
             selectedMovie: null,
             searchMovie: '',
+            loading: true,
             isActive: true,
             isSorted: true,
         }
@@ -34,8 +35,9 @@ class App extends Component {
             })
             .then((result) => {
                 this.setState({
+                    loading: false,
                     movies: result.data,
-                });
+                })
             })
             .catch(() => {
                 const error = new Error('some error')
@@ -54,10 +56,10 @@ class App extends Component {
                     throw new Error(`Could not fetch ${response.url} status: ${response.status}`)
                 }
                 return response.json();
-
             })
             .then((result) => {
                 this.setState({
+                    loading: false,
                     movies: result.data,
                 });
             })
@@ -102,7 +104,7 @@ class App extends Component {
     };
 
     render() {
-        const {movies, searchMovie, isActive, isSorted, selectedMovie} = this.state
+        const {loading, movies, searchMovie, isActive, isSorted, selectedMovie} = this.state
 
         return (
             <ErrorBoundary>
@@ -126,19 +128,15 @@ class App extends Component {
                     onSort={this.handleSort}
                     moviesLength={movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found`}
                 />
-                {movies.length ? (
                     <MoviesList
+                        loading={loading}
                         movies={movies}
                         onMovieSelected={this.handleMovieSelected}
                         onErrorImage={this.handleErrorImage}
                     />
-                ) : (
-                    <h2 className='header__text'>No movies found</h2>
-                )}
             </ErrorBoundary>
         );
-    }
-    ;
+    };
 }
 
 export default App;

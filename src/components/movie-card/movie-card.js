@@ -3,7 +3,7 @@ import './movie-card.css'
 
 class MovieCard extends PureComponent {
     render() {
-        const {onMovieSelected, onErrorImage, movies} = this.props
+        const {loading, onMovieSelected, onErrorImage, movies} = this.props
 
         const movieList = movies.map(({id, poster_path, title, release_date, genres}) => {
             return (
@@ -24,9 +24,17 @@ class MovieCard extends PureComponent {
             );
         });
 
+        if(loading) {
+            return <h1>Loading...</h1>
+        }
+
+        if(!movieList.length) {
+            return <h2>No movies found</h2>
+        }
+
         return (
             <ul className="movies">
-                 {movieList}
+                {movieList}
             </ul>
         )
 
