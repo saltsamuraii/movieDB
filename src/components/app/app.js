@@ -69,23 +69,23 @@ class App extends Component {
             });
     };
 
-    handleSort(event) {
-        console.log(event.target.value)
+    handleSort({target: {value}}) {
+        console.log(value)
         this.setState(({
-            sortValue: event.target.value
+            sortValue: value
         }));
     };
 
-    handleFilter(event) {
-        console.log(event.target.value)
+    handleFilter({target: {value}}) {
+        console.log(value)
         this.setState(({
-            filterValue: event.target.value
+            filterValue: value
         }));
     };
 
-    handleSearchMovie(event) {
+    handleSearchMovie({target: {value}}) {
         this.setState({
-            searchMovie: event.target.value
+            searchMovie: value
         });
     };
 
