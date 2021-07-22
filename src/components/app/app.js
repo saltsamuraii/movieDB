@@ -15,13 +15,13 @@ class App extends Component {
             selectedMovie: null,
             searchMovie: '',
             loading: true,
-            isActive: true,
-            isSorted: true,
+            filterValue: 'title',
+            sortValue: 'release',
         }
 
         this.handleSearch = this.handleSearchMovie.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.handleFilterToggle = this.handleFilterToggle.bind(this);
+        this.handleFilter = this.handleFilter.bind(this);
         this.handleErrorImage = this.handleErrorImage.bind(this);
         this.handleBack = this.handleBack.bind(this);
         this.handleSort = this.handleSort.bind(this);
@@ -47,8 +47,8 @@ class App extends Component {
 
     handleSubmit(event) {
         event.preventDefault()
-        const {isActive, searchMovie, isSorted} = this.state
-        const url = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${isSorted ? 'release_date' : 'vote_average'}&sortOrder=${isSorted ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${isActive ? 'title' : 'genres'}`
+        const {filterValue, searchMovie, sortValue} = this.state
+        const url = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortValue === 'release_date' ? 'release_date' : 'vote_average'}&sortOrder=${sortValue === 'rating' ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${filterValue === 'title' ? 'title' : 'genres'}`
 
         fetch(url)
             .then((response) => {
@@ -69,15 +69,17 @@ class App extends Component {
             });
     };
 
-    handleSort() {
-        this.setState(prevState => ({
-            isSorted: !prevState.isSorted
+    handleSort(event) {
+        console.log(event.target.value)
+        this.setState(({
+            sortValue: event.target.value
         }));
     };
 
-    handleFilterToggle() {
-        this.setState(prevState => ({
-            isActive: !prevState.isActive
+    handleFilter(event) {
+        console.log(event.target.value)
+        this.setState(({
+            filterValue: event.target.value
         }));
     };
 
@@ -104,18 +106,18 @@ class App extends Component {
     };
 
     render() {
-        const {loading, movies, searchMovie, isActive, isSorted, selectedMovie} = this.state
+        const {loading, movies, searchMovie, filterValue, sortValue, selectedMovie} = this.state
 
         return (
             <ErrorBoundary>
                 {!selectedMovie ? (
                     <SearchBar
                         movies={movies}
-                        isActive={isActive}
-                        searchMovie={searchMovie}
+                        filterValue={filterValue}
+                        movie={searchMovie}
                         onSearchMovie={this.handleSearch}
                         onSubmit={this.handleSubmit}
-                        onFilter={this.handleFilterToggle}
+                        onFilter={this.handleFilter}
                     />
                 ) : (
                     <MovieDetails
@@ -124,7 +126,7 @@ class App extends Component {
                         onBack={this.handleBack}/>
                 )}
                 <Results
-                    isSorted={isSorted}
+                    sortValue={sortValue}
                     onSort={this.handleSort}
                     moviesLength={movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found`}
                 />

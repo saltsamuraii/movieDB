@@ -24,6 +24,10 @@
     border: none;
 }
 
-.result__filter.active {
+.result__filter-btn-input {
+    display: none;
+}
+
+.result__filter.checked {
     color: #ff4f4f;
 }

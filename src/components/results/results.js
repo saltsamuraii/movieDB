@@ -3,7 +3,7 @@ import './results.css'
 
 class Results extends Component {
     render() {
-        const {moviesLength, isSorted, onSort} = this.props
+        const {moviesLength, sortValue, onSort} = this.props
 
         return (
             <>
@@ -11,16 +11,26 @@ class Results extends Component {
                     <span className="result__text">{moviesLength}</span>
                     <div>
                         <span className="result__text">Sort by</span>
-                        <button
-                            onClick={onSort}
-                            value="release_date"
-                            className={isSorted ? "result__filter active" : "result__filter"}>release date
-                        </button>
-                        <button
-                            onClick={onSort}
-                            value="vote_average"
-                            className={!isSorted ? "result__filter active" : "result__filter"}>rating
-                        </button>
+                        <label className={sortValue === "release" ? "result__filter checked" : "result__filter"}>
+                            <input
+                                className="result__filter-btn-input"
+                                type="radio"
+                                value="release"
+                                checked={sortValue === "release"}
+                                onChange={onSort}
+                            />
+                            release date
+                        </label>
+                        <label className={sortValue === "rating" ? "result__filter checked" : "result__filter"}>
+                            <input
+                                className="result__filter-btn-input"
+                                type="radio"
+                                value="rating"
+                                checked={sortValue === "rating"}
+                                onChange={onSort}
+                            />
+                            rating
+                        </label>
                     </div>
                 </div>
             </>

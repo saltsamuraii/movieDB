@@ -2,15 +2,16 @@ import React from 'react';
 import './search-bar.css'
 
 function SearchBar(props) {
-    const {isActive, searchMovie, onSubmit, onSearchMovie, onFilter} = props
+    const {filterValue, movie, onSubmit, onSearchMovie, onFilter} = props
 
     return (
         <>
             <h1>Movie Finder</h1>
             <form onSubmit={onSubmit}>
+
                 <input
                     className="search-bar"
-                    value={searchMovie}
+                    value={movie}
                     type="text"
                     placeholder="Search..."
                     onChange={onSearchMovie}
@@ -18,21 +19,27 @@ function SearchBar(props) {
 
                 <div className="search-bar__filters">
                     <div>
-                        <span className="search-bar__text">search by</span>
-                        <button
-                            type="button"
-                            value="title"
-                            onClick={onFilter}
-                            className={isActive ? "btn active" : "btn"}>
+                        <span className="search-bar__filters-text">Search by</span>
+                        <label className={filterValue === "title" ? "search-bar__radio-btn checked" : "search-bar__radio-btn"}>
+                            <input
+                                className="search-bar__filter-btn-input"
+                                type="radio"
+                                value="title"
+                                checked={filterValue === "title"}
+                                onChange={onFilter}
+                            />
                             Title
-                        </button>
-                        <button
-                            type="button"
-                            value="genre"
-                            onClick={onFilter}
-                            className={!isActive ? "btn active" : "btn"}>
+                        </label>
+                        <label className={filterValue === "genre" ? "search-bar__radio-btn checked" : "search-bar__radio-btn"}>
+                            <input
+                                className="search-bar__filter-btn-input"
+                                type="radio"
+                                value="genre"
+                                checked={filterValue === "genre"}
+                                onChange={onFilter}
+                            />
                             Genre
-                        </button>
+                        </label>
                     </div>
                     <button
                         className="btn btn-large">

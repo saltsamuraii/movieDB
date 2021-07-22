@@ -23,8 +23,26 @@
     padding: 10px;
 }
 
-.search-bar__text {
-    color: #fff;
+.search-bar__filters-text {
+    font-weight: bold;
     text-transform: uppercase;
+}
+
+.search-bar__radio-btn {
+    padding: 5px;
+    margin: 0 7px;
+    cursor: pointer;
+    text-transform: uppercase;
+    color: #fff;
+    font-weight: bold;
+    background-color: #585858;
+}
+
+.search-bar__filter-btn-input {
+    display: none;
+}
+
+.search-bar__radio-btn.checked {
+    background-color: #ff4f4f;
 }
 
