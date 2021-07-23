@@ -6,13 +6,11 @@ class MoviesList extends Component {
         const {loading, movies, onErrorImage, onMovieSelected} = this.props
 
         return (
-            <>
                 <MovieCard
                     loading={loading}
                     movies={movies}
                     onErrorImage={onErrorImage}
                     onMovieSelected={onMovieSelected}/>
-            </>
         );
     }
 }

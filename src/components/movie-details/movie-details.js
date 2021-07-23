@@ -22,7 +22,7 @@ class MovieDetails extends Component {
     updateMovie() {
         const { movieId } = this.props;
 
-        if (!movieId) {
+        if (movieId === undefined) {
             this.setState({
                 movieId: null,
             });
