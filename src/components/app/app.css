@@ -1,3 +1,10 @@
+:root {
+    --text-color-black: #000;
+    --text-color-white: #fff;
+    --filter-buttons-text-color: #fff;
+    --main-buttons-background-color: #ff4f4f;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -12,6 +19,7 @@ body {
 }
 
 h1, h2 {
+    color: var(--text-color-black);
     text-align: center;
 }
 
@@ -23,21 +31,17 @@ h1, h2 {
     cursor: pointer;
     text-transform: uppercase;
     border: none;
-    color: #fff;
+    color: var(--text-color-black);
     font-weight: bold;
     background-color: #585858;
-}
-
-.btn.active {
-    background-color: #ff4f4f;
 }
 
 .btn-large {
     width: 200px;
     padding: 10px 15px;
     margin: 0;
-    color: #fff;
-    background-color: #ff4f4f;
+    color: var(--filter-buttons-text-color);
+    background-color: var(--main-buttons-background-color);
 }
 
 .btn-large:hover {

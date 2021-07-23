@@ -1,7 +1,7 @@
 .title {
     text-align: center;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--text-color-white);
 }
 
 .search-bar {
@@ -13,7 +13,7 @@
     border-bottom: 3px red solid;
     outline: none;
     font-size: 20px;
-    color: #000;
+    color: var(--text-color-black);
 }
 
 .search-bar__filters {
@@ -33,7 +33,7 @@
     margin: 0 7px;
     cursor: pointer;
     text-transform: uppercase;
-    color: #fff;
+    color: var(--text-color-white);
     font-weight: bold;
     background-color: #585858;
 }
@@ -43,6 +43,6 @@
 }
 
 .search-bar__radio-btn.checked {
-    background-color: #ff4f4f;
+    background-color: var(--main-buttons-background-color);
 }
 

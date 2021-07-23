@@ -20,7 +20,7 @@
     margin: 0 30px;
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
+    color: var(--text-color-white);
     padding: 7px;
     border: 1px #fff solid;
     border-radius: 30px;
@@ -34,14 +34,14 @@
 .movie-details__year {
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
+    color: var(--text-color-white);
 }
 
 .movie-details__duration {
     margin-left: 10px;
     font-size: 20px;
     font-weight: bold;
-    color: #fff;
+    color: var(--text-color-white);
 }
 
 .movie-details__description {
