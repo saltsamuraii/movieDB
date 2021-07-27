@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import ErrorBoundary from '../error-boundary/error-boundary';
 import SearchBar from '../search-bar/search-bar';
-import Results from '../results/results';
+import SearchInfo from '../results/search-info';
 import MoviesList from '../movies-list/movies-list';
 import MovieDetails from '../movie-details/movie-details';
 import './app.css'
@@ -17,7 +17,7 @@ class App extends Component {
             searchMovie: '',
             loading: true,
             filterValue: 'title',
-            sortValue: 'release',
+            sortValue: 'release date',
         }
 
         this.handleSearch = this.handleSearchMovie.bind(this);
@@ -43,7 +43,7 @@ class App extends Component {
         event.preventDefault()
         const {filterValue, searchMovie, sortValue} = this.state
         const params = {
-            sortBy: sortValue === 'release_date' ? 'release_date' : 'vote_average',
+            sortBy: sortValue === 'release date' ? 'release_date' : 'vote_average',
             sortOrder: sortValue === 'rating' ? 'asc' : 'desc',
             search: searchMovie,
             searchBy: filterValue === 'title' ? 'title' : 'genres'
@@ -60,12 +60,14 @@ class App extends Component {
     };
 
     handleSort({target: {value}}) {
+        console.log(value)
         this.setState(({
             sortValue: value
         }));
     };
 
     handleFilter({target: {value}}) {
+        console.log(value)
         this.setState(({
             filterValue: value
         }));
@@ -113,7 +115,7 @@ class App extends Component {
                         onErrorImage={this.handleErrorImage}
                         onBack={this.handleBack}/>
                 )}
-                <Results
+                <SearchInfo
                     sortValue={sortValue}
                     onSort={this.handleSort}
                     moviesLength={movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found`}

@@ -35,21 +35,15 @@ class MovieDetails extends Component {
                 this.setState({
                     movie
                 });
-            })
-            .catch((error) => {
-                console.log(error)
             });
     }
 
     render() {
-        const {movie} = this.state
+        const {movie} = this.state;
+        const {onErrorImage, onBack} = this.props;
+        if (!movie) return null;
 
-        if (!movie) {
-            return null;
-        }
-
-        const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = movie
-        const {onErrorImage, onBack} = this.props
+        const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = movie;
 
         return (
             <div className="movie-details__container">

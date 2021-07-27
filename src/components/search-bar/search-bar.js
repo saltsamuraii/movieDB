@@ -1,4 +1,5 @@
 import React from 'react';
+import RadioButton from "../radio-button/radio-button";
 import './search-bar.css'
 
 function SearchBar(props) {
@@ -8,41 +9,29 @@ function SearchBar(props) {
         <>
             <h1>Movie Finder</h1>
             <form onSubmit={onSubmit}>
-
                 <input
-                    className="search-bar"
+                    className="search-form__input"
                     value={movie}
                     type="text"
                     placeholder="Search..."
                     onChange={onSearchMovie}
                 />
-
-                <div className="search-bar__filters">
-                    <div>
-                        <span className="search-bar__filters-text">Search by</span>
-                        <label className={filterValue === "title" ? "search-bar__radio-btn checked" : "search-bar__radio-btn"}>
-                            <input
-                                className="search-bar__filter-btn-input"
-                                type="radio"
-                                value="title"
-                                checked={filterValue === "title"}
-                                onChange={onFilter}
-                            />
-                            Title
-                        </label>
-                        <label className={filterValue === "genre" ? "search-bar__radio-btn checked" : "search-bar__radio-btn"}>
-                            <input
-                                className="search-bar__filter-btn-input"
-                                type="radio"
-                                value="genre"
-                                checked={filterValue === "genre"}
-                                onChange={onFilter}
-                            />
-                            Genre
-                        </label>
-                    </div>
+                <div className="search-form__filters">
+                    <fieldset>
+                        <legend className="search-form__legend-text">Search by</legend>
+                        <RadioButton
+                            value="title"
+                            isChecked={filterValue === "title"}
+                            onChange={onFilter}
+                        />
+                        <RadioButton
+                            value="genre"
+                            isChecked={filterValue === "genre"}
+                            onChange={onFilter}
+                        />
+                    </fieldset>
                     <button
-                        className="btn btn-large">
+                        className="search-form__button">
                         Search
                     </button>
                 </div>

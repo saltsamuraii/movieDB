@@ -13,6 +13,6 @@ export function loadData(url, params) {
             return response.json()
         })
         .catch((error) => {
-            console.log(error)
+            console.log(error + error.message)
         });
 }

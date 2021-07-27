@@ -24,7 +24,15 @@ h1, h2 {
     text-align: center;
 }
 
-.btn {
+fieldset {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+.button {
     width: 60px;
     height: auto;
     margin: 0 7px;
@@ -35,16 +43,4 @@ h1, h2 {
     color: var(--black-color);
     font-weight: bold;
     background-color: var(--gray-color);
-}
-
-.btn-large {
-    width: 200px;
-    padding: 10px 15px;
-    margin: 0;
-    color: var(--white-color);
-    background-color: var(--light-red);
-}
-
-.btn-large:hover {
-    background-color: var(--red-color);
 }
