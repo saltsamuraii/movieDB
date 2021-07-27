@@ -1,8 +1,9 @@
 :root {
-    --text-color-black: #000;
-    --text-color-white: #fff;
-    --filter-buttons-text-color: #fff;
-    --main-buttons-background-color: #ff4f4f;
+    --black-color: #000;
+    --white-color: #fff;
+    --gray-color: #a5a5a5;
+    --red-color: #ff0000;
+    --light-red: #ff4f4f;
 }
 
 body {
@@ -19,7 +20,7 @@ body {
 }
 
 h1, h2 {
-    color: var(--text-color-black);
+    color: var(--black-color);
     text-align: center;
 }
 
@@ -31,19 +32,19 @@ h1, h2 {
     cursor: pointer;
     text-transform: uppercase;
     border: none;
-    color: var(--text-color-black);
+    color: var(--black-color);
     font-weight: bold;
-    background-color: #585858;
+    background-color: var(--gray-color);
 }
 
 .btn-large {
     width: 200px;
     padding: 10px 15px;
     margin: 0;
-    color: var(--filter-buttons-text-color);
-    background-color: var(--main-buttons-background-color);
+    color: var(--white-color);
+    background-color: var(--light-red);
 }
 
 .btn-large:hover {
-    background-color: #ff1515;
+    background-color: var(--red-color);
 }

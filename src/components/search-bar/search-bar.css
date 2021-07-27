@@ -1,7 +1,7 @@
 .title {
     text-align: center;
     text-transform: uppercase;
-    color: var(--text-color-white);
+    color: var(--white-color);
 }
 
 .search-bar {
@@ -10,10 +10,10 @@
     margin: 0 auto;
     padding: 10px;
     border: 0;
-    border-bottom: 3px red solid;
+    border-bottom: 3px var(--red-color) solid;
     outline: none;
     font-size: 20px;
-    color: var(--text-color-black);
+    color: var(--black-color);
 }
 
 .search-bar__filters {
@@ -33,9 +33,9 @@
     margin: 0 7px;
     cursor: pointer;
     text-transform: uppercase;
-    color: var(--text-color-white);
+    color: var(--white-color);
     font-weight: bold;
-    background-color: #585858;
+    background-color: var(--gray-color);
 }
 
 .search-bar__filter-btn-input {
@@ -43,6 +43,6 @@
 }
 
 .search-bar__radio-btn.checked {
-    background-color: var(--main-buttons-background-color);
+    background-color: var(--light-red);
 }
 

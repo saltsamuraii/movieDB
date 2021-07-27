@@ -18,7 +18,8 @@ class MovieCard extends PureComponent {
                             <img className="movie-card__poster"
                                  src={poster_path}
                                  onError={onErrorImage}
-                                 alt="no image"
+                                 alt=""
+                                 role="presentation"
                             />
                             <div className="movie-card__content">
                                 <h5 className="movie-card__title">{title}</h5>

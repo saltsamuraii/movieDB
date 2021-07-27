@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import './movie-details.css'
+import {loadData} from "../../helpers/resourse";
 
 class MovieDetails extends Component {
     constructor(props) {
@@ -29,15 +30,14 @@ class MovieDetails extends Component {
             return;
         }
 
-        fetch(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`)
-            .then((response) => response.json())
+        loadData(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`)
             .then((movie) =>{
                 this.setState({
                     movie
                 });
             })
             .catch((error) => {
-                console.error(error + error.message)
+                console.log(error)
             });
     }
 
@@ -55,7 +55,8 @@ class MovieDetails extends Component {
             <div className="movie-details__container">
                 <img className="movie__poster" src={poster_path}
                      onError={onErrorImage}
-                     alt="no image"
+                     alt=""
+                     role="presentation"
                 />
                 <div className="movie-details__content">
                     <span className="movie-details__title">{title}</span>

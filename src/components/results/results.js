@@ -6,7 +6,6 @@ class Results extends Component {
         const {moviesLength, sortValue, onSort} = this.props
 
         return (
-            <>
                 <div className="result__filters">
                     <span className="result__text">{moviesLength}</span>
                     <div>
@@ -33,7 +32,6 @@ class Results extends Component {
                         </label>
                     </div>
                 </div>
-            </>
         );
     }
 }

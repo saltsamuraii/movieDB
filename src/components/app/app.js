@@ -5,6 +5,7 @@ import Results from '../results/results';
 import MoviesList from '../movies-list/movies-list';
 import MovieDetails from '../movie-details/movie-details';
 import './app.css'
+import {loadData} from "../../helpers/resourse";
 
 class App extends Component {
     constructor(props) {
@@ -29,44 +30,33 @@ class App extends Component {
     }
 
     componentDidMount() {
-        fetch(`https://reactjs-cdp.herokuapp.com/movies`)
-            .then((response) => {
-                return response.json();
-            })
+        loadData("https://reactjs-cdp.herokuapp.com/movies")
             .then((result) => {
                 this.setState({
                     loading: false,
                     movies: result.data,
                 })
             })
-            .catch(() => {
-                const error = new Error('some error')
-                console.error(error)
-            });
     };
 
     handleSubmit(event) {
         event.preventDefault()
         const {filterValue, searchMovie, sortValue} = this.state
-        const url = `https://reactjs-cdp.herokuapp.com/movies?sortBy=${sortValue === 'release_date' ? 'release_date' : 'vote_average'}&sortOrder=${sortValue === 'rating' ? 'asc' : 'desc'}&search=${searchMovie}&searchBy=${filterValue === 'title' ? 'title' : 'genres'}`
+        const params = {
+            sortBy: sortValue === 'release_date' ? 'release_date' : 'vote_average',
+            sortOrder: sortValue === 'rating' ? 'asc' : 'desc',
+            search: searchMovie,
+            searchBy: filterValue === 'title' ? 'title' : 'genres'
+        }
 
-        fetch(url)
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`Could not fetch ${response.url} status: ${response.status}`)
-                }
-                return response.json();
-            })
+        loadData("https://reactjs-cdp.herokuapp.com/movies", params)
             .then((result) => {
+                console.log(params)
                 this.setState({
                     loading: false,
                     movies: result.data,
-                });
+                })
             })
-            .catch(() => {
-                const error = new Error('Error')
-                console.error(error)
-            });
     };
 
     handleSort({target: {value}}) {
@@ -128,12 +118,12 @@ class App extends Component {
                     onSort={this.handleSort}
                     moviesLength={movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found`}
                 />
-                    <MoviesList
-                        loading={loading}
-                        movies={movies}
-                        onMovieSelected={this.handleMovieSelected}
-                        onErrorImage={this.handleErrorImage}
-                    />
+                <MoviesList
+                    loading={loading}
+                    movies={movies}
+                    onMovieSelected={this.handleMovieSelected}
+                    onErrorImage={this.handleErrorImage}
+                />
             </ErrorBoundary>
         );
     };
