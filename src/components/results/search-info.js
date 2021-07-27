@@ -1,5 +1,5 @@
 import React from 'react';
-import RadioButton from "../radio-button/radio-button";
+import RadioButton from '../radio-button/radio-button';
 import './search-info.css'
 
 function SearchInfo(props) {
@@ -11,11 +11,13 @@ function SearchInfo(props) {
             <fieldset>
                 <legend className="search-info__legend-text">Sort by</legend>
                 <RadioButton
+                    className="search-info__radio__button"
                     value="release date"
                     isChecked={sortValue === "release date"}
                     onChange={onSort}
                 />
                 <RadioButton
+                    className="search-info__radio__button"
                     value="rating"
                     isChecked={sortValue === "rating"}
                     onChange={onSort}

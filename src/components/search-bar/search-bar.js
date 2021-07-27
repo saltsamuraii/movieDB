@@ -1,5 +1,5 @@
 import React from 'react';
-import RadioButton from "../radio-button/radio-button";
+import RadioButton from '../radio-button/radio-button';
 import './search-bar.css'
 
 function SearchBar(props) {
@@ -20,11 +20,13 @@ function SearchBar(props) {
                     <fieldset>
                         <legend className="search-form__legend-text">Search by</legend>
                         <RadioButton
+                            className="search-form__radio__button"
                             value="title"
                             isChecked={filterValue === "title"}
                             onChange={onFilter}
                         />
                         <RadioButton
+                            className="search-form__radio__button"
                             value="genre"
                             isChecked={filterValue === "genre"}
                             onChange={onFilter}

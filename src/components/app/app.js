@@ -60,14 +60,12 @@ class App extends Component {
     };
 
     handleSort({target: {value}}) {
-        console.log(value)
         this.setState(({
             sortValue: value
         }));
     };
 
     handleFilter({target: {value}}) {
-        console.log(value)
         this.setState(({
             filterValue: value
         }));
@@ -118,7 +116,7 @@ class App extends Component {
                 <SearchInfo
                     sortValue={sortValue}
                     onSort={this.handleSort}
-                    moviesLength={movies.length > 1 ? `${movies.length} movies found` : `${movies.length} movie found`}
+                    moviesLength={`${movies.length} movie${movies.length === 1 ? "" : "s"} found`}
                 />
                 <MoviesList
                     loading={loading}

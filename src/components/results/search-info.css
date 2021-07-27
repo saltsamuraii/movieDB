@@ -21,3 +21,18 @@
     float: left;
     color: var(--black-color)
 }
+
+.search-info__radio__button {
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--black-color);
+
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.search-info__radio__button.checked {
+    color: var(--light-red);
+}

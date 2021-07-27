@@ -60,7 +60,7 @@ class MovieDetails extends Component {
                     <span className="movie-details__duration">{runtime} min</span>
                     <p className="movie-details__description">{overview}</p>
                     <button
-                        className="btn btn-large"
+                        className="movie-details__button"
                         onClick={onBack}>
                         Return
                     </button>
