@@ -41,6 +41,7 @@ class MovieDetails extends Component {
     render() {
         const {movie} = this.state;
         const {onErrorImage, onBack} = this.props;
+
         if (!movie) return null;
 
         const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = movie;
