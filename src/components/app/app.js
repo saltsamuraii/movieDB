@@ -4,8 +4,9 @@ import SearchBar from '../search-bar/search-bar';
 import SearchInfo from '../results/search-info';
 import MoviesList from '../movies-list/movies-list';
 import MovieDetails from '../movie-details/movie-details';
+import {loadData} from '../../helpers/resourse';
 import './app.css'
-import {loadData} from "../../helpers/resourse";
+
 
 class App extends Component {
     constructor(props) {
@@ -72,6 +73,8 @@ class App extends Component {
     };
 
     handleSearchMovie({target: {value}}) {
+
+
         this.setState({
             searchMovie: value
         });
