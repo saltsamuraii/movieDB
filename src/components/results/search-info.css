@@ -1,0 +1,38 @@
+.search-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px 0;
+    background: var(--gray-color);
+}
+
+.search-info__result {
+    margin: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--black-color);
+}
+
+.search-info__legend-text {
+    margin: 0 10px;
+    font-size: 20px;
+    font-weight: bold;
+    float: left;
+    color: var(--black-color)
+}
+
+.search-info__radio__button {
+    margin-right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--black-color);
+
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+.search-info__radio__button.checked {
+    color: var(--light-red);
+}
