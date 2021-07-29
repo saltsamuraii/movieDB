@@ -1,74 +1,84 @@
-import React, {Component} from 'react';
-import './movie-details.css'
-import {loadData} from "../../helpers/resourse";
+import React, { Component } from 'react';
+import './movie-details.css';
+import loadData from '../../helpers/resourse';
 
 class MovieDetails extends Component {
-    constructor(props) {
-        super(props);
-    }
-       state = {
-            movie: null,
-        };
+  constructor(props) {
+    super(props);
 
-    componentDidMount() {
-        this.updateMovie();
+    this.state = {
+      movie: null,
     };
+  }
 
-    componentDidUpdate(prevProps) {
-        if (this.props.movieId !== prevProps.movieId) {
-            this.updateMovie();
-        }
-    };
+  componentDidMount() {
+    this.updateMovie();
+  }
 
-    updateMovie() {
-        const { movieId } = this.props;
+  componentDidUpdate(prevProps) {
+    const { movieId } = this.props
+    if (movieId !== prevProps.movieId) {
+      this.updateMovie();
+    }
+  }
 
-        if (movieId === undefined) {
-            this.setState({
-                movieId: null,
-            });
-            return;
-        }
+  updateMovie() {
+    const { movieId } = this.props;
 
-        loadData(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`)
-            .then((movie) =>{
-                this.setState({
-                    movie
-                });
-            });
+    if (movieId === undefined) {
+      this.setState({
+        movieId: null
+      });
+      return;
     }
 
-    render() {
-        const {movie} = this.state;
-        const {onErrorImage, onBack} = this.props;
+    loadData(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`).then((movie) => {
+      this.setState({
+        movie,
+      });
+    });
+  }
 
-        if (!movie) return null;
+  render() {
+    const { movie } = this.state;
+    const { onErrorImage, onBack } = this.props;
 
-        const {poster_path, title,  vote_average, genres, release_date, runtime, overview} = movie;
+    if (!movie) return null;
 
-        return (
-            <div className="movie-details__container">
-                <img className="movie__poster" src={poster_path}
-                     onError={onErrorImage}
-                     alt=""
-                     role="presentation"
-                />
-                <div className="movie-details__content">
-                    <span className="movie-details__title">{title}</span>
-                    <span className="movie-details__rating">{vote_average}</span>
-                    <p className="movie-details__genre">{genres[0]}</p>
-                    <span className="movie-details__year">{release_date.slice(0, 4)}</span>
-                    <span className="movie-details__duration">{runtime} min</span>
-                    <p className="movie-details__description">{overview}</p>
-                    <button
-                        className="movie-details__button"
-                        onClick={onBack}>
-                        Return
-                    </button>
-                </div>
-            </div>
-        );
-    }
+    const {
+      poster_path: poster,
+      vote_average: voteAverage,
+      release_date: releaseDate,
+      title,
+      genres,
+      runtime,
+      overview
+    } = movie;
+
+
+    return (
+      <div className="movie-details__container">
+        <img
+          className="movie__poster"
+          src={poster}
+          onError={onErrorImage}
+          alt=""
+          role="presentation"
+        />
+        <div className="movie-details__content">
+          <span className="movie-details__title">{title}</span>
+          <span className="movie-details__rating">{voteAverage}</span>
+          <p className="movie-details__genre">{genres[0]}</p>
+          <span className="movie-details__year">{releaseDate.slice(0, 4)}</span>
+          <span className="movie-details__duration">{runtime} min</span>
+          <p className="movie-details__description">{overview}</p>
+          <button type="button" className="movie-details__button" onClick={onBack}>
+            Return
+          </button>
+        </div>
+      </div>
+    );
+  }
 }
 
 export default MovieDetails;

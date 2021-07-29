@@ -1,57 +1,55 @@
 .search-form__input {
-    display: block;
-    width: 90%;
-    margin: 0 auto;
-    padding: 10px;
-    border: 0;
-    border-bottom: 3px var(--red-color) solid;
-    outline: none;
-    font-size: 20px;
-    color: var(--black-color);
+  display: block;
+  width: 90%;
+  margin: 0 auto;
+  padding: 10px;
+  border: 0;
+  border-bottom: 3px var(--red-color) solid;
+  outline: none;
+  font-size: 20px;
+  color: var(--black-color);
 }
 
 .search-form__filters {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
 }
 
 .search-form__legend-text {
-    font-weight: bold;
-    text-transform: uppercase;
-    float: left;
+  font-weight: bold;
+  text-transform: uppercase;
+  float: left;
 }
 
 .search-form__radio__button {
-    padding: 5px;
-    margin: 0 7px;
-    cursor: pointer;
-    text-transform: uppercase;
-    color: var(--white-color);
-    font-weight: bold;
-    background-color: var(--gray-color);
+  padding: 5px;
+  margin: 0 7px;
+  cursor: pointer;
+  text-transform: uppercase;
+  color: var(--white-color);
+  font-weight: bold;
+  background-color: var(--gray-color);
 }
 
 .search-form__radio__button.checked {
-    background-color: var(--light-red);
+  background-color: var(--light-red);
 }
 
 .search-form__button {
-    width: 200px;
-    padding: 10px 15px;
-    margin: 0;
-    height: auto;
-    cursor: pointer;
-    text-transform: uppercase;
-    border: none;
-    font-weight: bold;
-    color: var(--white-color);
-    background-color: var(--light-red);
+  width: 200px;
+  padding: 10px 15px;
+  margin: 0;
+  height: auto;
+  cursor: pointer;
+  text-transform: uppercase;
+  border: none;
+  font-weight: bold;
+  color: var(--white-color);
+  background-color: var(--light-red);
 }
 
 .search-form__button:hover {
-    background-color: var(--red-color);
+  background-color: var(--red-color);
 }
-
-
