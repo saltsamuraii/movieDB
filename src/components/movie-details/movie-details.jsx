@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import './movie-details.css';
-import loadData from '../../helpers/resourse';
+import { loadData } from '../../helpers/resourse';
 
-class MovieDetails extends Component {
+export default class MovieDetails extends Component {
   constructor(props) {
     super(props);
 
@@ -27,7 +27,7 @@ class MovieDetails extends Component {
 
     if (movieId === undefined) {
       this.setState({
-        movieId: null
+        movie: null
       });
       return;
     }
@@ -80,5 +80,3 @@ class MovieDetails extends Component {
     );
   }
 }
-
-export default MovieDetails;

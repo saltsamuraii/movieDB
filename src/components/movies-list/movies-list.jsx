@@ -1,7 +1,7 @@
 import React from 'react';
-import MovieCard from '../movie-card/movie-card';
+import { MovieCard } from '../movie-card';
 
-function MoviesList(props) {
+export default function MoviesList(props) {
   const { loading, movies, onErrorImage, onMovieSelected } = props;
 
   if (loading) return <h1>Loading...</h1>;
@@ -25,5 +25,3 @@ function MoviesList(props) {
     </ul>
   );
 }
-
-export default MoviesList;

@@ -1,8 +1,8 @@
 import React from 'react';
-import RadioButton from '../radio-button/radio-button';
+import { RadioButton } from '../radio-button';
 import './search-bar.css';
 
-function SearchBar(props) {
+export default function SearchBar(props) {
   const { filterValue, movie, onSubmit, onSearchMovie, onFilter } = props;
 
   return (
@@ -41,5 +41,3 @@ function SearchBar(props) {
     </>
   );
 }
-
-export default SearchBar;

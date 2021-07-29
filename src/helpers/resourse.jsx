@@ -1,4 +1,4 @@
-export default function loadData(url, params) {
+export function loadData(url, params) {
   let resultUrl = url;
   if (params !== undefined) {
     const queryParams = new URLSearchParams(Object.entries(params));

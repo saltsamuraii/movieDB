@@ -1,8 +1,8 @@
 import React from 'react';
-import RadioButton from '../radio-button/radio-button';
+import { RadioButton } from '../radio-button';
 import './search-info.css';
 
-function SearchInfo(props) {
+export default function SearchInfo(props) {
   const { moviesLength, sortValue, onSort } = props;
 
   return (
@@ -26,5 +26,3 @@ function SearchInfo(props) {
     </div>
   );
 }
-
-export default SearchInfo;

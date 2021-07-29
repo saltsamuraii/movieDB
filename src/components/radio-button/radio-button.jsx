@@ -1,13 +1,11 @@
 import React from 'react';
 import './radio-button.css';
 
-function RadioButton(props) {
+export default function RadioButton(props) {
   const { value, onChange, isChecked, className } = props;
   return (
-    <label className={isChecked ? `${className} checked` : className}
-    htmlFor="input">
+    <label className={isChecked ? `${className} checked` : className}>
       <input
-        id="input"
         className="radio__button-input"
         type="radio"
         value={value}
@@ -18,5 +16,3 @@ function RadioButton(props) {
     </label>
   );
 }
-
-export default RadioButton;

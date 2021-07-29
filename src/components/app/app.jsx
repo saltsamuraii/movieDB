@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
-import ErrorBoundary from '../error-boundary';
-import SearchBar from '../search-bar/search-bar';
-import SearchInfo from '../results/search-info';
-import MoviesList from '../movies-list/movies-list';
-import MovieDetails from '../movie-details/movie-details';
-import loadData from '../../helpers/resourse';
+import { ErrorBoundary } from '../error-boundary';
+import { SearchBar } from '../search-bar';
+import { SearchInfo } from '../search-info';
+import { MoviesList } from '../movies-list';
+import { MovieDetails } from '../movie-details';
+import { loadData } from '../../helpers/resourse';
 import './app.css';
 
-class App extends Component {
+export default class App extends Component {
   constructor(props) {
     super(props);
 
@@ -23,7 +23,6 @@ class App extends Component {
     this.handleSearch = this.handleSearchMovie.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
-    this.handleErrorImage = this.handleErrorImage.bind(this);
     this.handleBack = this.handleBack.bind(this);
     this.handleSort = this.handleSort.bind(this);
     this.handleMovieSelected = this.handleMovieSelected.bind(this);
@@ -86,6 +85,7 @@ class App extends Component {
     });
   }
 
+
   handleErrorImage(event) {
     event.target.src = 'https://allmovies.tube/assets/img/no-poster.png';
   }
@@ -106,7 +106,7 @@ class App extends Component {
           />
         ) : (
           <MovieDetails
-            movieId={selectedMovie}
+            movieId={selectedMovie} // id
             onErrorImage={this.handleErrorImage}
             onBack={this.handleBack}
           />
@@ -127,4 +127,3 @@ class App extends Component {
   }
 }
 
-export default App;

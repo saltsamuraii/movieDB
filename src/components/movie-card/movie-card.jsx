@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import './movie-card.css';
 
-class MovieCard extends PureComponent {
+export default class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
@@ -35,5 +35,3 @@ class MovieCard extends PureComponent {
     );
   }
 }
-
-export default MovieCard;

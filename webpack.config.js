@@ -5,12 +5,11 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const isProd = process.env.NODE_ENV === "production";
 
-
 module.exports = {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "source-map" : "eval",
 
-    entry: "./src/index.js",
+    entry: "./src/index.jsx",
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, "dist"),
@@ -19,7 +18,7 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.js$/,
+                test: /\.(js|jsx)$/,
                 exclude: /node_modules/,
                 use: ["babel-loader"]
             },
@@ -45,6 +44,9 @@ module.exports = {
                 type: "asset/inline",
             },
         ]
+    },
+    resolve: {
+        extensions: ['*', '.js', '.jsx'],
     },
     plugins: [
         new HtmlWebpackPlugin({
