@@ -2,7 +2,7 @@ import React from 'react';
 import { MovieCard } from '../movie-card';
 
 export default function MoviesList(props) {
-  const { loading, movies, onErrorImage, onMovieSelected } = props;
+  const { loading, movies, onMovieSelected } = props;
 
   if (loading) return <h1>Loading...</h1>;
   if (!movies) return <h2>No movies found</h2>;
@@ -14,7 +14,6 @@ export default function MoviesList(props) {
           <MovieCard
             id={id}
             onMovieSelected={onMovieSelected}
-            onErrorImage={onErrorImage}
             poster={poster}
             title={title}
             release={releaseDate}

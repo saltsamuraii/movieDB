@@ -8,8 +8,8 @@
     "start": "webpack serve",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "webpack",
-    "lint": "eslint ./src",
-    "lintFix": "eslint ./src --fix"
+    "lint": "eslint ./src/**/*.{js,jsx}",
+    "lintFix": "eslint ./src/**/*.{js,jsx} --fix"
   },
   "repository": {
     "type": "git",

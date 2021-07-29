@@ -5,24 +5,40 @@ export default class MovieCard extends PureComponent {
   constructor(props) {
     super(props);
 
+    this.state = {
+      fallbackSrc: 'https://allmovies.tube/assets/img/no-poster.png',
+      imageError: true
+    }
+
     this.handleSelected = this.handleSelected.bind(this);
+    this.handleErrorImage = this.handleErrorImage.bind(this);
   }
+
 
   handleSelected() {
     const { onMovieSelected, id } = this.props;
     onMovieSelected(id);
   }
 
+  handleErrorImage() {
+    this.setState({
+      imageError: false,
+      fallbackSrc: "https://allmovies.tube/assets/img/no-poster.png"
+    });
+  }
+
   render() {
-    const { poster, release, title, genre, onErrorImage } = this.props;
+    const { imageError, fallbackSrc} = this.state;
+    const { poster, release, title, genre} = this.props;
+    const imgSrc = !imageError ? fallbackSrc : poster
 
     return (
       <>
         <img
           className="movie-card__poster"
-          src={poster}
+          src={imgSrc}
           onClick={this.handleSelected}
-          onError={onErrorImage}
+          onError={this.handleErrorImage}
           alt=""
           role="presentation"
         />

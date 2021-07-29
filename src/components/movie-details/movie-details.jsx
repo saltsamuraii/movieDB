@@ -8,7 +8,11 @@ export default class MovieDetails extends Component {
 
     this.state = {
       movie: null,
+      fallbackSrc: "https://allmovies.tube/assets/img/no-poster.png",
+      imageError: true
     };
+
+    this.handleErrorImage = this.handleErrorImage.bind(this);
   }
 
   componentDidMount() {
@@ -20,6 +24,13 @@ export default class MovieDetails extends Component {
     if (movieId !== prevProps.movieId) {
       this.updateMovie();
     }
+  }
+
+  handleErrorImage() {
+    this.setState({
+      fallbackSrc: "https://allmovies.tube/assets/img/no-poster.png",
+      imageError: false
+    });
   }
 
   updateMovie() {
@@ -40,8 +51,8 @@ export default class MovieDetails extends Component {
   }
 
   render() {
-    const { movie } = this.state;
-    const { onErrorImage, onBack } = this.props;
+    const { movie, imageError, fallbackSrc } = this.state;
+    const { onBack } = this.props;
 
     if (!movie) return null;
 
@@ -55,13 +66,14 @@ export default class MovieDetails extends Component {
       overview
     } = movie;
 
+    const imgSrc = !imageError ? fallbackSrc : poster
 
     return (
       <div className="movie-details__container">
         <img
           className="movie__poster"
-          src={poster}
-          onError={onErrorImage}
+          src={imgSrc}
+          onError={this.handleErrorImage}
           alt=""
           role="presentation"
         />

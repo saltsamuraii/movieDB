@@ -20,6 +20,7 @@ export default class App extends Component {
       sortValue: 'release date',
     };
 
+
     this.handleSearch = this.handleSearchMovie.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
@@ -63,7 +64,7 @@ export default class App extends Component {
 
   handleFilter({ target: { value } }) {
     this.setState({
-      filterValue: value
+      filterValue: value,
     });
   }
 
@@ -86,10 +87,6 @@ export default class App extends Component {
   }
 
 
-  handleErrorImage(event) {
-    event.target.src = 'https://allmovies.tube/assets/img/no-poster.png';
-  }
-
   render() {
     const { loading, movies, searchMovie, filterValue, sortValue, selectedMovie } = this.state;
 
@@ -107,7 +104,6 @@ export default class App extends Component {
         ) : (
           <MovieDetails
             movieId={selectedMovie} // id
-            onErrorImage={this.handleErrorImage}
             onBack={this.handleBack}
           />
         )}
@@ -120,7 +116,6 @@ export default class App extends Component {
           loading={loading}
           movies={movies}
           onMovieSelected={this.handleMovieSelected}
-          onErrorImage={this.handleErrorImage}
         />
       </ErrorBoundary>
     );
