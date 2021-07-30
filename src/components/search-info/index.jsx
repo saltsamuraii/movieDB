@@ -1,0 +1,1 @@
+export { default as SearchInfo } from './search-info'
