@@ -13,7 +13,7 @@ export default class App extends Component {
 
     this.state = {
       movies: [],
-      id: null,
+      movieId: null,
       searchMovie: '',
       loading: true,
       filterValue: 'title',
@@ -75,23 +75,23 @@ export default class App extends Component {
 
   handleBack() {
     this.setState({
-      selectedMovie: null
+      id: null
     });
   }
 
   handleMovieSelected(id) {
     this.setState({
-      selectedMovie: id
+      movieId: id
     });
   }
 
 
   render() {
-    const { loading, movies, searchMovie, filterValue, sortValue, id } = this.state;
+    const { loading, movies, searchMovie, filterValue, sortValue, movieId } = this.state;
 
     return (
       <ErrorBoundary>
-        {!id ? (
+        {!movieId ? (
           <SearchBar
             movies={movies}
             filterValue={filterValue}
@@ -102,7 +102,7 @@ export default class App extends Component {
           />
         ) : (
           <MovieDetails
-            movieId={id}
+            movieId={movieId}
             onBack={this.handleBack}
           />
         )}
