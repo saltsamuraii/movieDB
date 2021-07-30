@@ -75,7 +75,7 @@ export default class App extends Component {
 
   handleBack() {
     this.setState({
-      id: null
+      movieId: null
     });
   }
 
