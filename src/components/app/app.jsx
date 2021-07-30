@@ -85,7 +85,6 @@ export default class App extends Component {
     });
   }
 
-
   render() {
     const { loading, movies, searchMovie, filterValue, sortValue, movieId } = this.state;
 

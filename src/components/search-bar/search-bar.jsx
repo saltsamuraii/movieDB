@@ -32,7 +32,7 @@ export default function SearchBar(props) {
               onChange={onFilter}
             />
           </fieldset>
-          <button type="button"
+          <button type="submit"
                   className="search-form__button">
             Search
           </button>

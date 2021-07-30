@@ -6,31 +6,37 @@ export default class MovieCard extends PureComponent {
     super(props);
 
     this.state = {
-      fallbackSrc: 'https://allmovies.tube/assets/img/no-poster.png',
       imageError: true
-    }
+    };
 
     this.handleSelected = this.handleSelected.bind(this);
     this.handleErrorImage = this.handleErrorImage.bind(this);
   }
 
-
   handleSelected() {
-    const { onMovieSelected, id } = this.props;
+    const { onMovieSelected, data: { id } } = this.props;
     onMovieSelected(id);
   }
 
   handleErrorImage() {
     this.setState({
-      imageError: false,
-      fallbackSrc: "https://allmovies.tube/assets/img/no-poster.png"
+      imageError: false
     });
   }
 
   render() {
-    const { imageError, fallbackSrc} = this.state;
-    const { poster, release, title, genre} = this.props;
-    const imgSrc = !imageError ? fallbackSrc : poster
+    const { imageError } = this.state;
+    const {
+      data:
+        {
+          poster_path: poster,
+          release_date: releaseDate,
+          title,
+          genres
+        }
+    } = this.props;
+
+    const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 
     return (
       <>
@@ -44,9 +50,9 @@ export default class MovieCard extends PureComponent {
         />
         <div className="movie-card__content">
           <h5 className="movie-card__title">{title}</h5>
-          <span className="movie-card__year">{release.slice(0, 4)}</span>
+          <span className="movie-card__year">{releaseDate.slice(0, 4)}</span>
         </div>
-        <p className="movie-card__genre">{genre[0]}</p>
+        <p className="movie-card__genre">{genres[0]}</p>
       </>
     );
   }

@@ -9,16 +9,9 @@ export default function MoviesList(props) {
 
   return (
     <ul className="movies">
-      {movies.map(({ id, poster_path: poster, title, release_date: releaseDate, genres }) => (
-        <li className="movie-card" key={id} data-id={id}>
-          <MovieCard
-            id={id}
-            onMovieSelected={onMovieSelected}
-            poster={poster}
-            title={title}
-            release={releaseDate}
-            genre={genres}
-          />
+      {movies.map((movie) => (
+        <li className="movie-card" key={movie.id} data-id={movie.id}>
+          <MovieCard data={movie} onMovieSelected={onMovieSelected}/>
         </li>
       ))}
     </ul>

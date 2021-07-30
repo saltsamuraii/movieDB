@@ -8,7 +8,6 @@ export default class MovieDetails extends Component {
 
     this.state = {
       movie: null,
-      fallbackSrc: "https://allmovies.tube/assets/img/no-poster.png",
       imageError: true
     };
 
@@ -28,7 +27,6 @@ export default class MovieDetails extends Component {
 
   handleErrorImage() {
     this.setState({
-      fallbackSrc: "https://allmovies.tube/assets/img/no-poster.png",
       imageError: false
     });
   }
@@ -51,7 +49,7 @@ export default class MovieDetails extends Component {
   }
 
   render() {
-    const { movie, imageError, fallbackSrc } = this.state;
+    const { movie, imageError } = this.state;
     const { onBack } = this.props;
 
     if (!movie) return null;
@@ -66,7 +64,7 @@ export default class MovieDetails extends Component {
       overview
     } = movie;
 
-    const imgSrc = !imageError ? fallbackSrc : poster
+    const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster
 
     return (
       <div className="movie-details__container">
