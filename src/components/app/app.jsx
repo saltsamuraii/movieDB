@@ -20,7 +20,6 @@ export default class App extends Component {
       sortValue: 'release date',
     };
 
-
     this.handleSearch = this.handleSearchMovie.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
