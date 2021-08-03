@@ -15,10 +15,13 @@ module.exports = {
         path: path.resolve(__dirname, "dist"),
         clean: true
     },
+    resolve: {
+        extensions: ['*', '.js', '.jsx', '.ts', '.tsx'],
+    },
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.(js|jsx|ts|tsx)$/,
                 exclude: /node_modules/,
                 use: ["babel-loader"]
             },
@@ -44,9 +47,6 @@ module.exports = {
                 type: "asset/inline",
             },
         ]
-    },
-    resolve: {
-        extensions: ['*', '.js', '.jsx'],
     },
     plugins: [
         new HtmlWebpackPlugin({
