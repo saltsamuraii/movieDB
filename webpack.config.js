@@ -9,7 +9,7 @@ module.exports = {
     mode: isProd ? "production" : "development",
     devtool: isProd ? "source-map" : "eval",
 
-    entry: "./src/index.jsx",
+    entry: "./src/index.tsx",
     output: {
         filename: "main.js",
         path: path.resolve(__dirname, "dist"),

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "allowJs": true,
+    "esModuleInterop": true,
     "jsx": "react",
     "strict": true,
     "module": "commonjs",
