@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { ChangeEvent, Component, FormEvent } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import { SearchInfo } from '../search-info';
@@ -7,11 +7,21 @@ import { MovieDetails } from '../movie-details';
 import { loadData } from '../../helpers/resourse';
 import './app.css';
 
-export default class App extends Component {
-  constructor(props) {
+type AppState = {
+  movies: string[],
+  movieId: null | number,
+  searchMovie: string,
+  loading: boolean,
+  filterValue: any,
+  sortValue: string,
+}
+type AppProps = any
+
+export default class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
 
-    this.state = {
+   this.state = {
       movies: [],
       movieId: null,
       searchMovie: '',
@@ -20,7 +30,7 @@ export default class App extends Component {
       sortValue: 'release date',
     };
 
-    this.handleSearch = this.handleSearchMovie.bind(this);
+    this.handleSearchMovie = this.handleSearchMovie.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -28,7 +38,7 @@ export default class App extends Component {
     this.handleMovieSelected = this.handleMovieSelected.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     loadData('https://reactjs-cdp.herokuapp.com/movies').then((result) => {
       this.setState({
         loading: false,
@@ -37,7 +47,7 @@ export default class App extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const { filterValue, searchMovie, sortValue } = this.state;
     const params = {
@@ -55,31 +65,31 @@ export default class App extends Component {
     });
   }
 
-  handleSort({ target: { value } }) {
+  handleSort(event: ChangeEvent<HTMLInputElement>): void {
     this.setState({
-      sortValue: value
+      sortValue: event.target.value
     });
   }
 
-  handleFilter({ target: { value } }) {
+  handleFilter(event: ChangeEvent<HTMLInputElement>): void {
     this.setState({
-      filterValue: value,
+      filterValue: event.target.value
     });
   }
 
-  handleSearchMovie({ target: { value } }) {
+  handleSearchMovie(event: ChangeEvent<HTMLInputElement>): void {
     this.setState({
-      searchMovie: value
+      searchMovie: event.target.value
     });
   }
 
-  handleBack() {
+  handleBack(): void {
     this.setState({
       movieId: null
     });
   }
 
-  handleMovieSelected(id) {
+  handleMovieSelected(id: number): void {
     this.setState({
       movieId: id
     });
@@ -92,10 +102,9 @@ export default class App extends Component {
       <ErrorBoundary>
         {!movieId ? (
           <SearchBar
-            movies={movies}
             filterValue={filterValue}
             movie={searchMovie}
-            onSearchMovie={this.handleSearch}
+            onSearchMovie={this.handleSearchMovie}
             onSubmit={this.handleSubmit}
             onFilter={this.handleFilter}
           />

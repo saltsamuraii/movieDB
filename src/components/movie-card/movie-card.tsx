@@ -1,8 +1,17 @@
 import React, { PureComponent } from 'react';
 import './movie-card.css';
 
-export default class MovieCard extends PureComponent {
-  constructor(props) {
+type MovieCardState = {
+  imageError: boolean
+}
+
+type MovieCardProps = {
+  onMovieSelected: (data: { id: number } ) => void,
+  data: any
+}
+
+export default class MovieCard extends PureComponent<MovieCardProps, MovieCardState> {
+  constructor(props: MovieCardProps) {
     super(props);
 
     this.state = {
@@ -13,12 +22,12 @@ export default class MovieCard extends PureComponent {
     this.handleErrorImage = this.handleErrorImage.bind(this);
   }
 
-  handleSelected() {
+  handleSelected(): void {
     const { onMovieSelected, data: { id } } = this.props;
     onMovieSelected(id);
   }
 
-  handleErrorImage() {
+  handleErrorImage(): void {
     this.setState({
       imageError: false
     });

@@ -2,8 +2,18 @@ import React, { Component } from 'react';
 import './movie-details.css';
 import { loadData } from '../../helpers/resourse';
 
-export default class MovieDetails extends Component {
-  constructor(props) {
+type MovieDetailsState = {
+  movie: any | null,
+  imageError: boolean
+}
+
+type MovieDetailsProps = {
+  movieId: number
+  onBack: () => void
+}
+
+export default class MovieDetails extends Component<MovieDetailsProps, MovieDetailsState> {
+  constructor(props: MovieDetailsProps) {
     super(props);
 
     this.state = {
@@ -14,18 +24,18 @@ export default class MovieDetails extends Component {
     this.handleErrorImage = this.handleErrorImage.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.updateMovie();
   }
 
-  componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps: { movieId: number; }): void {
     const { movieId } = this.props
     if (movieId !== prevProps.movieId) {
       this.updateMovie();
     }
   }
 
-  handleErrorImage() {
+  handleErrorImage(): void {
     this.setState({
       imageError: false
     });
@@ -69,7 +79,7 @@ export default class MovieDetails extends Component {
     return (
       <div className="movie-details__container">
         <img
-          className="movie__poster"
+          className="movie-details__poster"
           src={imgSrc}
           onError={this.handleErrorImage}
           alt=""

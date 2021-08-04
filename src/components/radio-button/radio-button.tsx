@@ -1,7 +1,14 @@
 import React from 'react';
 import './radio-button.css';
 
-export default function RadioButton({ value, onChange, isChecked, className }) {
+type RadioButtonProps = {
+  value: any,
+  onChange: any,
+  isChecked: boolean,
+  className: string,
+}
+
+export default function RadioButton({ value, onChange, isChecked, className }: RadioButtonProps) {
   return (
     <label className={isChecked ? `${className} checked` : className}>
       <input

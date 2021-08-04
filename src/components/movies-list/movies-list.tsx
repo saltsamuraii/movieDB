@@ -1,7 +1,13 @@
 import React from 'react';
 import { MovieCard } from '../movie-card';
 
-export default function MoviesList(props) {
+type MoviesListProps = {
+  loading: boolean,
+  movies: any[],
+  onMovieSelected: any;
+}
+
+export default function MoviesList(props: MoviesListProps) {
   const { loading, movies, onMovieSelected } = props;
 
   if (loading) return <h1>Loading...</h1>;

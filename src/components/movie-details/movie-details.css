@@ -1,3 +1,10 @@
+.movie-details__poster {
+  width: 300px;
+  margin: 15px;
+  max-width: 100%;
+  border: 1px var(--red-color) solid;
+}
+
 .movie-details__container {
   display: flex;
   background: linear-gradient(rgba(0, 0, 0, 0.8), var(--black-color)),
@@ -6,7 +13,7 @@
 }
 
 .movie-details__content {
-  margin-left: 30px;
+  margin: 15px;
 }
 
 .movie-details__title {

@@ -2,7 +2,13 @@ import React from 'react';
 import { RadioButton } from '../radio-button';
 import './search-info.css';
 
-export default function SearchInfo(props) {
+type SearchInfoProps = {
+  moviesLength: string,
+  sortValue: string,
+  onSort: any,
+}
+
+export default function SearchInfo(props: SearchInfoProps) {
   const { moviesLength, sortValue, onSort } = props;
 
   return (

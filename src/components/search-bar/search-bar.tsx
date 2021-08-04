@@ -2,7 +2,15 @@ import React from 'react';
 import { RadioButton } from '../radio-button';
 import './search-bar.css';
 
-export default function SearchBar(props) {
+type SearchBarProps = {
+  filterValue: string,
+  movie: string,
+  onSubmit: any,
+  onSearchMovie: any,
+  onFilter: any
+}
+
+export default function SearchBar(props: SearchBarProps) {
   const { filterValue, movie, onSubmit, onSearchMovie, onFilter } = props;
 
   return (
