@@ -12,22 +12,22 @@ type AppState = {
   movieId: null | number,
   searchMovie: string,
   loading: boolean,
-  filterValue: any,
+  filterValue: string,
   sortValue: string,
 }
-type AppProps = any
+type AppProps = {}
 
 export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
     super(props);
 
-   this.state = {
+    this.state = {
       movies: [],
       movieId: null,
       searchMovie: '',
       loading: true,
       filterValue: 'title',
-      sortValue: 'release date',
+      sortValue: 'release date'
     };
 
     this.handleSearchMovie = this.handleSearchMovie.bind(this);

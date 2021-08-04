@@ -6,11 +6,12 @@
     "extends": [
         "eslint:recommended",
         "plugin:react/recommended",
-        //"plugin:@typescript-eslint/eslint-recommended",
-        //"plugin:@typescript-eslint/recommended",
+        "plugin:@typescript-eslint/eslint-recommended",
+        "plugin:@typescript-eslint/recommended",
         "airbnb",
         "prettier"
     ],
+    "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {
             "jsx": true
@@ -19,14 +20,14 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
-        //"@typescript-eslint"
+        "react",
+        "@typescript-eslint"
     ],
     "rules": {
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "react/prop-types": ["off"],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
         "import/prefer-default-export": "off",
         "jsx-a11y/label-has-associated-control": "off"
     }
