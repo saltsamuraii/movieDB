@@ -8,14 +8,16 @@ import { loadData } from '../../helpers/resourse';
 import './app.css';
 
 type AppState = {
-  movies: string[],
+  movies: (string | number)[],
   movieId: null | number,
   searchMovie: string,
   loading: boolean,
   filterValue: string,
   sortValue: string,
 }
-type AppProps = {}
+type AppProps = {
+
+}
 
 export default class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {

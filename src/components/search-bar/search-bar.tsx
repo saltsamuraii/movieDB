@@ -1,13 +1,13 @@
-import React from 'react';
+import React, { ChangeEvent, FormEvent } from 'react';
 import { RadioButton } from '../radio-button';
 import './search-bar.css';
 
 type SearchBarProps = {
   filterValue: string,
   movie: string,
-  onSubmit: any,
-  onSearchMovie: any,
-  onFilter: any
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void,
+  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => void,
+  onFilter: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
 export default function SearchBar(props: SearchBarProps) {

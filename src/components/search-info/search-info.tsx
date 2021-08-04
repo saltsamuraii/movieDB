@@ -1,11 +1,11 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import { RadioButton } from '../radio-button';
 import './search-info.css';
 
 type SearchInfoProps = {
   moviesLength: string,
   sortValue: string,
-  onSort: any,
+  onSort: (event: ChangeEvent<HTMLInputElement>) => void,
 }
 
 export default function SearchInfo(props: SearchInfoProps) {

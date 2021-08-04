@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import './radio-button.css';
 
 type RadioButtonProps = {
-  value: any,
-  onChange: any,
+  value: string,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
   isChecked: boolean,
   className: string,
 }

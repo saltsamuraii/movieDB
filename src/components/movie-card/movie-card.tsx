@@ -6,8 +6,14 @@ type MovieCardState = {
 }
 
 type MovieCardProps = {
-  onMovieSelected: (data: { id: number } ) => void,
-  data: any
+  onMovieSelected: (id: number) => void,
+  data: {
+    id: number;
+    poster_path: string;
+    release_date: string;
+    title: string,
+    genres: string,
+  }
 }
 
 export default class MovieCard extends PureComponent<MovieCardProps, MovieCardState> {
@@ -36,14 +42,13 @@ export default class MovieCard extends PureComponent<MovieCardProps, MovieCardSt
   render() {
     const { imageError } = this.state;
     const {
-      data:
-        {
-          poster_path: poster,
-          release_date: releaseDate,
-          title,
-          genres
-        }
-    } = this.props;
+      data: {
+        poster_path: poster,
+        release_date: releaseDate,
+        title,
+        genres
+      }
+    } = this.props
 
     const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 

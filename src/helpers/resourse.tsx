@@ -1,4 +1,11 @@
-export function loadData(url: any, params?: any) {
+type LoadDataProps = {
+  search: string,
+  sortOrder: string,
+  searchBy: string,
+  sortBy: string
+}
+
+export function loadData(url: string, params?: LoadDataProps) {
   let resultUrl = url;
   if (params !== undefined) {
     const queryParams = new URLSearchParams(Object.entries(params));
