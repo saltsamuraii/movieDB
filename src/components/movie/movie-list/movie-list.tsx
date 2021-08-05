@@ -1,9 +1,10 @@
 import React from 'react';
 import { MovieCard } from '../movie-card';
+import { Movie } from '../movie';
 
 interface MoviesListProps {
+  movies: Movie[],
   isLoading: boolean,
-  movies: (string | number)[],
   onMovieSelected: (id: number) => void,
 }
 
@@ -15,7 +16,7 @@ export default function MovieList({ isLoading, movies, onMovieSelected }: Movies
   return (
     <ul className="movies">
       {movies.map((movie) => (
-        <li className="movie-card"  key={movie.id} data-id={movie.id}>
+        <li className="movie-card"  key={movie.id}>
           <MovieCard data={movie} onMovieSelected={onMovieSelected}/>
         </li>
       ))}

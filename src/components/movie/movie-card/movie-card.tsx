@@ -1,21 +1,14 @@
 import React, { PureComponent } from 'react';
 import './movie-card.css';
-
-interface Movie {
-    id: number;
-    poster_path: string;
-    release_date: string;
-    title: string,
-    genres: string,
-}
+import { Movie } from '../movie';
 
 interface MovieCardState {
   imageError: boolean
 }
 
 interface MovieCardProps {
-  onMovieSelected: (id: number) => void,
   data: Movie
+  onMovieSelected: (id: number) => void,
 }
 
 export default class MovieCard extends PureComponent<MovieCardProps, MovieCardState> {

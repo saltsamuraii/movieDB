@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
+import { loadData } from '../../../helpers/resourse';
+import { Movie } from '../movie';
 import './movie-details.css';
-import { loadData } from '../../helpers/resourse';
 
 interface MovieDetailsState {
-  movie: null,
+  movie?: Movie,
   imageError: boolean
 }
 
 interface MovieDetailsProps {
-  movieId: number
+  movieId: number,
   onBack: () => void
 }
 
@@ -17,7 +18,7 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
     super(props);
 
     this.state = {
-      movie: null,
+      movie: undefined,
       imageError: true
     };
 
@@ -46,14 +47,14 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
 
     if (movieId === undefined) {
       this.setState({
-        movie: null
+        movie: undefined
       });
       return;
     }
 
     loadData(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`).then((movie) => {
       this.setState({
-        movie,
+        movie
       });
     });
   }

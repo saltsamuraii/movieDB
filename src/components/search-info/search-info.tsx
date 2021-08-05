@@ -3,15 +3,15 @@ import { RadioButton } from '../radio-button';
 import './search-info.css';
 
 interface SearchInfoProps {
-  moviesLength: string,
+  movieNumbers: string,
   sortValue: string,
   onSort: (event: ChangeEvent<HTMLInputElement>) => void,
 }
 
-export default function SearchInfo({ moviesLength, sortValue, onSort }: SearchInfoProps) {
+export default function SearchInfo({ movieNumbers, sortValue, onSort }: SearchInfoProps) {
   return (
     <div className="search-info">
-      <span className="search-info__result">{moviesLength}</span>
+      <span className="search-info__result">{movieNumbers}</span>
       <fieldset>
         <legend className="search-info__legend-text">Sort by</legend>
         <RadioButton

@@ -2,14 +2,15 @@ import React, { ChangeEvent, Component, FormEvent } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import { SearchInfo } from '../search-info';
-import { MovieList } from '../movie-list';
-import { MovieDetails } from '../movie-details';
+import { MovieList } from '../movie/movie-list';
+import { MovieDetails } from '../movie/movie-details';
 import { loadData } from '../../helpers/resourse';
+import { Movie } from '../movie/movie';
 import './app.css';
 
 interface AppState {
-  movies: /*interface Movie*/,
-  movieId: null | number,
+  movies: Movie[],
+  movieId: undefined | number,
   searchMovie: string,
   isLoading: boolean,
   filterValue: string,
@@ -22,7 +23,7 @@ export default class App extends Component<null, AppState> {
 
     this.state = {
       movies: [],
-      movieId: null,
+      movieId: undefined,
       searchMovie: '',
       isLoading: true,
       filterValue: 'title',
@@ -84,7 +85,7 @@ export default class App extends Component<null, AppState> {
 
   handleBack(): void {
     this.setState({
-      movieId: null
+      movieId: undefined
     });
   }
 
@@ -116,7 +117,7 @@ export default class App extends Component<null, AppState> {
         <SearchInfo
           sortValue={sortValue}
           onSort={this.handleSort}
-          moviesLength={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
+          movieNumbers={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
         />
         <MovieList
           isLoading={isLoading}
