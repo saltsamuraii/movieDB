@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component, FormEvent } from 'react';
+import React, { ChangeEvent, Component, FormEvent, PropsWithChildren, ReactNode } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import { SearchInfo } from '../search-info';
@@ -17,8 +17,8 @@ interface AppState {
   sortValue: string,
 }
 
-export default class App extends Component<null, AppState> {
-  constructor(props: null) {
+export default class App extends Component<PropsWithChildren<ReactNode>, AppState> {
+  constructor(props: PropsWithChildren<ReactNode>) {
     super(props);
 
     this.state = {
