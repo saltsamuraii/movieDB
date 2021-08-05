@@ -8,9 +8,7 @@ type SearchInfoProps = {
   onSort: (event: ChangeEvent<HTMLInputElement>) => void,
 }
 
-export default function SearchInfo(props: SearchInfoProps) {
-  const { moviesLength, sortValue, onSort } = props;
-
+export default function SearchInfo({ moviesLength, sortValue, onSort }: SearchInfoProps) {
   return (
     <div className="search-info">
       <span className="search-info__result">{moviesLength}</span>

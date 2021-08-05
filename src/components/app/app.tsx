@@ -8,7 +8,7 @@ import { loadData } from '../../helpers/resourse';
 import './app.css';
 
 type AppState = {
-  movies: (string | number)[],
+  movies: /*interface Movie*/,
   movieId: null | number,
   searchMovie: string,
   isLoading: boolean,

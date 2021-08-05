@@ -10,9 +10,7 @@ type SearchBarProps = {
   onFilter: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-export default function SearchBar(props: SearchBarProps) {
-  const { filterValue, movie, onSubmit, onSearchMovie, onFilter } = props;
-
+export default function SearchBar({ filterValue, movie, onSubmit, onSearchMovie, onFilter }: SearchBarProps) {
   return (
     <>
       <h1>Movie Finder</h1>
