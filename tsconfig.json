@@ -4,7 +4,7 @@
     "esModuleInterop": true,
     "jsx": "react",
     "strict": true,
-    "module": "commonjs",
+    "module": "es6",
     "target": "es5",
     "sourceMap": true
   },
