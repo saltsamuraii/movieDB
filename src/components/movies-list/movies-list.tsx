@@ -2,16 +2,16 @@ import React from 'react';
 import { MovieCard } from '../movie-card';
 
 type MoviesListProps = {
-  loading: boolean,
+  isLoading: boolean,
   movies: (string | number)[],
   onMovieSelected: (id: number) => void,
 }
 
 export default function MoviesList(props: MoviesListProps) {
-  const { loading, movies, onMovieSelected } = props;
+  const { isLoading, movies, onMovieSelected } = props;
 
 
-  if (loading) return <h1>Loading...</h1>;
+  if (isLoading) return <h1>Loading...</h1>;
   if (!movies) return <h2>No movies found</h2>;
 
   return (
@@ -24,5 +24,5 @@ export default function MoviesList(props: MoviesListProps) {
     </ul>
   );
 }
-// Проблема с подчеркиванием...
+
 

@@ -1,6 +1,16 @@
 import React, { PureComponent } from 'react';
 import './movie-card.css';
 
+interface MovieProps {
+  data: {
+    id: number;
+    poster_path: string;
+    release_date: string;
+    title: string,
+    genres: string,
+  }
+}
+
 type MovieCardState = {
   imageError: boolean
 }
@@ -48,7 +58,7 @@ export default class MovieCard extends PureComponent<MovieCardProps, MovieCardSt
         title,
         genres
       }
-    } = this.props
+      } = this.props
 
     const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 

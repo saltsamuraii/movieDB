@@ -1,11 +1,11 @@
-type LoadDataProps = {
+type LoadDataParams = {
   search: string,
   sortOrder: string,
   searchBy: string,
   sortBy: string
 }
 
-export function loadData(url: string, params?: LoadDataProps) {
+export function loadData(url: string, params?: LoadDataParams) {
   let resultUrl = url;
   if (params !== undefined) {
     const queryParams = new URLSearchParams(Object.entries(params));

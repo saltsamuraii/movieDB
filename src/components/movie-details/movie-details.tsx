@@ -3,7 +3,7 @@ import './movie-details.css';
 import { loadData } from '../../helpers/resourse';
 
 type MovieDetailsState = {
-  movie: number | null,
+  movie: null,
   imageError: boolean
 }
 
@@ -28,7 +28,7 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
     this.updateMovie();
   }
 
-  componentDidUpdate(prevProps: { movieId: number; }): void {
+  componentDidUpdate(prevProps: MovieDetailsProps): void {
     const { movieId } = this.props;
     if (movieId !== prevProps.movieId) {
       this.updateMovie();
@@ -53,7 +53,7 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
 
     loadData(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`).then((movie) => {
       this.setState({
-        movie
+        movie,
       });
     });
   }
@@ -74,7 +74,6 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
       overview
     } = movie;
 
-    // Проблема с деструктуризацией...
 
     const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 

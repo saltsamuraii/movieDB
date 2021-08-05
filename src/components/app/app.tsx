@@ -11,7 +11,7 @@ type AppState = {
   movies: (string | number)[],
   movieId: null | number,
   searchMovie: string,
-  loading: boolean,
+  isLoading: boolean,
   filterValue: string,
   sortValue: string,
 }
@@ -27,7 +27,7 @@ export default class App extends Component<AppProps, AppState> {
       movies: [],
       movieId: null,
       searchMovie: '',
-      loading: true,
+      isLoading: true,
       filterValue: 'title',
       sortValue: 'release date'
     };
@@ -43,7 +43,7 @@ export default class App extends Component<AppProps, AppState> {
   componentDidMount(): void {
     loadData('https://reactjs-cdp.herokuapp.com/movies').then((result) => {
       this.setState({
-        loading: false,
+        isLoading: false,
         movies: result.data
       });
     });
@@ -61,27 +61,27 @@ export default class App extends Component<AppProps, AppState> {
 
     loadData('https://reactjs-cdp.herokuapp.com/movies', params).then((result) => {
       this.setState({
-        loading: false,
+        isLoading: false,
         movies: result.data
       });
     });
   }
 
-  handleSort(event: ChangeEvent<HTMLInputElement>): void {
+  handleSort({ target: { value } }): void {
     this.setState({
-      sortValue: event.target.value
+      sortValue: value
     });
   }
 
-  handleFilter(event: ChangeEvent<HTMLInputElement>): void {
+  handleFilter({ target: { value } }): void {
     this.setState({
-      filterValue: event.target.value
+      filterValue: value
     });
   }
 
-  handleSearchMovie(event: ChangeEvent<HTMLInputElement>): void {
+  handleSearchMovie({ target: { value } }): void {
     this.setState({
-      searchMovie: event.target.value
+      searchMovie: value
     });
   }
 
@@ -98,7 +98,7 @@ export default class App extends Component<AppProps, AppState> {
   }
 
   render() {
-    const { loading, movies, searchMovie, filterValue, sortValue, movieId } = this.state;
+    const { isLoading, movies, searchMovie, filterValue, sortValue, movieId } = this.state;
 
     return (
       <ErrorBoundary>
@@ -122,7 +122,7 @@ export default class App extends Component<AppProps, AppState> {
           moviesLength={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
         />
         <MoviesList
-          loading={loading}
+          isLoading={isLoading}
           movies={movies}
           onMovieSelected={this.handleMovieSelected}
         />
