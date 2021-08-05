@@ -7,7 +7,7 @@ import { MovieDetails } from '../movie-details';
 import { loadData } from '../../helpers/resourse';
 import './app.css';
 
-type AppState = {
+interface AppState {
   movies: /*interface Movie*/,
   movieId: null | number,
   searchMovie: string,

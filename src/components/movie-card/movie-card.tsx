@@ -9,11 +9,11 @@ interface Movie {
     genres: string,
 }
 
-type MovieCardState = {
+interface MovieCardState {
   imageError: boolean
 }
 
-type MovieCardProps = {
+interface MovieCardProps {
   onMovieSelected: (id: number) => void,
   data: Movie
 }

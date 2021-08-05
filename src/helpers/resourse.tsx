@@ -1,4 +1,4 @@
-type LoadDataParams = {
+interface LoadDataParams {
   search: string,
   sortOrder: string,
   searchBy: string,

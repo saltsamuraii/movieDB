@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import './movie-details.css';
 import { loadData } from '../../helpers/resourse';
 
-type MovieDetailsState = {
+interface MovieDetailsState {
   movie: null,
   imageError: boolean
 }
 
-type MovieDetailsProps = {
+interface MovieDetailsProps {
   movieId: number
   onBack: () => void
 }

@@ -1,11 +1,11 @@
 import React, { ChangeEvent } from 'react';
 import './radio-button.css';
 
-type RadioButtonProps = {
+interface RadioButtonProps {
   value: string,
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
-  isChecked: boolean,
   className: string,
+  isChecked: boolean,
+  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
 }
 
 export default function RadioButton({ value, onChange, isChecked, className }: RadioButtonProps) {

@@ -2,7 +2,7 @@ import React, { ChangeEvent, FormEvent } from 'react';
 import { RadioButton } from '../radio-button';
 import './search-bar.css';
 
-type SearchBarProps = {
+interface SearchBarProps {
   filterValue: string,
   movie: string,
   onSubmit: (event: FormEvent<HTMLFormElement>) => void,

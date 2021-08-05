@@ -1,6 +1,6 @@
 import React, { Component, ReactNode, PropsWithChildren } from 'react';
 
-type ErrorBoundaryState = {
+interface ErrorBoundaryState {
   error: boolean
 }
 

@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { RadioButton } from '../radio-button';
 import './search-info.css';
 
-type SearchInfoProps = {
+interface SearchInfoProps {
   moviesLength: string,
   sortValue: string,
   onSort: (event: ChangeEvent<HTMLInputElement>) => void,

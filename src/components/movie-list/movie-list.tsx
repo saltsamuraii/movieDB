@@ -1,15 +1,13 @@
 import React from 'react';
 import { MovieCard } from '../movie-card';
 
-type MoviesListProps = {
+interface MoviesListProps {
   isLoading: boolean,
   movies: (string | number)[],
   onMovieSelected: (id: number) => void,
 }
 
-export default function MovieList(props: MoviesListProps) {
-  const { isLoading, movies, onMovieSelected } = props;
-
+export default function MovieList({ isLoading, movies, onMovieSelected }: MoviesListProps) {
 
   if (isLoading) return <h1>Loading...</h1>;
   if (!movies) return <h2>No movies found</h2>;
