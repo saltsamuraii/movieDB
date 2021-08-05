@@ -7,7 +7,7 @@ type MoviesListProps = {
   onMovieSelected: (id: number) => void,
 }
 
-export default function MoviesList(props: MoviesListProps) {
+export default function MovieList(props: MoviesListProps) {
   const { isLoading, movies, onMovieSelected } = props;
 
 

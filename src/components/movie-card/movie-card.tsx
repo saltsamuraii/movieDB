@@ -2,13 +2,11 @@ import React, { PureComponent } from 'react';
 import './movie-card.css';
 
 interface MovieProps {
-  data: {
     id: number;
     poster_path: string;
     release_date: string;
     title: string,
     genres: string,
-  }
 }
 
 type MovieCardState = {
@@ -17,13 +15,7 @@ type MovieCardState = {
 
 type MovieCardProps = {
   onMovieSelected: (id: number) => void,
-  data: {
-    id: number;
-    poster_path: string;
-    release_date: string;
-    title: string,
-    genres: string,
-  }
+  data: MovieProps
 }
 
 export default class MovieCard extends PureComponent<MovieCardProps, MovieCardState> {

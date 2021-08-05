@@ -4,12 +4,8 @@ type ErrorBoundaryState = {
   error: boolean
 }
 
-type ErrorBoundaryProps = {
-  children: ReactNode
-}
-
-export default class ErrorBoundary extends Component<PropsWithChildren<ErrorBoundaryProps>, ErrorBoundaryState> {
-  constructor(props: ErrorBoundaryProps) {
+export default class ErrorBoundary extends Component<PropsWithChildren<ReactNode>, ErrorBoundaryState> {
+  constructor(props: PropsWithChildren<ReactNode>) {
     super(props);
 
     this.state = {

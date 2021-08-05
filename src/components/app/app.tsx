@@ -2,7 +2,7 @@ import React, { ChangeEvent, Component, FormEvent } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import { SearchInfo } from '../search-info';
-import { MoviesList } from '../movies-list';
+import { MovieList } from '../movie-list';
 import { MovieDetails } from '../movie-details';
 import { loadData } from '../../helpers/resourse';
 import './app.css';
@@ -15,12 +15,9 @@ type AppState = {
   filterValue: string,
   sortValue: string,
 }
-type AppProps = {
 
-}
-
-export default class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
+export default class App extends Component<null, AppState> {
+  constructor(props: null) {
     super(props);
 
     this.state = {
@@ -67,19 +64,19 @@ export default class App extends Component<AppProps, AppState> {
     });
   }
 
-  handleSort({ target: { value } }): void {
+  handleSort({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
     this.setState({
       sortValue: value
     });
   }
 
-  handleFilter({ target: { value } }): void {
+  handleFilter({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
     this.setState({
       filterValue: value
     });
   }
 
-  handleSearchMovie({ target: { value } }): void {
+  handleSearchMovie({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
     this.setState({
       searchMovie: value
     });
@@ -121,7 +118,7 @@ export default class App extends Component<AppProps, AppState> {
           onSort={this.handleSort}
           moviesLength={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
         />
-        <MoviesList
+        <MovieList
           isLoading={isLoading}
           movies={movies}
           onMovieSelected={this.handleMovieSelected}
