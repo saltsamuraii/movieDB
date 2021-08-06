@@ -10,15 +10,15 @@ import './app.css';
 
 interface AppState {
   movies: Movie[],
-  movieId: undefined | number,
+  movieId?: number,
   searchMovie: string,
   isLoading: boolean,
   filterValue: string,
   sortValue: string,
 }
 
-export default class App extends Component<PropsWithChildren<ReactNode>, AppState> {
-  constructor(props: PropsWithChildren<ReactNode>) {
+export default class App extends Component<unknown, AppState> {
+  constructor(props: unknown) {
     super(props);
 
     this.state = {
