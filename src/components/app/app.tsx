@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component, FormEvent, PropsWithChildren, ReactNode } from 'react';
+import React, { ChangeEvent, Component, FormEvent } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import { SearchInfo } from '../search-info';
@@ -17,8 +17,8 @@ interface AppState {
   sortValue: string,
 }
 
-export default class App extends Component<unknown, AppState> {
-  constructor(props: unknown) {
+export default class App extends Component<Record<string, unknown>, AppState> {
+  constructor(props: Record<string, unknown>) {
     super(props);
 
     this.state = {
@@ -90,9 +90,9 @@ export default class App extends Component<unknown, AppState> {
   }
 
   handleMovieSelected(id: number): void {
-    this.setState({
-      movieId: id
-    });
+      this.setState({
+        movieId: id
+      });
   }
 
   render() {

@@ -16,7 +16,7 @@ export default function MovieList({ isLoading, movies, onMovieSelected }: Movies
   return (
     <ul className="movies">
       {movies.map((movie) => (
-        <li className="movie-card"  key={movie.id}>
+        <li className="movie-card" key={movie.id}>
           <MovieCard data={movie} onMovieSelected={onMovieSelected}/>
         </li>
       ))}
