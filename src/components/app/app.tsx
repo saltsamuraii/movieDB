@@ -1,26 +1,36 @@
-import React, { Component } from 'react';
+import React, { ChangeEvent, Component, FormEvent } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import { SearchInfo } from '../search-info';
-import { MoviesList } from '../movies-list';
-import { MovieDetails } from '../movie-details';
+import { MovieList } from '../movie/movie-list';
+import { MovieDetails } from '../movie/movie-details';
 import { loadData } from '../../helpers/resourse';
+import { Movie } from '../movie/movie';
 import './app.css';
 
-export default class App extends Component {
-  constructor(props) {
+interface AppState {
+  movies: Movie[],
+  movieId?: number,
+  searchMovie: string,
+  isLoading: boolean,
+  filterValue: string,
+  sortValue: string,
+}
+
+export default class App extends Component<Record<string, unknown>, AppState> {
+  constructor(props: Record<string, unknown>) {
     super(props);
 
     this.state = {
       movies: [],
-      movieId: null,
+      movieId: undefined,
       searchMovie: '',
-      loading: true,
+      isLoading: true,
       filterValue: 'title',
-      sortValue: 'release date',
+      sortValue: 'release date'
     };
 
-    this.handleSearch = this.handleSearchMovie.bind(this);
+    this.handleSearchMovie = this.handleSearchMovie.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleFilter = this.handleFilter.bind(this);
     this.handleBack = this.handleBack.bind(this);
@@ -28,16 +38,16 @@ export default class App extends Component {
     this.handleMovieSelected = this.handleMovieSelected.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     loadData('https://reactjs-cdp.herokuapp.com/movies').then((result) => {
       this.setState({
-        loading: false,
+        isLoading: false,
         movies: result.data
       });
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const { filterValue, searchMovie, sortValue } = this.state;
     const params = {
@@ -49,53 +59,52 @@ export default class App extends Component {
 
     loadData('https://reactjs-cdp.herokuapp.com/movies', params).then((result) => {
       this.setState({
-        loading: false,
+        isLoading: false,
         movies: result.data
       });
     });
   }
 
-  handleSort({ target: { value } }) {
+  handleSort({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
     this.setState({
       sortValue: value
     });
   }
 
-  handleFilter({ target: { value } }) {
+  handleFilter({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
     this.setState({
-      filterValue: value,
+      filterValue: value
     });
   }
 
-  handleSearchMovie({ target: { value } }) {
+  handleSearchMovie({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
     this.setState({
       searchMovie: value
     });
   }
 
-  handleBack() {
+  handleBack(): void {
     this.setState({
-      movieId: null
+      movieId: undefined
     });
   }
 
-  handleMovieSelected(id) {
-    this.setState({
-      movieId: id
-    });
+  handleMovieSelected(id: number): void {
+      this.setState({
+        movieId: id
+      });
   }
 
   render() {
-    const { loading, movies, searchMovie, filterValue, sortValue, movieId } = this.state;
+    const { isLoading, movies, searchMovie, filterValue, sortValue, movieId } = this.state;
 
     return (
       <ErrorBoundary>
         {!movieId ? (
           <SearchBar
-            movies={movies}
             filterValue={filterValue}
             movie={searchMovie}
-            onSearchMovie={this.handleSearch}
+            onSearchMovie={this.handleSearchMovie}
             onSubmit={this.handleSubmit}
             onFilter={this.handleFilter}
           />
@@ -108,10 +117,10 @@ export default class App extends Component {
         <SearchInfo
           sortValue={sortValue}
           onSort={this.handleSort}
-          moviesLength={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
+          movieNumbers={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
         />
-        <MoviesList
-          loading={loading}
+        <MovieList
+          isLoading={isLoading}
           movies={movies}
           onMovieSelected={this.handleMovieSelected}
         />

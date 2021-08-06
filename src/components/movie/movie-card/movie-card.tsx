@@ -1,8 +1,18 @@
 import React, { PureComponent } from 'react';
 import './movie-card.css';
+import { Movie } from '../movie';
 
-export default class MovieCard extends PureComponent {
-  constructor(props) {
+interface MovieCardState {
+  imageError: boolean
+}
+
+interface MovieCardProps {
+  data: Movie
+  onMovieSelected: (id: number) => void,
+}
+
+export default class MovieCard extends PureComponent<MovieCardProps, MovieCardState> {
+  constructor(props: MovieCardProps) {
     super(props);
 
     this.state = {
@@ -13,12 +23,12 @@ export default class MovieCard extends PureComponent {
     this.handleErrorImage = this.handleErrorImage.bind(this);
   }
 
-  handleSelected() {
+  handleSelected(): void {
     const { onMovieSelected, data: { id } } = this.props;
     onMovieSelected(id);
   }
 
-  handleErrorImage() {
+  handleErrorImage(): void {
     this.setState({
       imageError: false
     });
@@ -27,14 +37,13 @@ export default class MovieCard extends PureComponent {
   render() {
     const { imageError } = this.state;
     const {
-      data:
-        {
-          poster_path: poster,
-          release_date: releaseDate,
-          title,
-          genres
-        }
-    } = this.props;
+      data: {
+        poster_path: poster,
+        release_date: releaseDate,
+        title,
+        genres
+      }
+      } = this.props
 
     const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 

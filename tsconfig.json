@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "esModuleInterop": true,
+    "moduleResolution": "Node",
+    "jsx": "react",
+    "strict": true,
+    "module": "es6",
+    "target": "es5",
+    "sourceMap": true
+  },
+  "lig": [
+    "es2016",
+    "dom"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

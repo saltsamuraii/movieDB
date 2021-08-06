@@ -8,8 +8,8 @@
     "start": "webpack serve",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "webpack",
-    "lint": "eslint ./src/**/*.{js,jsx}",
-    "lintFix": "eslint ./src/**/*.{js,jsx} --fix"
+    "lint": "eslint ./src/**/*.{ts,tsx}",
+    "lintFix": "eslint ./src/**/*.{ts,tsx} --fix"
   },
   "repository": {
     "type": "git",
@@ -31,11 +31,18 @@
     "@babel/core": "7.14.3",
     "@babel/preset-env": "7.14.4",
     "@babel/preset-react": "7.13.13",
+    "@babel/preset-typescript": "7.14.5",
+    "@types/react": "17.0.15",
+    "@types/react-dom": "17.0.9",
+    "@typescript-eslint/eslint-plugin": "4.29.0",
+    "@typescript-eslint/eslint-plugin-tslint": "4.29.0",
+    "@typescript-eslint/parser": "4.29.0",
     "babel-loader": "8.2.2",
     "cross-env": "7.0.3",
     "css-loader": "5.2.6",
     "eslint": "7.31.0",
     "eslint-config-airbnb": "18.2.1",
+    "eslint-config-airbnb-typescript": "12.3.1",
     "eslint-config-prettier": "8.3.0",
     "eslint-plugin-import": "2.23.4",
     "eslint-plugin-jsx-a11y": "6.4.1",
@@ -47,15 +54,16 @@
     "mini-css-extract-plugin": "1.6.0",
     "prettier": "2.3.2",
     "style-loader": "2.0.0",
+    "typescript": "4.3.5",
     "webpack": "5.38.1",
     "webpack-cli": "4.7.2",
     "webpack-dev-server": "3.11.2"
   },
   "dependencies": {
+    "normalize.css": "8.0.1",
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-redux": "7.2.4",
-    "redux": "4.1.0",
-    "normalize.css": "8.0.1"
+    "redux": "4.1.0"
   }
 }

@@ -1,31 +1,42 @@
 import React, { Component } from 'react';
+import { loadData } from '../../../helpers/resourse';
+import { Movie } from '../movie';
 import './movie-details.css';
-import { loadData } from '../../helpers/resourse';
 
-export default class MovieDetails extends Component {
-  constructor(props) {
+interface MovieDetailsState {
+  movie?: Movie,
+  imageError: boolean
+}
+
+interface MovieDetailsProps {
+  movieId?: number,
+  onBack: () => void
+}
+
+export default class MovieDetails extends Component<MovieDetailsProps, MovieDetailsState> {
+  constructor(props: MovieDetailsProps) {
     super(props);
 
     this.state = {
-      movie: null,
+      movie: undefined,
       imageError: true
     };
 
     this.handleErrorImage = this.handleErrorImage.bind(this);
   }
 
-  componentDidMount() {
+  componentDidMount(): void {
     this.updateMovie();
   }
 
-  componentDidUpdate(prevProps) {
-    const { movieId } = this.props
+  componentDidUpdate(prevProps: MovieDetailsProps): void {
+    const { movieId } = this.props;
     if (movieId !== prevProps.movieId) {
       this.updateMovie();
     }
   }
 
-  handleErrorImage() {
+  handleErrorImage(): void {
     this.setState({
       imageError: false
     });
@@ -36,14 +47,14 @@ export default class MovieDetails extends Component {
 
     if (movieId === undefined) {
       this.setState({
-        movie: null
+        movie: undefined
       });
       return;
     }
 
     loadData(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`).then((movie) => {
       this.setState({
-        movie,
+        movie
       });
     });
   }
@@ -64,12 +75,13 @@ export default class MovieDetails extends Component {
       overview
     } = movie;
 
-    const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster
+
+    const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 
     return (
       <div className="movie-details__container">
         <img
-          className="movie__poster"
+          className="movie-details__poster"
           src={imgSrc}
           onError={this.handleErrorImage}
           alt=""
