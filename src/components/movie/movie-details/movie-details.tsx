@@ -9,7 +9,7 @@ interface MovieDetailsState {
 }
 
 interface MovieDetailsProps {
-  movieId: number,
+  movieId?: number,
   onBack: () => void
 }
 
