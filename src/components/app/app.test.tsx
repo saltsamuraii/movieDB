@@ -1,12 +1,9 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import App from './app';
 
-import App from './App';
+test("renders app element", () => {
 
-describe('App', () => {
-  test('renders App component', () => {
-    render(<App />);
-
-    screen.debug()
-  });
+  render(<App/>);
+  screen.debug()
 });
