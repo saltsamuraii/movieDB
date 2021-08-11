@@ -1,12 +1,13 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import { RadioButton } from '../components/radio-button';
+import { App } from '../components/app';
+import { SearchBar } from '../components/search-bar';
 
-test("render app element", () => {
 
-  render(<RadioButton className="red" 
-                      onChange={event => event.target.value} 
-                      isChecked
-                      value="title"/>);
-  screen.debug()
+describe('App', () => {
+  it('renders App component', () => {
+    render(<SearchBar filterValue="title" movie='star wars' onSubmit={event => event} onSearchMovie={event => event} onFilter={event => event}/>);
+    screen.debug();
+    expect(screen.getByText("Search by")).toBeInTheDocument();
+  });
 });
