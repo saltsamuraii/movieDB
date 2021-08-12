@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1628773302164" clover="3.2.0">
-  <project timestamp="1628773302164" name="All files">
+<coverage generated="1628790855469" clover="3.2.0">
+  <project timestamp="1628790855469" name="All files">
     <metrics statements="145" coveredstatements="87" conditionals="40" coveredconditionals="11" methods="45" coveredmethods="20" elements="230" coveredelements="118" complexity="0" loc="145" ncloc="145" packages="9" files="17" classes="17"/>
     <package name="components.app">
       <metrics statements="41" coveredstatements="30" conditionals="12" coveredconditionals="4" methods="13" coveredmethods="5"/>
@@ -169,14 +169,14 @@
       <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
       <file name="index.tsx" path="D:\FrontEnd\epam-project\src\components\radio-button\index.tsx">
         <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="8" type="stmt"/>
+        <line num="1" count="5" type="stmt"/>
       </file>
       <file name="radio-button.tsx" path="D:\FrontEnd\epam-project\src\components\radio-button\radio-button.tsx">
         <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="11" count="6" type="stmt"/>
-        <line num="12" count="6" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
       </file>
     </package>
     <package name="components.search-bar">
@@ -202,11 +202,11 @@
       </file>
       <file name="search-info.tsx" path="D:\FrontEnd\epam-project\src\components\search-info\search-info.tsx">
         <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
-        <line num="1" count="2" type="stmt"/>
-        <line num="2" count="2" type="stmt"/>
-        <line num="3" count="2" type="stmt"/>
-        <line num="11" count="2" type="stmt"/>
-        <line num="12" count="2" type="stmt"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
       </file>
     </package>
     <package name="helpers">
