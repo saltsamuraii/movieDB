@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { loadData } from '../helpers/resourse';
+import { loadData } from './resourse';
 
 test('loadData', () => {
   it ('render data from resourse', async () => {

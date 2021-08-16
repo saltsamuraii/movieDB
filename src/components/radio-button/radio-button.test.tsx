@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import { RadioButton } from '../components/radio-button';
+import { RadioButton } from './index';
 
 test('Module SearchInfo', () => {
   const onChange = jest.fn();

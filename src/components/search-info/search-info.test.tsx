@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import SearchInfo from '../components/search-info/search-info';
+import SearchInfo from './search-info';
 
 test('Module SearchInfo', () => {
    render(
