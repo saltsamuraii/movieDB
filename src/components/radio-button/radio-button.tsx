@@ -1,22 +1,19 @@
-import React, { ChangeEvent } from 'react';
+import React, { InputHTMLAttributes } from 'react';
 import './radio-button.css';
 
-interface RadioButtonProps {
-  value: string,
+interface RadioButtonProps extends InputHTMLAttributes<HTMLInputElement> {
   className: string,
-  isChecked: boolean,
-  onChange: (event: ChangeEvent<HTMLInputElement>) => void,
 }
 
-export default function RadioButton({ value, onChange, isChecked, className }: RadioButtonProps) {
+export default function RadioButton({ value, checked, className, ...rest }: Omit<RadioButtonProps, 'type'>) {
   return (
-    <label className={isChecked ? `${className} checked` : className}>
+    <label className={checked ? `${className} checked` : className}>
       <input
+        {...rest}
         className="radio__button-input"
         type="radio"
         value={value}
-        checked={isChecked}
-        onChange={onChange}
+        checked={checked}
       />
       {value}
     </label>

@@ -17,13 +17,13 @@ export default function SearchInfo({ movieNumbers, sortValue, onSort }: SearchIn
         <RadioButton
           className="search-info__radio__button"
           value="release date"
-          isChecked={sortValue === 'release date'}
+          checked={sortValue === 'release date'}
           onChange={onSort}
         />
         <RadioButton
           className="search-info__radio__button"
           value="rating"
-          isChecked={sortValue === 'rating'}
+          checked={sortValue === 'rating'}
           onChange={onSort}
         />
       </fieldset>
