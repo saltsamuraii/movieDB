@@ -4,7 +4,7 @@ import { render, screen } from '@testing-library/react';
 import { RadioButton } from './index';
 
 describe('Radiobutton module', () => {
-  it('it should call onChange on click', () => {
+  it('should call onChange when button clicked', () => {
     const onChange = jest.fn();
     render(
       <fieldset>
@@ -20,9 +20,7 @@ describe('Radiobutton module', () => {
           className='button'
           onChange={onChange}/>
       </fieldset>);
-
     userEvent.click(screen.getAllByRole('radio')[1]);
     expect(onChange).toHaveBeenCalled();
   });
-
 });
