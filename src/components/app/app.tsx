@@ -4,7 +4,7 @@ import { SearchBar } from '../search-bar';
 import { SearchInfo } from '../search-info';
 import { MovieList } from '../movie/movie-list';
 import { MovieDetails } from '../movie/movie-details';
-import { loadData } from '../../helpers/resourse';
+import { loadData } from '../../helpers/resourсe';
 import { Movie } from '../movie/movie';
 import './app.css';
 

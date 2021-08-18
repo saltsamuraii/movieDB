@@ -5,7 +5,7 @@ import { SearchBar } from './index';
 
 describe('Searchbar module', () => {
   it('should render component with correct title', () => {
-    const { getByText } = render(
+    render(
       <SearchBar
         filterValue=''
         movie=''
@@ -13,19 +13,20 @@ describe('Searchbar module', () => {
         onSearchMovie={jest.fn()}
         onFilter={jest.fn()}/>
     );
-    expect(getByText('Movie Finder')).toBeInTheDocument();
+    expect(screen.getByText('Movie Finder')).toBeInTheDocument();
   });
-  it('should handleSubmit on button click', () => {
-    const onSubmit = jest.fn(event => event.preventDefault())
+
+  it('should put text into input', () => {
+    const onSearchMovie = jest.fn()
     render(
       <SearchBar
         filterValue=''
         movie=''
-        onSubmit={onSubmit}
-        onSearchMovie={jest.fn()}
+        onSubmit={jest.fn()}
+        onSearchMovie={onSearchMovie}
         onFilter={jest.fn()}/>
         );
-    userEvent.click(screen.getByRole('button'))
-    expect(onSubmit).toHaveBeenCalled()
+    userEvent.type(screen.getByPlaceholderText('Search...'), 'pulp fiction')
+    expect(onSearchMovie).toHaveBeenCalled()
   });
 });

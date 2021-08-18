@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { loadData } from '../../../helpers/resourse';
+import { loadData } from '../../../helpers/resourсe';
 import { Movie } from '../movie';
 import './movie-details.css';
 
@@ -63,7 +63,10 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
     const { movie, imageError } = this.state;
     const { onBack } = this.props;
 
-    if (!movie) return null;
+    if (!movie) {
+      return null;
+    }
+
 
     const {
       poster_path: poster,

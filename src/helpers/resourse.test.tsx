@@ -1,11 +1,18 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import { loadData } from './resourse';
+import { loadData } from './resourсe';
 
-test('loadData', () => {
-  it ('render data from resourse', async () => {
-    render(
-      await loadData('https://reactjs-cdp.herokuapp.com/movies')
-    );
-  })
+jest.mock('./resourсe', () => ({
+  loadData: jest.fn()
+}));
+
+describe('loadData module', () => {
+  it('loaddata to have been call', () => {
+    const params = {
+      search: 'string',
+      sortOrder: 'string',
+      searchBy: 'string',
+      sortBy: 'string'
+    };
+    expect(loadData('movies.com', params));
+  });
 });
