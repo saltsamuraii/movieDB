@@ -4,10 +4,10 @@ import { loadData } from './resourсe';
 
 enableFetchMocks();
 
-fetchMock.mockResponseOnce(JSON.stringify({foo: "bar"}), {
+fetchMock.mockResponseOnce(JSON.stringify({ foo: 'bar' }), {
   status: 200,
   headers: [
-    ["Content-Type", "application/json"]
+    ['Content-Type', 'application/json']
   ]
 });
 
@@ -32,11 +32,11 @@ describe('loadData module', () => {
   it('should call api', () => {
     fetchMock.mockResponseOnce(JSON.stringify({ url: 'url' }));
     loadData('https://reactjs-cdp.herokuapp.com/movies');
-    expect(fetchMock).toHaveBeenCalled()
-  })
-  /*it('should show error on wrong url',() => {
-    const errorMessage = 'oops'
-    fetchMock.mockRejectOnce(new Error(errorMessage));
-      expect(loadData('www.google.com')).rejects.toEqual('www.com')
-  });*/
+    expect(fetchMock).toHaveBeenCalled();
+  });
+  it('should show error on wrong url', () => {
+    fetchMock.mockRejectOnce(new Error('wrong url'));
+    loadData('https://reactjs-cdp.herokuapp.com/movies');
+    expect(fetchMock).rejects.toThrow('wrong url');
+  });
 });
