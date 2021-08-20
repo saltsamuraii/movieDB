@@ -1,10 +1,9 @@
-import { enableFetchMocks, ErrorOrFunction } from 'jest-fetch-mock';
+import { enableFetchMocks } from 'jest-fetch-mock';
 import { loadData } from './resourсe';
-
 
 enableFetchMocks();
 
-fetchMock.mockResponseOnce(JSON.stringify({ foo: 'bar' }), {
+fetchMock.mockResponseOnce(JSON.stringify({ data: { url: 'url' } }), {
   status: 200,
   headers: [
     ['Content-Type', 'application/json']
