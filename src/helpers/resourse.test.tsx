@@ -1,18 +1,16 @@
-import React from 'react';
+import fetchMock from 'jest-fetch-mock';
 import { loadData } from './resourсe';
 
-jest.mock('./resourсe', () => ({
-  loadData: jest.fn()
-}));
+fetchMock.enableMocks();
 
 describe('loadData module', () => {
-  it('loaddata to have been call', () => {
-    const params = {
-      search: 'string',
-      sortOrder: 'string',
-      searchBy: 'string',
-      sortBy: 'string'
-    };
-    expect(loadData('movies.com', params));
+  it('', () => {
+    fetchMock.mockResponseOnce(JSON.stringify({ object: { url: 'https://reactjs-cdp.herokuapp.com/movies' } }));
+    //const object = loadData('https://reactjs-cdp.herokuapp.com/movies', undefined);
+    const requestUrl = `https://reactjs-cdp.herokuapp.com/movies`;
+
+    //expect(fetch).toHaveBeenCalledWith(requestUrl);
+    expect(fetch).toHaveBeenCalled();
+    //expect(fetch).toEqual(requestUrl);
   });
 });

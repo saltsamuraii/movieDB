@@ -10,7 +10,7 @@ jest.mock('../../../helpers/resourсe', () => ({
 }));
 
 describe('Movie-details component', () => {
-  it('should return null when Return button clicked', () => {
+  it('should Return button clicked', () => {
     const onBack = jest.fn();
     const mockedLoadData = mocked(loadData);
     mockedLoadData.mockImplementation(() => Promise.resolve({
