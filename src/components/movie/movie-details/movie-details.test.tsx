@@ -9,7 +9,7 @@ jest.mock('../../../helpers/resourсe', () => ({
   loadData: jest.fn()
 }));
 
-describe('Movie-details component', () => {
+describe('MovieDetails component', () => {
   it('should Return button clicked', () => {
     const onBack = jest.fn();
     const mockedLoadData = mocked(loadData);

@@ -3,12 +3,7 @@ import { loadData } from './resourсe';
 
 enableFetchMocks();
 
-fetchMock.mockResponseOnce(JSON.stringify({ data: { url: 'url' } }), {
-  status: 200,
-  headers: [
-    ['Content-Type', 'application/json']
-  ]
-});
+fetchMock.mockResponseOnce(JSON.stringify({ data: { url: 'url' } }));
 
 describe('loadData module', () => {
   it('should call right url', () => {

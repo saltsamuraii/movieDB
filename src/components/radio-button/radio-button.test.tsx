@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event/dist';
 import { render, screen } from '@testing-library/react';
 import { RadioButton } from './index';
 
-describe('Radiobutton module', () => {
+describe('RadioButton component', () => {
   it('should call onChange when button clicked', () => {
     const onChange = jest.fn();
     render(

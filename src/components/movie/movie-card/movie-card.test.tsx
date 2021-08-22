@@ -11,7 +11,7 @@ const movie = {
   genres: 'drama'
 };
 
-describe('Movie-card component', () => {
+describe('MovieCard component', () => {
   it('should select an item on click at movie-card', () => {
     const onMovieSelected = jest.fn();
     render(<MovieCard data={movie} onMovieSelected={onMovieSelected}/>);
