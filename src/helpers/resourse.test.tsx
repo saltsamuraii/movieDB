@@ -1,16 +1,16 @@
 import { disableFetchMocks, enableFetchMocks } from 'jest-fetch-mock';
 import { loadData } from './resourсe';
 
-beforeEach(() => {
-  enableFetchMocks();
-  fetchMock.mockResponseOnce(JSON.stringify({ movie: 'Movie1' }));
-});
-
-afterEach(() => {
-  disableFetchMocks();
-});
-
 describe('loadData module', () => {
+
+  beforeEach(() => {
+    enableFetchMocks();
+    fetchMock.mockResponseOnce(JSON.stringify({ movie: 'Movie1' }));
+  });
+  afterEach(() => {
+    disableFetchMocks();
+  });
+
   it('should call right url', () => {
     loadData('https://reactjs-cdp.herokuapp.com/movies', undefined);
     expect(fetchMock).toBeCalledWith('https://reactjs-cdp.herokuapp.com/movies');

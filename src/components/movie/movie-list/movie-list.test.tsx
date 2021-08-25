@@ -1,13 +1,17 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
 import MovieList from './movie-list';
+import { Movie } from '../movie';
 
 describe('MovieList component', () => {
-  const movies = [
-    { id: 1, title: 'Movie1', poster_path: 'poster', genres: 'genre', release_date: '2018' },
-    { id: 2, title: 'Movie2', poster_path: 'poster', genres: 'genre', release_date: '2018' },
-    { id: 3, title: 'Movie3', poster_path: 'poster', genres: 'genre', release_date: '2018' }
-  ];
+  let movies: Movie[];
+  beforeEach(() => {
+    movies = [
+      { id: 1, title: 'Movie1', poster_path: 'poster', genres: 'genre', release_date: '2018' },
+      { id: 2, title: 'Movie2', poster_path: 'poster', genres: 'genre', release_date: '2018' },
+      { id: 3, title: 'Movie3', poster_path: 'poster', genres: 'genre', release_date: '2018' }
+    ];
+  });
 
   it('render a message if no movies founds', () => {
     render(<MovieList movies={[]} isLoading={false} onMovieSelected={jest.fn()}/>);
