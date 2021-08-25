@@ -67,7 +67,6 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
       return null;
     }
 
-
     const {
       poster_path: poster,
       vote_average: voteAverage,

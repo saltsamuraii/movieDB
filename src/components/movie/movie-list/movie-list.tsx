@@ -1,6 +1,7 @@
 import React from 'react';
 import { MovieCard } from '../movie-card';
 import { Movie } from '../movie';
+import './movie-list.css'
 
 interface MoviesListProps {
   movies: Movie[],
@@ -11,7 +12,7 @@ interface MoviesListProps {
 export default function MovieList({ isLoading, movies, onMovieSelected }: MoviesListProps) {
 
   if (isLoading) return <h1>Loading...</h1>;
-  if (!movies) return <h2>No movies found</h2>;
+  if (!movies.length) return <h2>No movies found</h2>;
 
   return (
     <ul className="movies">

@@ -1,6 +1,6 @@
 import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
-import userEvent from '@testing-library/user-event/dist';
+import userEvent from '@testing-library/user-event';
 import { mocked } from 'ts-jest/utils';
 import { loadData } from '../../../helpers/resourсe';
 import MovieDetails from './movie-details';
@@ -10,23 +10,36 @@ jest.mock('../../../helpers/resourсe', () => ({
 }));
 
 describe('MovieDetails component', () => {
-  it('should Return button clicked', () => {
+  const mockedLoadData = mocked(loadData);
+  mockedLoadData.mockImplementation(() => Promise.resolve({
+    id: 1,
+    poster_path: 'www.fake0',
+    release_date: 'dd',
+    vote_average: 3,
+    title: 'string',
+    genres: 'string',
+    runtime: 3,
+    overview: 'string'
+  }));
+
+  it('should click button onBack if MovieDetails was called', () => {
     const onBack = jest.fn();
-    const mockedLoadData = mocked(loadData);
-    mockedLoadData.mockImplementation(() => Promise.resolve({
-      id: 1,
-      poster_path: 'www.fake0',
-      release_date: 'dd',
-      vote_average: 3,
-      title: 'string',
-      genres: 'string',
-      runtime: 3,
-      overview: 'string'
-    }));
     render(<MovieDetails movieId={3} onBack={onBack}/>);
     waitFor(() => {
       userEvent.click(screen.getByText('Return'));
       expect(onBack).toHaveBeenCalled();
+    });
+  });
+
+  it('MovieDetails not have been called if movieId undefined', () => {
+    const { container } = render(<MovieDetails movieId={undefined} onBack={jest.fn()}/>);
+    expect(container).toBeEmptyDOMElement();
+  });
+
+  it('Movie poster have an errorImage backup url attribute', () => {
+    render(<MovieDetails movieId={3} onBack={jest.fn()}/>);
+    waitFor(() => {
+      expect(screen.getByRole('img')).toHaveAttribute('src', 'https://allmovies.tube/assets/img/no-poster.png');
     });
   });
 });

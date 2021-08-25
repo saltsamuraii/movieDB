@@ -117,7 +117,7 @@ export default class App extends Component<Record<string, unknown>, AppState> {
         <SearchInfo
           sortValue={sortValue}
           onSort={this.handleSort}
-          movieNumbers={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
+          movieResult={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
         />
         <MovieList
           isLoading={isLoading}
