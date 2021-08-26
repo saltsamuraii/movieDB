@@ -4,7 +4,6 @@ import { render, screen } from '@testing-library/react';
 import MovieCard from './movie-card';
 import { Movie } from '../movie';
 
-
 describe('MovieCard component', () => {
   let movieData: Movie;
   beforeEach(() => {
@@ -14,8 +13,8 @@ describe('MovieCard component', () => {
         poster_path: 'https://allmovies.tube/assets/img/no-poster.png',
         release_date: '2019',
         title: 'Movie1',
-        genres: 'drama'
-      }
+        genres: 'drama',
+      };
   });
 
   it('should select an item on click at movie-card', () => {

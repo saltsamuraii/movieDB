@@ -9,7 +9,7 @@ describe('MovieList component', () => {
     movies = [
       { id: 1, title: 'Movie1', poster_path: 'poster', genres: 'genre', release_date: '2018' },
       { id: 2, title: 'Movie2', poster_path: 'poster', genres: 'genre', release_date: '2018' },
-      { id: 3, title: 'Movie3', poster_path: 'poster', genres: 'genre', release_date: '2018' }
+      { id: 3, title: 'Movie3', poster_path: 'poster', genres: 'genre', release_date: '2018' },
     ];
   });
 
