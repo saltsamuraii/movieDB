@@ -28,13 +28,13 @@ export default function SearchBar({ filterValue, movie, onSubmit, onSearchMovie,
             <RadioButton
               className="search-form__radio__button"
               value="title"
-              isChecked={filterValue === 'title'}
+              checked={filterValue === 'title'}
               onChange={onFilter}
             />
             <RadioButton
               className="search-form__radio__button"
               value="genre"
-              isChecked={filterValue === 'genre'}
+              checked={filterValue === 'genre'}
               onChange={onFilter}
             />
           </fieldset>

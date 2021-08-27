@@ -43,7 +43,7 @@ export default class MovieCard extends PureComponent<MovieCardProps, MovieCardSt
         title,
         genres
       }
-      } = this.props
+    } = this.props;
 
     const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 
