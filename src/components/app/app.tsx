@@ -9,13 +9,15 @@ import { Movie } from '../movie/movie';
 import './app.css';
 
 interface AppState {
-  movies: Movie[],
-  movieId?: number,
-  searchMovie: string,
-  isLoading: boolean,
-  filterValue: string,
-  sortValue: string,
+  movies: Movie[];
+  movieId?: number;
+  searchMovie: string;
+  isLoading: boolean;
+  filterValue: string;
+  sortValue: string;
 }
+
+const url = 'https://reactjs-cdp.herokuapp.com/movies';
 
 export default class App extends Component<Record<string, unknown>, AppState> {
   constructor(props: Record<string, unknown>) {
@@ -27,7 +29,7 @@ export default class App extends Component<Record<string, unknown>, AppState> {
       searchMovie: '',
       isLoading: true,
       filterValue: 'title',
-      sortValue: 'release date'
+      sortValue: 'release date',
     };
 
     this.handleSearchMovie = this.handleSearchMovie.bind(this);
@@ -39,10 +41,10 @@ export default class App extends Component<Record<string, unknown>, AppState> {
   }
 
   componentDidMount(): void {
-    loadData('https://reactjs-cdp.herokuapp.com/movies').then((result) => {
+    loadData(url).then((result) => {
       this.setState({
         isLoading: false,
-        movies: result.data
+        movies: result.data,
       });
     });
   }
@@ -54,45 +56,45 @@ export default class App extends Component<Record<string, unknown>, AppState> {
       sortBy: sortValue === 'release date' ? 'release_date' : 'vote_average',
       sortOrder: sortValue === 'rating' ? 'asc' : 'desc',
       search: searchMovie,
-      searchBy: filterValue === 'title' ? 'title' : 'genres'
+      searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
 
-    loadData('https://reactjs-cdp.herokuapp.com/movies', params).then((result) => {
+    loadData(url, params).then((result) => {
       this.setState({
         isLoading: false,
-        movies: result.data
+        movies: result.data,
       });
     });
   }
 
-  handleSort({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
+  handleSort({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
     this.setState({
-      sortValue: value
+      sortValue: value,
     });
   }
 
-  handleFilter({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
+  handleFilter({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
     this.setState({
-      filterValue: value
+      filterValue: value,
     });
   }
 
-  handleSearchMovie({ target: { value } }:ChangeEvent<HTMLInputElement>): void {
+  handleSearchMovie({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
     this.setState({
-      searchMovie: value
+      searchMovie: value,
     });
   }
 
   handleBack(): void {
     this.setState({
-      movieId: undefined
+      movieId: undefined,
     });
   }
 
   handleMovieSelected(id: number): void {
-      this.setState({
-        movieId: id
-      });
+    this.setState({
+      movieId: id,
+    });
   }
 
   render() {
@@ -109,10 +111,7 @@ export default class App extends Component<Record<string, unknown>, AppState> {
             onFilter={this.handleFilter}
           />
         ) : (
-          <MovieDetails
-            movieId={movieId}
-            onBack={this.handleBack}
-          />
+          <MovieDetails movieId={movieId} onBack={this.handleBack} />
         )}
         <SearchInfo
           sortValue={sortValue}
@@ -128,4 +127,3 @@ export default class App extends Component<Record<string, unknown>, AppState> {
     );
   }
 }
-
