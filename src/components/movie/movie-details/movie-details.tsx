@@ -43,14 +43,15 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
   }
 
   updateMovie() {
-    const { movieId, resetMovie, onLoadMovie } = this.props;
+    const { movieId } = this.props;
 
     if (movieId === undefined) {
-      resetMovie();
+      // eslint-disable-next-line react/destructuring-assignment
+      this.props.resetMovie();
       return;
     }
-
-    onLoadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`);
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.onLoadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`);
   }
 
   render() {

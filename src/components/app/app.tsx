@@ -40,8 +40,8 @@ export default class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount(): void {
-    const { onLoadMovies } = this.props;
-    onLoadMovies(url);
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.onLoadMovies(url);
   }
 
   handleSubmit(event: FormEvent<HTMLFormElement>): void {
@@ -55,8 +55,8 @@ export default class App extends Component<AppProps, AppState> {
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
 
-    const { onLoadMovies } = this.props;
-    onLoadMovies(url, params);
+    // eslint-disable-next-line react/destructuring-assignment
+    this.props.onLoadMovies(url, params);
   }
 
   handleSort({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
