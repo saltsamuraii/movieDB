@@ -1,16 +1,17 @@
 import React, { Component } from 'react';
-import { loadData } from '../../../helpers/resourсe';
 import { Movie } from '../movie';
 import './movie-details.css';
 
 interface MovieDetailsState {
-  movie?: Movie,
-  imageError: boolean
+  imageError: boolean;
 }
 
 interface MovieDetailsProps {
-  movieId?: number,
-  onBack: () => void
+  movie?: Movie;
+  movieId?: number;
+  onBack: () => void;
+  onLoadMovie: (url: string) => void;
+  resetMovie: () => void;
 }
 
 export default class MovieDetails extends Component<MovieDetailsProps, MovieDetailsState> {
@@ -18,8 +19,7 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
     super(props);
 
     this.state = {
-      movie: undefined,
-      imageError: true
+      imageError: true,
     };
 
     this.handleErrorImage = this.handleErrorImage.bind(this);
@@ -38,30 +38,24 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
 
   handleErrorImage(): void {
     this.setState({
-      imageError: false
+      imageError: false,
     });
   }
 
   updateMovie() {
-    const { movieId } = this.props;
+    const { movieId, resetMovie, onLoadMovie } = this.props;
 
     if (movieId === undefined) {
-      this.setState({
-        movie: undefined
-      });
+      resetMovie();
       return;
     }
 
-    loadData(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`).then((movie) => {
-      this.setState({
-        movie
-      });
-    });
+    onLoadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`);
   }
 
   render() {
-    const { movie, imageError } = this.state;
-    const { onBack } = this.props;
+    const { imageError } = this.state;
+    const { onBack, movie } = this.props;
 
     if (!movie) {
       return null;
@@ -74,9 +68,8 @@ export default class MovieDetails extends Component<MovieDetailsProps, MovieDeta
       title,
       genres,
       runtime,
-      overview
+      overview,
     } = movie;
-
 
     const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 

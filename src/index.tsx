@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import 'normalize.css';
-import { App } from './components/app';
+import { Provider } from 'react-redux';
+import { store } from './redux/store/store';
+import { AppContainer } from './components/app/app.container';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <Provider store={store}>
+    <AppContainer />
+  </Provider>,
+  document.getElementById('root')
+);
