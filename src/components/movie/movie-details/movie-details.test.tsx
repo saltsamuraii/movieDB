@@ -24,10 +24,10 @@ describe('MovieDetails component', () => {
     })
   );
 
-  it('should click button onBack if MovieDetails was called', async () => {
+  it('should click button onBack if MovieDetails was called', () => {
     const onBack = jest.fn();
     render(<MovieDetails onLoadMovie={jest.fn} resetMovie={jest.fn} movieId={3} onBack={onBack} />);
-    await waitFor(() => {
+    waitFor(() => {
       userEvent.click(screen.getByText('Return'));
       expect(onBack).toHaveBeenCalled();
     });
