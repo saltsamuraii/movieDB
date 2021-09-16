@@ -1,33 +1,32 @@
 import React, { ChangeEvent, Component, FormEvent } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
-import { SearchInfo } from '../search-info';
-import { MovieList } from '../movie/movie-list';
-import { MovieDetails } from '../movie/movie-details';
-import { loadData } from '../../helpers/resourсe';
-import { Movie } from '../movie/movie';
 import './app.css';
+import { LoadDataParams } from '../../helpers/resourсe';
+import { MovieListContainer } from '../movie/movie-list/movie-list.container';
+import { MovieDetailsContainer } from '../movie/movie-details/movie-details.container';
+import { SearchInfoContainer } from '../search-info/search-info.container';
 
 interface AppState {
-  movies: Movie[];
   movieId?: number;
   searchMovie: string;
-  isLoading: boolean;
   filterValue: string;
   sortValue: string;
 }
 
+interface AppProps {
+  onLoadMovies: (url: string, params?: LoadDataParams) => void;
+}
+
 const url = 'https://reactjs-cdp.herokuapp.com/movies';
 
-export default class App extends Component<Record<string, unknown>, AppState> {
-  constructor(props: Record<string, unknown>) {
+export default class App extends Component<AppProps, AppState> {
+  constructor(props: AppProps) {
     super(props);
 
     this.state = {
-      movies: [],
       movieId: undefined,
       searchMovie: '',
-      isLoading: true,
       filterValue: 'title',
       sortValue: 'release date',
     };
@@ -41,30 +40,22 @@ export default class App extends Component<Record<string, unknown>, AppState> {
   }
 
   componentDidMount(): void {
-    loadData(url).then((result) => {
-      this.setState({
-        isLoading: false,
-        movies: result.data,
-      });
-    });
+    const { onLoadMovies } = this.props;
+    onLoadMovies(url);
   }
 
   handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const { filterValue, searchMovie, sortValue } = this.state;
+    const { onLoadMovies } = this.props;
+
     const params = {
       sortBy: sortValue === 'release date' ? 'release_date' : 'vote_average',
       sortOrder: sortValue === 'rating' ? 'asc' : 'desc',
       search: searchMovie,
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
-
-    loadData(url, params).then((result) => {
-      this.setState({
-        isLoading: false,
-        movies: result.data,
-      });
-    });
+    onLoadMovies(url, params);
   }
 
   handleSort({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
@@ -98,7 +89,7 @@ export default class App extends Component<Record<string, unknown>, AppState> {
   }
 
   render() {
-    const { isLoading, movies, searchMovie, filterValue, sortValue, movieId } = this.state;
+    const { searchMovie, filterValue, sortValue, movieId } = this.state;
 
     return (
       <ErrorBoundary>
@@ -111,18 +102,10 @@ export default class App extends Component<Record<string, unknown>, AppState> {
             onFilter={this.handleFilter}
           />
         ) : (
-          <MovieDetails movieId={movieId} onBack={this.handleBack} />
+          <MovieDetailsContainer movieId={movieId} onBack={this.handleBack} />
         )}
-        <SearchInfo
-          sortValue={sortValue}
-          onSort={this.handleSort}
-          movieResult={`${movies.length} movie${movies.length === 1 ? '' : 's'} found`}
-        />
-        <MovieList
-          isLoading={isLoading}
-          movies={movies}
-          onMovieSelected={this.handleMovieSelected}
-        />
+        <SearchInfoContainer sortValue={sortValue} onSort={this.handleSort} />
+        <MovieListContainer onMovieSelected={this.handleMovieSelected} />
       </ErrorBoundary>
     );
   }

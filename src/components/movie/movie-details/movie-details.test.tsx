@@ -24,22 +24,31 @@ describe('MovieDetails component', () => {
     })
   );
 
-  it('should click button onBack if MovieDetails was called', async () => {
+  it('should click button onBack if MovieDetails was called', () => {
     const onBack = jest.fn();
-    render(<MovieDetails movieId={3} onBack={onBack} />);
-    await waitFor(() => {
+    render(<MovieDetails onLoadMovie={jest.fn} resetMovie={jest.fn} movieId={3} onBack={onBack} />);
+    waitFor(() => {
       userEvent.click(screen.getByText('Return'));
       expect(onBack).toHaveBeenCalled();
     });
   });
 
   it('MovieDetails not have been called if movieId undefined', () => {
-    const { container } = render(<MovieDetails movieId={undefined} onBack={jest.fn()} />);
+    const { container } = render(
+      <MovieDetails
+        onLoadMovie={jest.fn}
+        resetMovie={jest.fn}
+        movieId={undefined}
+        onBack={jest.fn()}
+      />
+    );
     expect(container).toBeEmptyDOMElement();
   });
 
   it('Movie poster have an errorImage backup url attribute', () => {
-    render(<MovieDetails movieId={3} onBack={jest.fn()} />);
+    render(
+      <MovieDetails onLoadMovie={jest.fn} resetMovie={jest.fn} movieId={3} onBack={jest.fn()} />
+    );
     waitFor(() => {
       expect(screen.getByRole('img')).toHaveAttribute(
         'src',
