@@ -1,19 +1,18 @@
 import React, { ChangeEvent } from 'react';
 import { RadioButton } from '../radio-button';
 import './search-info.css';
-import { Movie } from '../movie/movie';
 
 interface SearchInfoProps {
-  movies: Movie[];
+  movies: number;
   sortValue: string;
   onSort: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SearchInfo({ movies, sortValue, onSort }: SearchInfoProps) {
+export default function SearchInfo({ sortValue, onSort, movies }: SearchInfoProps) {
   return (
     <div className="search-info">
       <span className="search-info__result">
-        {movies.length} movie{movies.length === 1 ? '' : 's'} found
+        {movies} movie{movies === 1 ? '' : 's'} found
       </span>
       <fieldset>
         <legend className="search-info__legend-text">Sort by</legend>

@@ -40,13 +40,14 @@ export default class App extends Component<AppProps, AppState> {
   }
 
   componentDidMount(): void {
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.onLoadMovies(url);
+    const { onLoadMovies } = this.props;
+    onLoadMovies(url);
   }
 
   handleSubmit(event: FormEvent<HTMLFormElement>): void {
     event.preventDefault();
     const { filterValue, searchMovie, sortValue } = this.state;
+    const { onLoadMovies } = this.props;
 
     const params = {
       sortBy: sortValue === 'release date' ? 'release_date' : 'vote_average',
@@ -54,9 +55,7 @@ export default class App extends Component<AppProps, AppState> {
       search: searchMovie,
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
-
-    // eslint-disable-next-line react/destructuring-assignment
-    this.props.onLoadMovies(url, params);
+    onLoadMovies(url, params);
   }
 
   handleSort({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
