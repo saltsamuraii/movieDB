@@ -8,6 +8,7 @@ export const loggerMiddleware = (store: Store) => (next: Dispatch) => (action: A
   const result = next(action);
   console.log('next state', store.getState());
   console.groupEnd();
+
   console.log('return result', result);
   return result;
 };
