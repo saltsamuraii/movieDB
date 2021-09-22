@@ -10,7 +10,7 @@ interface SearchInfoProps {
 }
 
 export default function SearchInfo({ sortValue, onSort }: SearchInfoProps) {
-  const movieResult = useSelector<MoviesState, number>((state) => state.movies.data.length);
+  const movieResult = useSelector((state: MoviesState) => state.movies.data.length);
 
   return (
     <div className="search-info">

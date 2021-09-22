@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Movie } from '../movie';
+import { useDispatch, useSelector } from 'react-redux';
 import './movie-details.css';
+import { MoviesState } from '../../../redux/store/store';
+import { loadMovie } from '../../../redux/redux-helpers/load-movie';
+import { movieResetAction } from '../../../redux/action-creators/movie-action-creators';
 
 interface MovieDetailsProps {
-  movie?: Movie;
   movieId?: number;
   onBack: () => void;
-  onLoadMovie: (url: string) => void;
-  resetMovie: () => void;
 }
 
-export default function MovieDetails({
-  movie,
-  movieId,
-  onBack,
-  onLoadMovie,
-  resetMovie,
-}: MovieDetailsProps) {
+export default function MovieDetails({ movieId, onBack }: MovieDetailsProps) {
   const [imageError, setImageError] = useState(true);
+  const movie = useSelector((state: MoviesState) => state.movie.data);
+
+  const dispatch = useDispatch();
+  const onLoadMovie = (url: string) => dispatch(loadMovie(url));
+  const resetMovie = () => dispatch(movieResetAction());
 
   useEffect((): void => {
     const updateMovie = () => {

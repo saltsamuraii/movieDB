@@ -1,7 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { MovieCard } from '../movie-card';
-import { Movie } from '../movie';
 import './movie-list.css';
 import { MoviesState } from '../../../redux/store/store';
 
@@ -10,8 +9,8 @@ interface MoviesListProps {
 }
 
 export default function MovieList({ onMovieSelected }: MoviesListProps) {
-  const movies = useSelector<MoviesState, Movie[]>((state) => state.movies.data);
-  const isLoading = useSelector<MoviesState, boolean>((state) => state.movies.isLoading);
+  const movies = useSelector((state: MoviesState) => state.movies.data);
+  const isLoading = useSelector((state: MoviesState) => state.movies.isLoading);
 
   if (isLoading) return <h1>Loading...</h1>;
   if (!movies.length) return <h2>No movies found</h2>;

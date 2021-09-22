@@ -1,26 +1,25 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
 import { LoadDataParams } from '../../helpers/resourсe';
-import { MovieDetailsContainer } from '../movie/movie-details/movie-details.container';
 import { MovieList } from '../movie/movie-list';
 import { SearchInfo } from '../search-info';
+import { MovieDetails } from '../movie/movie-details';
+import { loadMovies } from '../../redux/redux-helpers/load-movies';
 
-interface AppProps {
-  onLoadMovies: (url: string, params?: LoadDataParams) => void;
-}
-
-const url = 'https://reactjs-cdp.herokuapp.com/movies';
-
-export default function App({ onLoadMovies }: AppProps) {
+export default function App() {
   const [movieId, setMovieId] = useState<number | undefined>(undefined);
   const [searchMovie, setSearchMovie] = useState<string>('');
   const [filterValue, setFilterValue] = useState<string>('title');
   const [sortValue, setSortValue] = useState<string>('release date');
 
+  const dispatch = useDispatch();
+  const onLoadMovies = (url: string, params?: LoadDataParams) => dispatch(loadMovies(url, params));
+
   useEffect((): void => {
-    onLoadMovies(url);
+    onLoadMovies('https://reactjs-cdp.herokuapp.com/movies');
   }, []);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
@@ -32,7 +31,7 @@ export default function App({ onLoadMovies }: AppProps) {
       search: searchMovie,
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
-    onLoadMovies(url, params);
+    onLoadMovies('https://reactjs-cdp.herokuapp.com/movies', params);
   };
 
   const handleFilter = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
@@ -66,7 +65,7 @@ export default function App({ onLoadMovies }: AppProps) {
           onFilter={handleFilter}
         />
       ) : (
-        <MovieDetailsContainer movieId={movieId} onBack={handleBack} />
+        <MovieDetails movieId={movieId} onBack={handleBack} />
       )}
       <SearchInfo sortValue={sortValue} onSort={handleSort} />
       <MovieList onMovieSelected={handleMovieSelected} />
