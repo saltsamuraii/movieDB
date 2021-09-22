@@ -1,4 +1,4 @@
-import React, { ChangeEvent, Component, FormEvent } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
@@ -7,47 +7,24 @@ import { MovieListContainer } from '../movie/movie-list/movie-list.container';
 import { MovieDetailsContainer } from '../movie/movie-details/movie-details.container';
 import { SearchInfoContainer } from '../search-info/search-info.container';
 
-interface AppState {
-  movieId?: number;
-  searchMovie: string;
-  filterValue: string;
-  sortValue: string;
-}
-
 interface AppProps {
   onLoadMovies: (url: string, params?: LoadDataParams) => void;
 }
 
 const url = 'https://reactjs-cdp.herokuapp.com/movies';
 
-export default class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
+export default function App({ onLoadMovies }: AppProps) {
+  const [movieId, setMovieId] = useState<number | undefined>(undefined);
+  const [searchMovie, setSearchMovie] = useState<string>('');
+  const [filterValue, setFilterValue] = useState<string>('title');
+  const [sortValue, setSortValue] = useState<string>('release date');
 
-    this.state = {
-      movieId: undefined,
-      searchMovie: '',
-      filterValue: 'title',
-      sortValue: 'release date',
-    };
-
-    this.handleSearchMovie = this.handleSearchMovie.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleFilter = this.handleFilter.bind(this);
-    this.handleBack = this.handleBack.bind(this);
-    this.handleSort = this.handleSort.bind(this);
-    this.handleMovieSelected = this.handleMovieSelected.bind(this);
-  }
-
-  componentDidMount(): void {
-    const { onLoadMovies } = this.props;
+  useEffect((): void => {
     onLoadMovies(url);
-  }
+  }, []);
 
-  handleSubmit(event: FormEvent<HTMLFormElement>): void {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
-    const { filterValue, searchMovie, sortValue } = this.state;
-    const { onLoadMovies } = this.props;
 
     const params = {
       sortBy: sortValue === 'release date' ? 'release_date' : 'vote_average',
@@ -56,57 +33,43 @@ export default class App extends Component<AppProps, AppState> {
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
     onLoadMovies(url, params);
-  }
+  };
 
-  handleSort({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    this.setState({
-      sortValue: value,
-    });
-  }
+  const handleFilter = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
+    setFilterValue(value);
+  };
 
-  handleFilter({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    this.setState({
-      filterValue: value,
-    });
-  }
+  const handleSort = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
+    setSortValue(value);
+  };
 
-  handleSearchMovie({ target: { value } }: ChangeEvent<HTMLInputElement>): void {
-    this.setState({
-      searchMovie: value,
-    });
-  }
+  const handleSearchMovie = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
+    setSearchMovie(value);
+  };
 
-  handleBack(): void {
-    this.setState({
-      movieId: undefined,
-    });
-  }
+  const handleBack = (): void => {
+    setMovieId(undefined);
+  };
 
-  handleMovieSelected(id: number): void {
-    this.setState({
-      movieId: id,
-    });
-  }
+  const handleMovieSelected = (id: number): void => {
+    setMovieId(id);
+  };
 
-  render() {
-    const { searchMovie, filterValue, sortValue, movieId } = this.state;
-
-    return (
-      <ErrorBoundary>
-        {!movieId ? (
-          <SearchBar
-            filterValue={filterValue}
-            movie={searchMovie}
-            onSearchMovie={this.handleSearchMovie}
-            onSubmit={this.handleSubmit}
-            onFilter={this.handleFilter}
-          />
-        ) : (
-          <MovieDetailsContainer movieId={movieId} onBack={this.handleBack} />
-        )}
-        <SearchInfoContainer sortValue={sortValue} onSort={this.handleSort} />
-        <MovieListContainer onMovieSelected={this.handleMovieSelected} />
-      </ErrorBoundary>
-    );
-  }
+  return (
+    <ErrorBoundary>
+      {!movieId ? (
+        <SearchBar
+          filterValue={filterValue}
+          movie={searchMovie}
+          onSearchMovie={handleSearchMovie}
+          onSubmit={handleSubmit}
+          onFilter={handleFilter}
+        />
+      ) : (
+        <MovieDetailsContainer movieId={movieId} onBack={handleBack} />
+      )}
+      <SearchInfoContainer sortValue={sortValue} onSort={handleSort} />
+      <MovieListContainer onMovieSelected={handleMovieSelected} />
+    </ErrorBoundary>
+  );
 }

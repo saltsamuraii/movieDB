@@ -27,7 +27,6 @@ export default function MovieDetails({
       }
       onLoadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`);
     };
-
     updateMovie();
   }, [movieId]);
 
