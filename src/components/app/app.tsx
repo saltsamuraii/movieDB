@@ -4,8 +4,8 @@ import { SearchBar } from '../search-bar';
 import './app.css';
 import { LoadDataParams } from '../../helpers/resourсe';
 import { MovieDetailsContainer } from '../movie/movie-details/movie-details.container';
-import { SearchInfoContainer } from '../search-info/search-info.container';
 import { MovieList } from '../movie/movie-list';
+import { SearchInfo } from '../search-info';
 
 interface AppProps {
   onLoadMovies: (url: string, params?: LoadDataParams) => void;
@@ -68,7 +68,7 @@ export default function App({ onLoadMovies }: AppProps) {
       ) : (
         <MovieDetailsContainer movieId={movieId} onBack={handleBack} />
       )}
-      <SearchInfoContainer sortValue={sortValue} onSort={handleSort} />
+      <SearchInfo sortValue={sortValue} onSort={handleSort} />
       <MovieList onMovieSelected={handleMovieSelected} />
     </ErrorBoundary>
   );
