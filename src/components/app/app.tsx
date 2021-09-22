@@ -3,9 +3,9 @@ import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
 import { LoadDataParams } from '../../helpers/resourсe';
-import { MovieListContainer } from '../movie/movie-list/movie-list.container';
 import { MovieDetailsContainer } from '../movie/movie-details/movie-details.container';
 import { SearchInfoContainer } from '../search-info/search-info.container';
+import { MovieList } from '../movie/movie-list';
 
 interface AppProps {
   onLoadMovies: (url: string, params?: LoadDataParams) => void;
@@ -69,7 +69,7 @@ export default function App({ onLoadMovies }: AppProps) {
         <MovieDetailsContainer movieId={movieId} onBack={handleBack} />
       )}
       <SearchInfoContainer sortValue={sortValue} onSort={handleSort} />
-      <MovieListContainer onMovieSelected={handleMovieSelected} />
+      <MovieList onMovieSelected={handleMovieSelected} />
     </ErrorBoundary>
   );
 }
