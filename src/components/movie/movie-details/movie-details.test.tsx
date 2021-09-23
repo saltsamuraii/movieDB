@@ -1,9 +1,14 @@
 import React from 'react';
+import { Provider } from 'react-redux';
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { mocked } from 'ts-jest/utils';
 import { loadData } from '../../../helpers/resourсe';
 import MovieDetails from './movie-details';
+import { movieLoadReducer } from '../../../redux/reducers';
+import { Movie } from '../movie';
 
 jest.mock('../../../helpers/resourсe', () => ({
   loadData: jest.fn(),
@@ -24,9 +29,40 @@ describe('MovieDetails component', () => {
     })
   );
 
+  let movie: Movie;
+  beforeEach(() => {
+    movie = {
+      id: 1,
+      poster_path: 'www.www.ww',
+      genres: 'drama',
+      vote_average: 30,
+      title: 'Movie1',
+      release_date: '2019',
+    };
+  });
+
   it('should click button onBack if MovieDetails was called', () => {
+    const rootReducer = combineReducers({
+      movie: movieLoadReducer,
+    });
+    const store = createStore(
+      rootReducer,
+      {
+        movie: {
+          isLoading: false,
+          error: false,
+          data: movie,
+        },
+      },
+      applyMiddleware(thunk)
+    );
+
     const onBack = jest.fn();
-    render(<MovieDetails onLoadMovie={jest.fn} resetMovie={jest.fn} movieId={3} onBack={onBack} />);
+    render(
+      <Provider store={store}>
+        <MovieDetails movieId={3} onBack={onBack} />
+      </Provider>
+    );
     waitFor(() => {
       userEvent.click(screen.getByText('Return'));
       expect(onBack).toHaveBeenCalled();
@@ -34,20 +70,41 @@ describe('MovieDetails component', () => {
   });
 
   it('MovieDetails not have been called if movieId undefined', () => {
+    const rootReducer = combineReducers({
+      movie: movieLoadReducer,
+    });
+    const store = createStore(rootReducer, {
+      movie: { isLoading: false, error: false, data: undefined },
+    });
+
     const { container } = render(
-      <MovieDetails
-        onLoadMovie={jest.fn}
-        resetMovie={jest.fn}
-        movieId={undefined}
-        onBack={jest.fn()}
-      />
+      <Provider store={store}>
+        <MovieDetails movieId={undefined} onBack={jest.fn()} />
+      </Provider>
     );
     expect(container).toBeEmptyDOMElement();
   });
 
   it('Movie poster have an errorImage backup url attribute', () => {
+    const rootReducer = combineReducers({
+      movie: movieLoadReducer,
+    });
+    const store = createStore(
+      rootReducer,
+      {
+        movie: {
+          isLoading: false,
+          error: false,
+          data: movie,
+        },
+      },
+      applyMiddleware(thunk)
+    );
+
     render(
-      <MovieDetails onLoadMovie={jest.fn} resetMovie={jest.fn} movieId={3} onBack={jest.fn()} />
+      <Provider store={store}>
+        <MovieDetails movieId={3} onBack={jest.fn()} />
+      </Provider>
     );
     waitFor(() => {
       expect(screen.getByRole('img')).toHaveAttribute(
