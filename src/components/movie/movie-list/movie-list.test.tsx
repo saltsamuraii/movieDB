@@ -14,11 +14,11 @@ describe('MovieList component', () => {
       { id: 2, release_date: '2014', title: 'Movie', genres: 'drama', poster_path: 'www.www.www' },
     ];
   });
+  const rootReducer = combineReducers({
+    movies: moviesReducer,
+  });
 
   it('render a message if no movies founds', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { isLoading: false, error: false, data: [] },
     });
@@ -32,9 +32,6 @@ describe('MovieList component', () => {
   });
 
   it('render a message if loading is true', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, { movies: { isLoading: true, error: false, data: [] } });
 
     render(
@@ -46,9 +43,6 @@ describe('MovieList component', () => {
   });
 
   it('rendered movies length to be equal movies length', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { data: movies, isLoading: false, error: false },
     });

@@ -23,10 +23,10 @@ describe('SearchInfo component', () => {
       },
     ];
   });
+  const rootReducer = combineReducers({
+    movies: moviesReducer,
+  });
   it('should render number of movies in text', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { isLoading: false, error: false, data: movies },
     });
@@ -40,9 +40,6 @@ describe('SearchInfo component', () => {
   });
 
   it('should render 0 movies in text', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { isLoading: false, error: false, data: [] },
     });
@@ -59,9 +56,6 @@ describe('SearchInfo component', () => {
     movies = [
       { id: 1, release_date: '2014', title: 'Movie', genres: 'drama', poster_path: 'www.www.www' },
     ];
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { isLoading: false, error: false, data: movies },
     });
@@ -75,9 +69,6 @@ describe('SearchInfo component', () => {
   });
 
   it('sortValue with release date should be defaultChecked', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { isLoading: false, error: false, data: [] },
     });
@@ -91,9 +82,6 @@ describe('SearchInfo component', () => {
   });
 
   it('rating should not to be checked by default', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { isLoading: false, error: false, data: [] },
     });
@@ -107,9 +95,6 @@ describe('SearchInfo component', () => {
   });
 
   it('method onSort should be called on click', () => {
-    const rootReducer = combineReducers({
-      movies: moviesReducer,
-    });
     const store = createStore(rootReducer, {
       movies: { isLoading: false, error: false, data: [] },
     });

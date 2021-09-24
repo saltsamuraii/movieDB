@@ -41,10 +41,11 @@ describe('MovieDetails component', () => {
     };
   });
 
+  const rootReducer = combineReducers({
+    movie: movieLoadReducer,
+  });
+
   it('should click button onBack if MovieDetails was called', () => {
-    const rootReducer = combineReducers({
-      movie: movieLoadReducer,
-    });
     const store = createStore(
       rootReducer,
       {
@@ -70,9 +71,6 @@ describe('MovieDetails component', () => {
   });
 
   it('MovieDetails not have been called if movieId undefined', () => {
-    const rootReducer = combineReducers({
-      movie: movieLoadReducer,
-    });
     const store = createStore(rootReducer, {
       movie: { isLoading: false, error: false, data: undefined },
     });
@@ -86,9 +84,6 @@ describe('MovieDetails component', () => {
   });
 
   it('Movie poster have an errorImage backup url attribute', () => {
-    const rootReducer = combineReducers({
-      movie: movieLoadReducer,
-    });
     const store = createStore(
       rootReducer,
       {
