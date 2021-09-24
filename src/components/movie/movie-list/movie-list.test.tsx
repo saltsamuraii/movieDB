@@ -1,31 +1,34 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { screen } from '@testing-library/react';
 import MovieList from './movie-list';
 import { Movie } from '../movie';
+import { renderWithStore } from '../../../helpers/test-utils';
 
 describe('MovieList component', () => {
   let movies: Movie[];
   beforeEach(() => {
     movies = [
-      { id: 1, title: 'Movie1', poster_path: 'poster', genres: 'genre', release_date: '2018' },
-      { id: 2, title: 'Movie2', poster_path: 'poster', genres: 'genre', release_date: '2018' },
-      { id: 3, title: 'Movie3', poster_path: 'poster', genres: 'genre', release_date: '2018' },
+      { id: 1, release_date: '2014', title: 'Movie', genres: 'drama', poster_path: 'www.www.www' },
+      { id: 2, release_date: '2014', title: 'Movie', genres: 'drama', poster_path: 'www.www.www' },
     ];
   });
-
   it('render a message if no movies founds', () => {
-    render(<MovieList movies={[]} isLoading={false} onMovieSelected={jest.fn()}/>);
+    renderWithStore(<MovieList onMovieSelected={jest.fn()} />);
     expect(screen.getByText('No movies found')).toBeInTheDocument();
   });
 
   it('render a message if loading is true', () => {
-    render(<MovieList movies={movies} isLoading onMovieSelected={jest.fn()}/>);
+    renderWithStore(<MovieList onMovieSelected={jest.fn()} />, {
+      initialState: { movies: { isLoading: true, error: false, data: [] } },
+    });
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('rendered movies length to be equal movies length', () => {
-    render(<MovieList movies={movies} isLoading={false} onMovieSelected={jest.fn()}/>);
+    renderWithStore(<MovieList onMovieSelected={jest.fn()} />, {
+      initialState: { movies: { isLoading: false, error: false, data: movies } },
+    });
     const renderedMovies = screen.getAllByRole('listitem');
-    expect(renderedMovies.length).toEqual(movies.length);
+    expect(renderedMovies.length).toEqual(2);
   });
 });

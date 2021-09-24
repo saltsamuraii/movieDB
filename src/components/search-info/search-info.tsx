@@ -1,14 +1,17 @@
 import React, { ChangeEvent } from 'react';
+import { useSelector } from 'react-redux';
 import { RadioButton } from '../radio-button';
 import './search-info.css';
+import { MoviesState } from '../../redux/store/store';
 
 interface SearchInfoProps {
-  movieResult: number;
   sortValue: string;
   onSort: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SearchInfo({ sortValue, onSort, movieResult }: SearchInfoProps) {
+export default function SearchInfo({ sortValue, onSort }: SearchInfoProps) {
+  const movieResult = useSelector((state: MoviesState) => state.movies.data.length);
+
   return (
     <div className="search-info">
       <span className="search-info__result">

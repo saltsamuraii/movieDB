@@ -1,5 +1,5 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
-import thunk, { ThunkMiddleware } from 'redux-thunk';
+import thunk from 'redux-thunk';
 import { Movie } from '../../components/movie/movie';
 import { movieLoadReducer, moviesReducer } from '../reducers';
 import { loggerMiddleware } from '../middleware/logger';
@@ -34,7 +34,7 @@ const initialState: MoviesState = {
   movie: movieInitialState,
 };
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   movies: moviesReducer,
   movie: movieLoadReducer,
 });
@@ -42,5 +42,5 @@ const rootReducer = combineReducers({
 export const store = createStore(
   rootReducer,
   initialState,
-  applyMiddleware(thunk, loggerMiddleware as ThunkMiddleware)
+  applyMiddleware(thunk, loggerMiddleware)
 );
