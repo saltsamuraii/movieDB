@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
@@ -16,11 +16,14 @@ export default function App() {
   const [sortValue, setSortValue] = useState<string>('release date');
 
   const dispatch = useDispatch();
-  const onLoadMovies = (url: string, params?: LoadDataParams) => dispatch(loadMovies(url, params));
+  const onLoadMovies = useCallback(
+    (url: string, params?: LoadDataParams) => dispatch(loadMovies(url, params)),
+    [dispatch]
+  );
 
   useEffect((): void => {
     onLoadMovies('https://reactjs-cdp.herokuapp.com/movies');
-  }, []);
+  }, [onLoadMovies]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();

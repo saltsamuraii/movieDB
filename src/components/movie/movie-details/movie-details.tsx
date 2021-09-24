@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import './movie-details.css';
 import { MoviesState } from '../../../redux/store/store';
@@ -15,8 +15,8 @@ export default function MovieDetails({ movieId, onBack }: MovieDetailsProps) {
   const movie = useSelector((state: MoviesState) => state.movie.data);
 
   const dispatch = useDispatch();
-  const onLoadMovie = (url: string) => dispatch(loadMovie(url));
-  const resetMovie = () => dispatch(movieResetAction());
+  const onLoadMovie = useCallback((url: string) => dispatch(loadMovie(url)), [dispatch]);
+  const resetMovie = useCallback(() => dispatch(movieResetAction()), [dispatch]);
 
   useEffect((): void => {
     const updateMovie = () => {
@@ -27,7 +27,7 @@ export default function MovieDetails({ movieId, onBack }: MovieDetailsProps) {
       onLoadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`);
     };
     updateMovie();
-  }, [movieId]);
+  }, [movieId, resetMovie, onLoadMovie]);
 
   const handleErrorImage = (): void => {
     setImageError(false);
