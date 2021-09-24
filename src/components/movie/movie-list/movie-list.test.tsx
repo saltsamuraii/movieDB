@@ -1,10 +1,8 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import { combineReducers, createStore } from 'redux';
-import { Provider } from 'react-redux';
+import { screen } from '@testing-library/react';
 import MovieList from './movie-list';
-import { moviesReducer } from '../../../redux/reducers';
 import { Movie } from '../movie';
+import { renderWithStore } from '../../../helpers/test-utils';
 
 describe('MovieList component', () => {
   let movies: Movie[];
@@ -14,44 +12,22 @@ describe('MovieList component', () => {
       { id: 2, release_date: '2014', title: 'Movie', genres: 'drama', poster_path: 'www.www.www' },
     ];
   });
-  const rootReducer = combineReducers({
-    movies: moviesReducer,
-  });
-
   it('render a message if no movies founds', () => {
-    const store = createStore(rootReducer, {
-      movies: { isLoading: false, error: false, data: [] },
-    });
-
-    render(
-      <Provider store={store}>
-        <MovieList onMovieSelected={jest.fn()} />
-      </Provider>
-    );
+    renderWithStore(<MovieList onMovieSelected={jest.fn()} />);
     expect(screen.getByText('No movies found')).toBeInTheDocument();
   });
 
   it('render a message if loading is true', () => {
-    const store = createStore(rootReducer, { movies: { isLoading: true, error: false, data: [] } });
-
-    render(
-      <Provider store={store}>
-        <MovieList onMovieSelected={jest.fn()} />
-      </Provider>
-    );
+    renderWithStore(<MovieList onMovieSelected={jest.fn()} />, {
+      initialState: { movies: { isLoading: true, error: false, data: [] } },
+    });
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('rendered movies length to be equal movies length', () => {
-    const store = createStore(rootReducer, {
-      movies: { data: movies, isLoading: false, error: false },
+    renderWithStore(<MovieList onMovieSelected={jest.fn()} />, {
+      initialState: { movies: { isLoading: false, error: false, data: movies } },
     });
-
-    render(
-      <Provider store={store}>
-        <MovieList onMovieSelected={jest.fn()} />
-      </Provider>
-    );
     const renderedMovies = screen.getAllByRole('listitem');
     expect(renderedMovies.length).toEqual(2);
   });

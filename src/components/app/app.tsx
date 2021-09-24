@@ -1,9 +1,8 @@
-import React, { ChangeEvent, FormEvent, useCallback, useEffect, useState } from 'react';
+import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
-import { LoadDataParams } from '../../helpers/resourсe';
 import { MovieList } from '../movie/movie-list';
 import { SearchInfo } from '../search-info';
 import { MovieDetails } from '../movie/movie-details';
@@ -14,16 +13,11 @@ export default function App() {
   const [searchMovie, setSearchMovie] = useState<string>('');
   const [filterValue, setFilterValue] = useState<string>('title');
   const [sortValue, setSortValue] = useState<string>('release date');
-
   const dispatch = useDispatch();
-  const onLoadMovies = useCallback(
-    (url: string, params?: LoadDataParams) => dispatch(loadMovies(url, params)),
-    [dispatch]
-  );
 
   useEffect((): void => {
-    onLoadMovies('https://reactjs-cdp.herokuapp.com/movies');
-  }, [onLoadMovies]);
+    dispatch(loadMovies('https://reactjs-cdp.herokuapp.com/movies'));
+  }, [dispatch]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
@@ -34,7 +28,7 @@ export default function App() {
       search: searchMovie,
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
-    onLoadMovies('https://reactjs-cdp.herokuapp.com/movies', params);
+    dispatch(loadMovies('https://reactjs-cdp.herokuapp.com/movies', params));
   };
 
   const handleFilter = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
