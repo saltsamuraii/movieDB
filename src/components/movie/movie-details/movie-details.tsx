@@ -19,14 +19,11 @@ export default function MovieDetails({ movieId, onBack }: MovieDetailsProps) {
   const resetMovie = useCallback(() => dispatch(movieResetAction()), [dispatch]);
 
   useEffect((): void => {
-    const updateMovie = () => {
-      if (movieId === undefined) {
-        resetMovie();
-        return;
-      }
-      onLoadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`);
-    };
-    updateMovie();
+    if (movieId === undefined) {
+      resetMovie();
+      return;
+    }
+    onLoadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`);
   }, [movieId, resetMovie, onLoadMovie]);
 
   const handleErrorImage = (): void => {
