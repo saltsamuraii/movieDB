@@ -14,7 +14,7 @@ interface MoviesRenderParams {
   };
 }
 
-const moviesState: MoviesRenderParams = {
+const moviesInitialState: MoviesRenderParams = {
   movies: {
     isLoading: false,
     error: false,
@@ -22,7 +22,7 @@ const moviesState: MoviesRenderParams = {
   },
 };
 
-export function renderWithStore(component: ReactElement, initialState = moviesState) {
+export function renderWithStore(component: ReactElement, initialState = moviesInitialState) {
   const Wrapper: FC = ({ children }) => (
     <Provider store={createStore(rootReducer, initialState, applyMiddleware(thunk))}>
       {children}
