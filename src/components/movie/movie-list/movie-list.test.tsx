@@ -19,14 +19,14 @@ describe('MovieList component', () => {
 
   it('render a message if loading is true', () => {
     renderWithStore(<MovieList onMovieSelected={jest.fn()} />, {
-      initialState: { movies: { isLoading: true, error: false, data: [] } },
+      movies: { data: [], error: false, isLoading: true },
     });
     expect(screen.getByText('Loading...')).toBeInTheDocument();
   });
 
   it('rendered movies length to be equal movies length', () => {
     renderWithStore(<MovieList onMovieSelected={jest.fn()} />, {
-      initialState: { movies: { isLoading: false, error: false, data: movies } },
+      movies: { data: movies, error: false, isLoading: false },
     });
     const renderedMovies = screen.getAllByRole('listitem');
     expect(renderedMovies.length).toEqual(2);

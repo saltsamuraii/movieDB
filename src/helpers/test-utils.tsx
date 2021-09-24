@@ -7,29 +7,22 @@ import { rootReducer } from '../redux/store/store';
 import { Movie } from '../components/movie/movie';
 
 interface MoviesRenderParams {
-  movies: {
+  movies?: {
     isLoading: boolean;
     error: boolean;
     data: Movie[];
   };
 }
 
-interface RenderParams {
-  initialState: MoviesRenderParams;
-}
+const moviesState: MoviesRenderParams = {
+  movies: {
+    isLoading: false,
+    error: false,
+    data: [],
+  },
+};
 
-export function renderWithStore(
-  component: ReactElement,
-  {
-    initialState = {
-      movies: {
-        isLoading: false,
-        error: false,
-        data: [],
-      },
-    },
-  } = {} as RenderParams
-) {
+export function renderWithStore(component: ReactElement, initialState = moviesState) {
   const Wrapper: FC = ({ children }) => (
     <Provider store={createStore(rootReducer, initialState, applyMiddleware(thunk))}>
       {children}
