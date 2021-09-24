@@ -7,19 +7,19 @@ interface MovieCardProps {
   onMovieSelected: (id: number) => void;
 }
 
-export default function MovieCard({ data, onMovieSelected }: MovieCardProps) {
+export default function MovieCard({
+  data: { id, poster_path: poster, release_date: releaseDate, title, genres },
+  onMovieSelected,
+}: MovieCardProps) {
   const [imageError, setImageError] = useState(true);
 
   const handleSelected = (): void => {
-    const { id } = data;
     onMovieSelected(id);
   };
 
   const handleErrorImage = (): void => {
     setImageError(false);
   };
-
-  const { poster_path: poster, release_date: releaseDate, title, genres } = data;
 
   const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 
