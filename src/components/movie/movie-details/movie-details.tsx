@@ -1,23 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
 import './movie-details.css';
 import { MoviesState } from '../../../redux/store/store';
 import { loadMovie } from '../../../redux/redux-helpers/load-movie';
 import { movieResetAction } from '../../../redux/action-creators/movie-action-creators';
 
-interface MovieParams {
-  movieId?: string;
-}
-
 interface MovieDetailsProps {
+  movieId?: number;
   onBack: () => void;
 }
 
-export default function MovieDetails({ onBack }: MovieDetailsProps) {
+export default function MovieDetails({ movieId, onBack }: MovieDetailsProps) {
   const [imageError, setImageError] = useState(true);
   const movie = useSelector(({ movie: { data } }: MoviesState) => data);
-  const { movieId } = useParams<MovieParams>();
   const dispatch = useDispatch();
 
   useEffect((): void => {
