@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { Route, useHistory } from 'react-router-dom';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
@@ -14,6 +15,7 @@ export default function App() {
   const [filterValue, setFilterValue] = useState<string>('title');
   const [sortValue, setSortValue] = useState<string>('release date');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect((): void => {
     dispatch(loadMovies('https://reactjs-cdp.herokuapp.com/movies'));
@@ -45,6 +47,7 @@ export default function App() {
 
   const handleBack = (): void => {
     setMovieId(undefined);
+    history.push('/');
   };
 
   const handleMovieSelected = (id: number): void => {
@@ -62,7 +65,9 @@ export default function App() {
           onFilter={handleFilter}
         />
       ) : (
-        <MovieDetails movieId={movieId} onBack={handleBack} />
+        <Route exact path="/movie/:movieId">
+          <MovieDetails onBack={handleBack} />
+        </Route>
       )}
       <SearchInfo sortValue={sortValue} onSort={handleSort} />
       <MovieList onMovieSelected={handleMovieSelected} />

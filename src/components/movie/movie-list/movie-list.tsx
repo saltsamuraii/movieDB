@@ -1,8 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { MovieCard } from '../movie-card';
-import './movie-list.css';
 import { MoviesState } from '../../../redux/store/store';
+import './movie-list.css';
 
 interface MoviesListProps {
   onMovieSelected: (id: number) => void;
@@ -19,7 +20,9 @@ export default function MovieList({ onMovieSelected }: MoviesListProps) {
     <ul className="movies">
       {movies.map((movie) => (
         <li className="movie-card" key={movie.id}>
-          <MovieCard data={movie} onMovieSelected={onMovieSelected} />
+          <Link className="movie-card__link" to={`/movie/${movie.id}`}>
+            <MovieCard data={movie} onMovieSelected={onMovieSelected} />
+          </Link>
         </li>
       ))}
     </ul>
