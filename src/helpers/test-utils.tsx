@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
-import { BrowserRouter } from 'react-router-dom';
+import { MemoryRouter } from 'react-router-dom';
 import { rootReducer } from '../redux/store/store';
 import { Movie } from '../components/movie/movie';
 
@@ -26,7 +26,7 @@ const moviesInitialState: MoviesRenderParams = {
 export function renderWithStore(component: ReactElement, initialState = moviesInitialState) {
   const Wrapper: FC = ({ children }) => (
     <Provider store={createStore(rootReducer, initialState, applyMiddleware(thunk))}>
-      <BrowserRouter>{children}</BrowserRouter>
+      <MemoryRouter>{children}</MemoryRouter>
     </Provider>
   );
   return render(component, { wrapper: Wrapper });

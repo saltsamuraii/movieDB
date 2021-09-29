@@ -9,9 +9,9 @@ import { SearchInfo } from '../search-info';
 import { MovieDetails } from '../movie/movie-details';
 import { loadMovies } from '../../redux/redux-helpers/load-movies';
 import { PageNotFound } from '../page-not-found';
+import { ROUTE } from '../../enums/enum-routes';
 
 export default function App() {
-  const [movieId, setMovieId] = useState<number | undefined>(undefined);
   const [searchMovie, setSearchMovie] = useState<string>('');
   const [filterValue, setFilterValue] = useState<string>('title');
   const [sortValue, setSortValue] = useState<string>('release date');
@@ -32,7 +32,7 @@ export default function App() {
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
     dispatch(loadMovies('https://reactjs-cdp.herokuapp.com/movies', params));
-    history.push(`/search/${searchMovie}`);
+    history.push(`${ROUTE.SEARCH}${searchMovie}`);
   };
 
   const handleFilter = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
@@ -48,19 +48,16 @@ export default function App() {
   };
 
   const handleBack = (): void => {
-    setMovieId(undefined);
     history.goBack();
-  };
-
-  const handleMovieSelected = (id: number): void => {
-    setMovieId(id);
   };
 
   return (
     <ErrorBoundary>
       <Switch>
-        {/* AppPage */}
-        <Route exact path="/">
+        <Route path={ROUTE.MOVIE_DETAILS}>
+          <MovieDetails onBack={handleBack} />
+        </Route>
+        <Route path={ROUTE.HOME}>
           <SearchBar
             filterValue={filterValue}
             movie={searchMovie}
@@ -68,29 +65,11 @@ export default function App() {
             onSubmit={handleSubmit}
             onFilter={handleFilter}
           />
-          <SearchInfo sortValue={sortValue} onSort={handleSort} />
-          <MovieList onMovieSelected={handleMovieSelected} />
-        </Route>
-        {/* MovieSearchPage */}
-        <Route path="/search/">
-          <SearchBar
-            filterValue={filterValue}
-            movie={searchMovie}
-            onSearchMovie={handleSearchMovie}
-            onSubmit={handleSubmit}
-            onFilter={handleFilter}
-          />
-          <SearchInfo sortValue={sortValue} onSort={handleSort} />
-          <MovieList onMovieSelected={handleMovieSelected} />
-        </Route>
-        {/* MovieDetailsPage */}
-        <Route path="/movie/:movieId">
-          <MovieDetails movieId={movieId} onBack={handleBack} />
-          <SearchInfo sortValue={sortValue} onSort={handleSort} />
-          <MovieList onMovieSelected={handleMovieSelected} />
         </Route>
         <Route component={PageNotFound} />
       </Switch>
+      <SearchInfo sortValue={sortValue} onSort={handleSort} />
+      <MovieList />
     </ErrorBoundary>
   );
 }
