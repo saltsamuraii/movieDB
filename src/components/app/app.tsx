@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch, useHistory } from 'react-router-dom';
+import { Route, Switch, useHistory, generatePath } from 'react-router-dom';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
@@ -32,7 +32,7 @@ export default function App() {
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
     dispatch(loadMovies('https://reactjs-cdp.herokuapp.com/movies', params));
-    history.push(`${ROUTE.SEARCH}${searchMovie}`);
+    history.push(generatePath(ROUTE.SEARCH, { searchMovie }));
   };
 
   const handleFilter = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {

@@ -19,7 +19,7 @@ export default function MovieList() {
         <li className="movie-card" key={movie.id}>
           <Link
             className="movie-card__link"
-            to={generatePath(`${ROUTE.MOVIE_DETAILS}`, { movieId: movie.id })}
+            to={generatePath(ROUTE.MOVIE_DETAILS, { movieId: movie.id })}
           >
             <MovieCard data={movie} />
           </Link>

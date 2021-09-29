@@ -1,5 +1,5 @@
 export enum ROUTE {
   HOME = '/',
-  SEARCH = 'search/',
+  SEARCH = '/search/:searchMovie',
   MOVIE_DETAILS = '/movie/:movieId',
 }
