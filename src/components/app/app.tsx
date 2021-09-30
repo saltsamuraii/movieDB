@@ -1,6 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { Route, Switch, useHistory, generatePath } from 'react-router-dom';
+import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
@@ -54,10 +54,7 @@ export default function App() {
   return (
     <ErrorBoundary>
       <Switch>
-        <Route path={ROUTE.MOVIE_DETAILS}>
-          <MovieDetails onBack={handleBack} />
-        </Route>
-        <Route path={ROUTE.HOME}>
+        <Route exact path={ROUTE.HOME}>
           <SearchBar
             filterValue={filterValue}
             movie={searchMovie}
@@ -65,11 +62,27 @@ export default function App() {
             onSubmit={handleSubmit}
             onFilter={handleFilter}
           />
+          <SearchInfo sortValue={sortValue} onSort={handleSort} />
+          <MovieList />
+        </Route>
+        <Route path={ROUTE.SEARCH}>
+          <SearchBar
+            filterValue={filterValue}
+            movie={searchMovie}
+            onSearchMovie={handleSearchMovie}
+            onSubmit={handleSubmit}
+            onFilter={handleFilter}
+          />
+          <SearchInfo sortValue={sortValue} onSort={handleSort} />
+          <MovieList />
+        </Route>
+        <Route path={ROUTE.MOVIE_DETAILS}>
+          <MovieDetails onBack={handleBack} />
+          <SearchInfo sortValue={sortValue} onSort={handleSort} />
+          <MovieList />
         </Route>
         <Route component={PageNotFound} />
       </Switch>
-      <SearchInfo sortValue={sortValue} onSort={handleSort} />
-      <MovieList />
     </ErrorBoundary>
   );
 }
