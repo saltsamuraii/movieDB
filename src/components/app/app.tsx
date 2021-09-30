@@ -76,7 +76,7 @@ export default function App() {
           <SearchInfo sortValue={sortValue} onSort={handleSort} />
           <MovieList />
         </Route>
-        <Route path={ROUTE.MOVIE_DETAILS}>
+        <Route exact path={ROUTE.MOVIE_DETAILS}>
           <MovieDetails onBack={handleBack} />
           <SearchInfo sortValue={sortValue} onSort={handleSort} />
           <MovieList />

@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import './movie-details.css';
 import { MoviesState } from '../../../redux/store/store';
 import { loadMovie } from '../../../redux/redux-helpers/load-movie';
 import { movieResetAction } from '../../../redux/action-creators/movie-action-creators';
+import { ROUTE } from '../../../enums/enum-routes';
 
 interface MovieId {
   movieId?: string;
@@ -37,6 +38,7 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
   }
 
   const {
+    id,
     poster_path: poster,
     vote_average: voteAverage,
     release_date: releaseDate,
@@ -45,6 +47,10 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
     runtime,
     overview,
   } = movie;
+
+  if (!id) {
+    return <Redirect to={ROUTE.NOT_FOUND} />;
+  }
 
   const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 
