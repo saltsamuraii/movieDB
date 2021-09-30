@@ -21,13 +21,16 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
   const { movieId } = useParams<MovieId>();
   const dispatch = useDispatch();
 
-  useEffect((): void => {
-    if (movieId === undefined) {
-      dispatch(movieResetAction());
-      return;
-    }
+  useEffect(() => {
     dispatch(loadMovie(`https://reactjs-cdp.herokuapp.com/movies/${movieId}`));
   }, [movieId, dispatch]);
+
+  useEffect(
+    () => () => {
+      dispatch(movieResetAction());
+    },
+    [dispatch]
+  );
 
   const handleErrorImage = (): void => {
     setImageError(false);
