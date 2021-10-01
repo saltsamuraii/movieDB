@@ -12,3 +12,8 @@
     cursor: pointer;
     margin: 10px 15px;
 }
+
+.movie-card__link {
+    text-decoration: none;
+    color: inherit;
+}

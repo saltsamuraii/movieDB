@@ -4,18 +4,12 @@ import { Movie } from '../movie';
 
 interface MovieCardProps {
   data: Movie;
-  onMovieSelected: (id: number) => void;
 }
 
 export default function MovieCard({
-  data: { id, poster_path: poster, release_date: releaseDate, title, genres },
-  onMovieSelected,
+  data: { poster_path: poster, release_date: releaseDate, title, genres },
 }: MovieCardProps) {
   const [imageError, setImageError] = useState(true);
-
-  const handleSelected = (): void => {
-    onMovieSelected(id);
-  };
 
   const handleErrorImage = (): void => {
     setImageError(false);
@@ -28,7 +22,6 @@ export default function MovieCard({
       <img
         className="movie-card__poster"
         src={imgSrc}
-        onClick={handleSelected}
         onError={handleErrorImage}
         alt=""
         role="presentation"

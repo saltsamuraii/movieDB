@@ -53,6 +53,7 @@ module.exports = {
             title: "Movie Finder",
             template: path.resolve(__dirname, "public/index.html"),
             filename: "index.html",
+            base: '/'
         }),
         new MiniCssExtractPlugin({
             filename: "style.css"

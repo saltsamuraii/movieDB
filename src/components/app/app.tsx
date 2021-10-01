@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
 import './app.css';
@@ -7,13 +8,15 @@ import { MovieList } from '../movie/movie-list';
 import { SearchInfo } from '../search-info';
 import { MovieDetails } from '../movie/movie-details';
 import { loadMovies } from '../../redux/redux-helpers/load-movies';
+import { PageNotFound } from '../page-not-found';
+import { ROUTE } from '../../enums/enum-routes';
 
 export default function App() {
-  const [movieId, setMovieId] = useState<number | undefined>(undefined);
   const [searchMovie, setSearchMovie] = useState<string>('');
   const [filterValue, setFilterValue] = useState<string>('title');
   const [sortValue, setSortValue] = useState<string>('release date');
   const dispatch = useDispatch();
+  const history = useHistory();
 
   useEffect((): void => {
     dispatch(loadMovies('https://reactjs-cdp.herokuapp.com/movies'));
@@ -29,6 +32,7 @@ export default function App() {
       searchBy: filterValue === 'title' ? 'title' : 'genres',
     };
     dispatch(loadMovies('https://reactjs-cdp.herokuapp.com/movies', params));
+    history.push(generatePath(ROUTE.SEARCH, { searchMovie }));
   };
 
   const handleFilter = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
@@ -44,28 +48,41 @@ export default function App() {
   };
 
   const handleBack = (): void => {
-    setMovieId(undefined);
-  };
-
-  const handleMovieSelected = (id: number): void => {
-    setMovieId(id);
+    history.goBack();
   };
 
   return (
     <ErrorBoundary>
-      {!movieId ? (
-        <SearchBar
-          filterValue={filterValue}
-          movie={searchMovie}
-          onSearchMovie={handleSearchMovie}
-          onSubmit={handleSubmit}
-          onFilter={handleFilter}
-        />
-      ) : (
-        <MovieDetails movieId={movieId} onBack={handleBack} />
-      )}
-      <SearchInfo sortValue={sortValue} onSort={handleSort} />
-      <MovieList onMovieSelected={handleMovieSelected} />
+      <Switch>
+        <Route exact path={ROUTE.HOME}>
+          <SearchBar
+            filterValue={filterValue}
+            movie={searchMovie}
+            onSearchMovie={handleSearchMovie}
+            onSubmit={handleSubmit}
+            onFilter={handleFilter}
+          />
+          <SearchInfo sortValue={sortValue} onSort={handleSort} />
+          <MovieList />
+        </Route>
+        <Route path={ROUTE.SEARCH}>
+          <SearchBar
+            filterValue={filterValue}
+            movie={searchMovie}
+            onSearchMovie={handleSearchMovie}
+            onSubmit={handleSubmit}
+            onFilter={handleFilter}
+          />
+          <SearchInfo sortValue={sortValue} onSort={handleSort} />
+          <MovieList />
+        </Route>
+        <Route exact path={ROUTE.MOVIE_DETAILS}>
+          <MovieDetails onBack={handleBack} />
+          <SearchInfo sortValue={sortValue} onSort={handleSort} />
+          <MovieList />
+        </Route>
+        <Route component={PageNotFound} />
+      </Switch>
     </ErrorBoundary>
   );
 }
