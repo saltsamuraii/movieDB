@@ -6,6 +6,11 @@ export const getMovies = createSelector(
   (data) => data
 );
 
+export const moviesLength = createSelector(
+  (state: MoviesState) => state.movies.data.length,
+  (data) => data
+);
+
 export const loading = createSelector(
   (state: MoviesState) => state.movies.isLoading,
   (isLoading) => isLoading

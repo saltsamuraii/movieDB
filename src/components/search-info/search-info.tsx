@@ -2,7 +2,7 @@ import React, { ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { RadioButton } from '../radio-button';
 import './search-info.css';
-import { MoviesState } from '../../redux/store/store';
+import { moviesLength } from '../../redux/selectors/movies-selector';
 
 interface SearchInfoProps {
   sortValue: string;
@@ -10,7 +10,7 @@ interface SearchInfoProps {
 }
 
 export default function SearchInfo({ sortValue, onSort }: SearchInfoProps) {
-  const movieResult = useSelector((state: MoviesState) => state.movies.data.length);
+  const movieResult = useSelector(moviesLength);
 
   return (
     <div className="search-info">

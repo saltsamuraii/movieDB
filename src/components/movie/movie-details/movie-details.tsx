@@ -2,10 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
 import './movie-details.css';
-import { MoviesState } from '../../../redux/store/store';
 import { loadMovie } from '../../../redux/redux-helpers/load-movie';
 import { movieResetAction } from '../../../redux/action-creators/movie-action-creators';
 import { ROUTE } from '../../../enums/enum-routes';
+import { getMovie } from '../../../redux/selectors/movie-selector';
 
 interface MovieId {
   movieId?: string;
@@ -17,7 +17,7 @@ interface MovieDetailsProps {
 
 export default function MovieDetails({ onBack }: MovieDetailsProps) {
   const [imageError, setImageError] = useState(true);
-  const movie = useSelector(({ movie: { data } }: MoviesState) => data);
+  const movie = useSelector(getMovie);
   const { movieId } = useParams<MovieId>();
   const dispatch = useDispatch();
 
