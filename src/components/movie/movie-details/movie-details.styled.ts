@@ -1,27 +1,25 @@
-.movie-details__poster {
-  width: 300px;
-  margin: 15px;
-  max-width: 100%;
-  border: 1px var(--red-color) solid;
-}
+import styled from 'styled-components';
 
-.movie-details__container {
+const MovieDetailsContainer = styled.div`
   display: flex;
   background: linear-gradient(rgba(0, 0, 0, 0.8), var(--black-color)),
     url('https://i.redd.it/4fxxbm4opjd31.jpg') center, no-repeat;
   background-size: cover;
-}
-
-.movie-details__content {
+`;
+const MovieDetailsPoster = styled.img`
+  width: 300px;
   margin: 15px;
-}
-
-.movie-details__title {
+  max-width: 100%;
+  border: 1px var(--red-color) solid;
+`;
+const MovieDetailsContent = styled.div`
+  margin: 15px;
+`;
+const MovieDetailsTitle = styled.span`
   font-size: 40px;
   color: var(--red-color);
-}
-
-.movie-details__rating {
+`;
+const MovieDetailsRating = styled.span`
   margin: 0 30px;
   font-size: 20px;
   font-weight: bold;
@@ -29,32 +27,31 @@
   padding: 7px;
   border: 1px var(--white-color) solid;
   border-radius: 30px;
-}
-
-.movie-details__genre {
+`;
+const MovieDetailsGenre = styled.p`
   font-size: 20px;
   color: var(--gray-color);
-}
+`;
 
-.movie-details__year {
+const MovieDetailsYear = styled.span`
   font-size: 20px;
   font-weight: bold;
   color: var(--white-color);
-}
+`;
 
-.movie-details__duration {
+const MovieDetailsDuration = styled.span`
   margin-left: 10px;
   font-size: 20px;
   font-weight: bold;
   color: var(--white-color);
-}
+`;
 
-.movie-details__description {
+const MovieDetailsDescription = styled.p`
   font-size: 25px;
   color: var(--gray-color);
-}
+`;
 
-.movie-details__button {
+const MovieDetailsButton = styled.button`
   width: 200px;
   padding: 10px;
   margin: 0;
@@ -65,8 +62,21 @@
   font-weight: bold;
   color: var(--white-color);
   background-color: var(--light-red);
-}
 
-.movie-details__button:hover {
-  background-color: var(--red-color);
-}
+  &:hover {
+    background-color: var(--red-color);
+  }
+`;
+
+export {
+  MovieDetailsContainer,
+  MovieDetailsPoster,
+  MovieDetailsContent,
+  MovieDetailsTitle,
+  MovieDetailsRating,
+  MovieDetailsGenre,
+  MovieDetailsYear,
+  MovieDetailsDuration,
+  MovieDetailsDescription,
+  MovieDetailsButton,
+};

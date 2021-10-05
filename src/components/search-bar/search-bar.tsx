@@ -1,30 +1,41 @@
 import React, { ChangeEvent, FormEvent } from 'react';
 import { RadioButton } from '../radio-button';
 import './search-bar.css';
+import {
+  SearchFormButton,
+  SearchFormFilters,
+  SearchFormInput,
+  SearchFormLegendText,
+} from './search-bar.styled';
 
 interface SearchBarProps {
-  filterValue: string,
-  movie: string,
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void,
-  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => void,
-  onFilter: (event: ChangeEvent<HTMLInputElement>) => void
+  filterValue: string;
+  movie: string;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFilter: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SearchBar({ filterValue, movie, onSubmit, onSearchMovie, onFilter }: SearchBarProps) {
+export default function SearchBar({
+  filterValue,
+  movie,
+  onSubmit,
+  onSearchMovie,
+  onFilter,
+}: SearchBarProps) {
   return (
     <>
       <h1>Movie Finder</h1>
       <form onSubmit={onSubmit}>
-        <input
-          className="search-form__input"
+        <SearchFormInput
           value={movie}
           type="text"
           placeholder="Search..."
           onChange={onSearchMovie}
         />
-        <div className="search-form__filters">
+        <SearchFormFilters>
           <fieldset>
-            <legend className="search-form__legend-text">Search by</legend>
+            <SearchFormLegendText>Search by</SearchFormLegendText>
             <RadioButton
               className="search-form__radio__button"
               value="title"
@@ -38,11 +49,8 @@ export default function SearchBar({ filterValue, movie, onSubmit, onSearchMovie,
               onChange={onFilter}
             />
           </fieldset>
-          <button type="submit"
-                  className="search-form__button">
-            Search
-          </button>
-        </div>
+          <SearchFormButton type="submit">Search</SearchFormButton>
+        </SearchFormFilters>
       </form>
     </>
   );
