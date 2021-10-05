@@ -1,38 +1,39 @@
-.search-info {
+import styled from 'styled-components';
+import { RadioButton } from '../radio-button';
+
+const SearchInfoContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: 100%;
   padding: 10px 0;
   background: var(--gray-color);
-}
+`;
 
-.search-info__result {
+const SearchInfoResult = styled.span`
   margin: 0 10px;
   font-size: 20px;
   font-weight: bold;
   color: var(--black-color);
-}
+`;
 
-.search-info__legend-text {
+const SearchInfoLegendText = styled.legend`
   margin: 0 10px;
   font-size: 20px;
   font-weight: bold;
   float: left;
   color: var(--black-color);
-}
+`;
 
-.search-info__radio__button {
+const SearchInfoRadioButton = styled(RadioButton)`
   margin-right: 10px;
   font-size: 20px;
   font-weight: bold;
-  color: var(--black-color);
+  color: ${({ checked }) => (checked ? 'var(--light-red)' : 'var(--black-color)')};
 
   cursor: pointer;
   background: none;
   border: none;
-}
+`;
 
-.search-info__radio__button.checked {
-  color: var(--light-red);
-}
+export { SearchInfoContainer, SearchInfoResult, SearchInfoLegendText, SearchInfoRadioButton };

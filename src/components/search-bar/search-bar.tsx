@@ -1,11 +1,10 @@
 import React, { ChangeEvent, FormEvent } from 'react';
-import { RadioButton } from '../radio-button';
-import './search-bar.css';
 import {
   SearchFormButton,
   SearchFormFilters,
   SearchFormInput,
   SearchFormLegendText,
+  SearchFormRadioButton,
 } from './search-bar.styled';
 
 interface SearchBarProps {
@@ -36,14 +35,12 @@ export default function SearchBar({
         <SearchFormFilters>
           <fieldset>
             <SearchFormLegendText>Search by</SearchFormLegendText>
-            <RadioButton
-              className="search-form__radio__button"
+            <SearchFormRadioButton
               value="title"
               checked={filterValue === 'title'}
               onChange={onFilter}
             />
-            <RadioButton
-              className="search-form__radio__button"
+            <SearchFormRadioButton
               value="genre"
               checked={filterValue === 'genre'}
               onChange={onFilter}
