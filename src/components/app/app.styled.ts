@@ -1,3 +1,6 @@
+import { createGlobalStyle } from 'styled-components';
+
+export const GlobalStyles = createGlobalStyle`
 :root {
   --black-color: #000;
   --white-color: #fff;
@@ -19,11 +22,11 @@ body {
   box-sizing: border-box;
 }
 
-/*h1,
+h1,
 h2 {
   color: var(--black-color);
   text-align: center;
-}*/
+}
 
 fieldset {
   display: flex;
@@ -45,3 +48,4 @@ fieldset {
   font-weight: bold;
   background-color: var(--gray-color);
 }
+`;

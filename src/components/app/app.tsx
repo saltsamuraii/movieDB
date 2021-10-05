@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { generatePath, Route, Switch, useHistory } from 'react-router-dom';
 import { ErrorBoundary } from '../error-boundary';
 import { SearchBar } from '../search-bar';
-import './app.css';
 import { MovieList } from '../movie/movie-list';
 import { SearchInfo } from '../search-info';
 import { MovieDetails } from '../movie/movie-details';
 import { loadMovies } from '../../redux/redux-helpers/load-movies';
 import { PageNotFound } from '../page-not-found';
 import { ROUTE } from '../../enums/enum-routes';
+import { GlobalStyles } from './app.styled';
 
 export default function App() {
   const [searchMovie, setSearchMovie] = useState<string>('');
@@ -53,6 +53,7 @@ export default function App() {
 
   return (
     <ErrorBoundary>
+      <GlobalStyles />
       <Switch>
         <Route exact path={ROUTE.HOME}>
           <SearchBar
