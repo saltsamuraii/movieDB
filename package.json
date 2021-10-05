@@ -57,6 +57,7 @@
     "@typescript-eslint/eslint-plugin-tslint": "4.29.0",
     "@typescript-eslint/parser": "4.29.0",
     "babel-loader": "8.2.2",
+    "babel-plugin-styled-components": "1.13.2",
     "cross-env": "7.0.3",
     "css-loader": "5.2.6",
     "eslint": "7.31.0",
