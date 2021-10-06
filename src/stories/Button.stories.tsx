@@ -1,37 +1,31 @@
-import React from 'react';
-import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { Meta, Story } from '@storybook/react';
+import React, { ChangeEvent, FormEvent } from 'react';
+import { SearchBar } from '../components/search-bar';
 
-import { Button } from './Button';
+interface SearchBarProps {
+  filterValue: string;
+  movie: string;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFilter: (event: ChangeEvent<HTMLInputElement>) => void;
+}
 
 export default {
-  title: 'Example/Button',
-  component: Button,
+  title: 'Components/SearchBar',
+  component: SearchBar,
   argTypes: {
-    backgroundColor: { control: 'color' },
+    backgroundColor: { description: '#fff' },
   },
-} as ComponentMeta<typeof Button>;
+} as Meta;
 
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
+const Template: Story<SearchBarProps> = (args) => <SearchBar {...args} />;
 
-export const Primary = Template.bind({});
-Primary.args = {
-  primary: true,
-  label: 'Button',
-};
+export const SearchBarComponent = Template.bind(SearchBar);
 
-export const Secondary = Template.bind(`Record<string, never>`);
-Secondary.args = {
-  label: 'Button',
-};
-
-export const Large = Template.bind(`Record<string, never>`);
-Large.args = {
-  size: 'large',
-  label: 'Button',
-};
-
-export const Small = Template.bind(`Record<string, never>`);
-Small.args = {
-  size: 'small',
-  label: 'Button',
+SearchBarComponent.args = {
+  filterValue: 'Title',
+  movie: 'Search you movie...',
+  onSubmit: (event: FormEvent<HTMLFormElement>) => console.log(event.target),
+  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => console.log(event),
+  onFilter: (event: ChangeEvent<HTMLInputElement>) => console.log(event),
 };
