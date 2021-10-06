@@ -54,7 +54,7 @@ describe('SearchInfo component', () => {
   it('method onSort should be called on click', () => {
     const onSort = jest.fn();
     renderWithStore(<SearchInfo sortValue="release date" onSort={onSort} />);
-    userEvent.click(screen.getAllByRole('radio')[1]);
+    userEvent.click(screen.getAllByRole('radio', { hidden: true })[1]);
     expect(onSort).toHaveBeenCalled();
   });
 });
