@@ -73,6 +73,7 @@
     "husky": "7.0.2",
     "jest": "27.0.6",
     "jest-fetch-mock": "3.0.3",
+    "jest-styled-components": "7.0.5",
     "lint-staged": "11.1.2",
     "mini-css-extract-plugin": "1.6.0",
     "prettier": "2.3.2",
