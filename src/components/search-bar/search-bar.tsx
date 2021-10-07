@@ -4,8 +4,8 @@ import {
   SearchFormFilters,
   SearchFormInput,
   SearchFormLegendText,
-  SearchFormRadioButton,
 } from './search-bar.styled';
+import { RadioButton } from '../radio-button';
 
 interface SearchBarProps {
   filterValue: string;
@@ -35,16 +35,8 @@ export default function SearchBar({
         <SearchFormFilters>
           <fieldset>
             <SearchFormLegendText>Search by</SearchFormLegendText>
-            <SearchFormRadioButton
-              value="title"
-              checked={filterValue === 'title'}
-              onChange={onFilter}
-            />
-            <SearchFormRadioButton
-              value="genre"
-              checked={filterValue === 'genre'}
-              onChange={onFilter}
-            />
+            <RadioButton value="title" checked={filterValue === 'title'} onChange={onFilter} />
+            <RadioButton value="genre" checked={filterValue === 'genre'} onChange={onFilter} />
           </fieldset>
           <SearchFormButton type="submit">Search</SearchFormButton>
         </SearchFormFilters>

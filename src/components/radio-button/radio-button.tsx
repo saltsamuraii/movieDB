@@ -1,16 +1,15 @@
 import React, { InputHTMLAttributes } from 'react';
-import { RadioButtonInput } from './radio-button.styled';
+import { RadioButtonInput, RadioButtonSpan } from './radio-button.styled';
 
 export default function RadioButton({
   value,
   checked,
-  className,
   ...rest
 }: Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>) {
   return (
-    <label className={className}>
+    <label>
       <RadioButtonInput {...rest} type="radio" value={value} checked={checked} />
-      {value}
+      <RadioButtonSpan>{value}</RadioButtonSpan>
     </label>
   );
 }

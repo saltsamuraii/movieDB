@@ -12,7 +12,7 @@ describe('RadioButton component', () => {
         <RadioButton name="genre" value="2" className="button" onChange={onChange} />
       </fieldset>
     );
-    userEvent.click(screen.getAllByRole('radio', { hidden: true })[1]);
+    userEvent.click(screen.getAllByRole('radio')[1]);
     expect(onChange).toHaveBeenCalled();
   });
 });

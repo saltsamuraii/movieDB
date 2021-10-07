@@ -69,7 +69,7 @@ describe('Searchbar module', () => {
         onFilter={onFilter}
       />
     );
-    userEvent.click(screen.getAllByRole('radio', { hidden: true })[1]);
+    userEvent.click(screen.getAllByRole('radio')[1]);
     expect(onFilter).toHaveBeenCalled();
   });
 

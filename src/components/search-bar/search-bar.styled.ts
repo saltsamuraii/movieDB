@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { RadioButton } from '../radio-button';
 
 const SearchFormInput = styled.input`
   display: block;
@@ -26,16 +25,6 @@ const SearchFormLegendText = styled.legend`
   float: left;
 `;
 
-const SearchFormRadioButton = styled(RadioButton)`
-  padding: 5px;
-  margin: 0 7px;
-  cursor: pointer;
-  text-transform: uppercase;
-  color: var(--white-color);
-  font-weight: bold;
-  background-color: ${({ checked }) => (checked ? 'var(--light-red)' : 'var(--gray-color)')};
-`;
-
 const SearchFormButton = styled.button`
   width: 200px;
   padding: 10px 15px;
@@ -53,10 +42,4 @@ const SearchFormButton = styled.button`
   }
 `;
 
-export {
-  SearchFormInput,
-  SearchFormFilters,
-  SearchFormLegendText,
-  SearchFormRadioButton,
-  SearchFormButton,
-};
+export { SearchFormInput, SearchFormFilters, SearchFormLegendText, SearchFormButton };

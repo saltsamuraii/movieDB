@@ -1,12 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
 import { moviesLength } from '../../redux/selectors/movies-selector';
-import {
-  SearchInfoContainer,
-  SearchInfoLegendText,
-  SearchInfoRadioButton,
-  SearchInfoResult,
-} from './search-info.styled';
+import { SearchInfoContainer, SearchInfoLegendText, SearchInfoResult } from './search-info.styled';
+import { RadioButton } from '../radio-button';
 
 interface SearchInfoProps {
   sortValue: string;
@@ -23,12 +19,12 @@ export default function SearchInfo({ sortValue, onSort }: SearchInfoProps) {
       </SearchInfoResult>
       <fieldset>
         <SearchInfoLegendText>Sort by</SearchInfoLegendText>
-        <SearchInfoRadioButton
+        <RadioButton
           value="release date"
           checked={sortValue === 'release date'}
           onChange={onSort}
         />
-        <SearchInfoRadioButton value="rating" checked={sortValue === 'rating'} onChange={onSort} />
+        <RadioButton value="rating" checked={sortValue === 'rating'} onChange={onSort} />
       </fieldset>
     </SearchInfoContainer>
   );

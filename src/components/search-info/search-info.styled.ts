@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { RadioButton } from '../radio-button';
 
 const SearchInfoContainer = styled.div`
   display: flex;
@@ -25,15 +24,4 @@ const SearchInfoLegendText = styled.legend`
   color: var(--black-color);
 `;
 
-const SearchInfoRadioButton = styled(RadioButton)`
-  margin-right: 10px;
-  font-size: 20px;
-  font-weight: bold;
-  color: ${({ checked }) => (checked ? 'var(--light-red)' : 'var(--black-color)')};
-
-  cursor: pointer;
-  background: none;
-  border: none;
-`;
-
-export { SearchInfoContainer, SearchInfoResult, SearchInfoLegendText, SearchInfoRadioButton };
+export { SearchInfoContainer, SearchInfoResult, SearchInfoLegendText };
