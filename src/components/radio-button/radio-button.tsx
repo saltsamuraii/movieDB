@@ -8,7 +8,7 @@ export default function RadioButton({
   ...rest
 }: Omit<InputHTMLAttributes<HTMLInputElement>, 'type'>) {
   return (
-    <label className={checked ? `${className} checked` : className}>
+    <label className={className}>
       <RadioButtonInput {...rest} type="radio" value={value} checked={checked} />
       {value}
     </label>
