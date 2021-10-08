@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const RadioButtonSpan = styled.span`
+const RadioButtonValue = styled.span`
   padding: 5px;
   margin: 0 7px;
   cursor: pointer;
@@ -18,9 +18,9 @@ const RadioButtonInput = styled.input`
   cursor: pointer;
   clip: rect(0 0 0 0);
 
-  &:checked + ${RadioButtonSpan} {
+  &:checked + ${RadioButtonValue} {
     background-color: var(--light-red);
   }
 `;
 
-export { RadioButtonSpan, RadioButtonInput };
+export { RadioButtonValue, RadioButtonInput };

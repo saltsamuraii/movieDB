@@ -1,5 +1,5 @@
 import React, { InputHTMLAttributes } from 'react';
-import { RadioButtonInput, RadioButtonSpan } from './radio-button.styled';
+import { RadioButtonInput, RadioButtonValue } from './radio-button.styled';
 
 export default function RadioButton({
   value,
@@ -9,7 +9,7 @@ export default function RadioButton({
   return (
     <label>
       <RadioButtonInput {...rest} type="radio" value={value} checked={checked} />
-      <RadioButtonSpan>{value}</RadioButtonSpan>
+      <RadioButtonValue>{value}</RadioButtonValue>
     </label>
   );
 }

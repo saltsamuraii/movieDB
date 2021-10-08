@@ -2,7 +2,6 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { generatePath } from 'react-router-dom';
 import { MovieCard } from '../movie-card';
-
 import { ROUTE } from '../../../enums/enum-routes';
 import { getMovies, loading } from '../../../redux/selectors/movies-selector';
 import { Movies, MovieCardList, MovieCardLink } from './movie-list.styled';

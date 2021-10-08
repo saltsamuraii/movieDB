@@ -71,7 +71,6 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
   return (
     <MovieDetailsContainer>
       <MovieDetailsPoster src={imgSrc} onError={handleErrorImage} alt="" role="presentation" />
-
       <MovieDetailsContent>
         <MovieDetailsTitle>{title}</MovieDetailsTitle>
         <MovieDetailsRating>{voteAverage}</MovieDetailsRating>

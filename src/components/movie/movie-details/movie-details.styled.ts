@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../../app/app.styled';
 
 const MovieDetailsContainer = styled.div`
   display: flex;
@@ -51,15 +52,10 @@ const MovieDetailsDescription = styled.p`
   color: var(--gray-color);
 `;
 
-const MovieDetailsButton = styled.button`
+const MovieDetailsButton = styled(Button)`
   width: 200px;
   padding: 10px;
   margin: 0;
-  height: auto;
-  cursor: pointer;
-  text-transform: uppercase;
-  border: none;
-  font-weight: bold;
   color: var(--white-color);
   background-color: var(--light-red);
 

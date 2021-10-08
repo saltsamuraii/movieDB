@@ -1,4 +1,17 @@
-import { createGlobalStyle } from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
+
+export const Button = styled.button`
+  width: 60px;
+  height: auto;
+  margin: 0 7px;
+  padding: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  border: none;
+  color: var(--black-color);
+  font-weight: bold;
+  background-color: var(--gray-color);
+`;
 
 export const GlobalStyles = createGlobalStyle`
 :root {
@@ -36,7 +49,7 @@ fieldset {
   border: none;
 }
 
-.button {
+/*.button {
   width: 60px;
   height: auto;
   margin: 0 7px;
@@ -47,5 +60,5 @@ fieldset {
   color: var(--black-color);
   font-weight: bold;
   background-color: var(--gray-color);
-}
+}*/
 `;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Button } from '../app/app.styled';
 
 const SearchFormInput = styled.input`
   display: block;
@@ -25,15 +26,10 @@ const SearchFormLegendText = styled.legend`
   float: left;
 `;
 
-const SearchFormButton = styled.button`
+const SearchFormButton = styled(Button)`
   width: 200px;
   padding: 10px 15px;
   margin: 0;
-  height: auto;
-  cursor: pointer;
-  text-transform: uppercase;
-  border: none;
-  font-weight: bold;
   color: var(--white-color);
   background-color: var(--light-red);
 
