@@ -1,31 +1,25 @@
-import { Meta, Story } from '@storybook/react';
-import React, { ChangeEvent, FormEvent } from 'react';
-import { SearchBar } from '../components/search-bar';
+import { Story } from '@storybook/react';
+import React from 'react';
+import { action } from '@storybook/addon-actions';
+import { RadioButton } from '../components/radio-button';
 
-interface SearchBarProps {
-  filterValue: string;
-  movie: string;
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
-  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => void;
-  onFilter: (event: ChangeEvent<HTMLInputElement>) => void;
+interface RadioButtonProps {
+  value: string;
+  checked: boolean;
+  onChange: () => void;
 }
 
 export default {
-  title: 'Components/SearchBar',
-  component: SearchBar,
-  argTypes: {
-    backgroundColor: { description: '#fff' },
-  },
-} as Meta;
+  component: RadioButton,
+  title: 'RadioButton',
+};
 
-const Template: Story<SearchBarProps> = (args) => <SearchBar {...args} />;
+const Template: Story<RadioButtonProps> = (args) => <RadioButton {...args} />;
 
-export const SearchBarComponent = Template.bind(SearchBar);
+export const RadioButtonTitle = Template.bind(RadioButton);
 
-SearchBarComponent.args = {
-  filterValue: 'Title',
-  movie: 'Search you movie...',
-  onSubmit: (event: FormEvent<HTMLFormElement>) => console.log(event.target),
-  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => console.log(event),
-  onFilter: (event: ChangeEvent<HTMLInputElement>) => console.log(event),
+RadioButtonTitle.args = {
+  value: 'Title',
+  checked: true,
+  onChange: () => console.log(action('click')),
 };
