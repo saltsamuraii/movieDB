@@ -1,8 +1,8 @@
 import React, { ChangeEvent } from 'react';
 import { useSelector } from 'react-redux';
+import { moviesLength } from '../../redux/selectors/movies-selector';
+import { SearchInfoContainer, SearchInfoLegendText, SearchInfoResult } from './search-info.styled';
 import { RadioButton } from '../radio-button';
-import './search-info.css';
-import { MoviesState } from '../../redux/store/store';
 
 interface SearchInfoProps {
   sortValue: string;
@@ -10,28 +10,22 @@ interface SearchInfoProps {
 }
 
 export default function SearchInfo({ sortValue, onSort }: SearchInfoProps) {
-  const movieResult = useSelector((state: MoviesState) => state.movies.data.length);
+  const movieResult = useSelector(moviesLength);
 
   return (
-    <div className="search-info">
-      <span className="search-info__result">
+    <SearchInfoContainer>
+      <SearchInfoResult>
         {movieResult} movie{movieResult === 1 ? '' : 's'} found
-      </span>
+      </SearchInfoResult>
       <fieldset>
-        <legend className="search-info__legend-text">Sort by</legend>
+        <SearchInfoLegendText>Sort by</SearchInfoLegendText>
         <RadioButton
-          className="search-info__radio__button"
           value="release date"
           checked={sortValue === 'release date'}
           onChange={onSort}
         />
-        <RadioButton
-          className="search-info__radio__button"
-          value="rating"
-          checked={sortValue === 'rating'}
-          onChange={onSort}
-        />
+        <RadioButton value="rating" checked={sortValue === 'rating'} onChange={onSort} />
       </fieldset>
-    </div>
+    </SearchInfoContainer>
   );
 }

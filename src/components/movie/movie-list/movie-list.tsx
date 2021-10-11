@@ -1,30 +1,27 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { Link, generatePath } from 'react-router-dom';
+import { generatePath } from 'react-router-dom';
 import { MovieCard } from '../movie-card';
-import { MoviesState } from '../../../redux/store/store';
-import './movie-list.css';
 import { ROUTE } from '../../../enums/enum-routes';
+import { getMovies, loading } from '../../../redux/selectors/movies-selector';
+import { Movies, MovieCardList, MovieCardLink } from './movie-list.styled';
 
 export default function MovieList() {
-  const movies = useSelector((state: MoviesState) => state.movies.data);
-  const isLoading = useSelector((state: MoviesState) => state.movies.isLoading);
+  const movies = useSelector(getMovies);
+  const isLoading = useSelector(loading);
 
   if (isLoading) return <h1>Loading...</h1>;
   if (!movies.length) return <h2>No movies found</h2>;
 
   return (
-    <ul className="movies">
+    <Movies>
       {movies.map((movie) => (
-        <li className="movie-card" key={movie.id}>
-          <Link
-            className="movie-card__link"
-            to={generatePath(ROUTE.MOVIE_DETAILS, { movieId: movie.id })}
-          >
+        <MovieCardList key={movie.id}>
+          <MovieCardLink to={generatePath(ROUTE.MOVIE_DETAILS, { movieId: movie.id })}>
             <MovieCard data={movie} />
-          </Link>
-        </li>
+          </MovieCardLink>
+        </MovieCardList>
       ))}
-    </ul>
+    </Movies>
   );
 }

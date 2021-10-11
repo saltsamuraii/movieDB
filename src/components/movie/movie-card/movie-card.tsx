@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
-import './movie-card.css';
 import { Movie } from '../movie';
+import {
+  MovieCardContent,
+  MovieCardGenre,
+  MovieCardPoster,
+  MovieCardTitle,
+  MovieCardYear,
+} from './movie-card.styled';
 
 interface MovieCardProps {
   data: Movie;
@@ -19,18 +25,12 @@ export default function MovieCard({
 
   return (
     <>
-      <img
-        className="movie-card__poster"
-        src={imgSrc}
-        onError={handleErrorImage}
-        alt=""
-        role="presentation"
-      />
-      <div className="movie-card__content">
-        <h5 className="movie-card__title">{title}</h5>
-        <span className="movie-card__year">{releaseDate.slice(0, 4)}</span>
-      </div>
-      <p className="movie-card__genre">{genres[0]}</p>
+      <MovieCardPoster src={imgSrc} onError={handleErrorImage} alt="" role="presentation" />
+      <MovieCardContent>
+        <MovieCardTitle>{title}</MovieCardTitle>
+        <MovieCardYear>{releaseDate.slice(0, 4)}</MovieCardYear>
+      </MovieCardContent>
+      <MovieCardGenre>{genres[0]}</MovieCardGenre>
     </>
   );
 }

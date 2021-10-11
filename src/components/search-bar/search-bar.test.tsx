@@ -7,37 +7,40 @@ describe('Searchbar module', () => {
   it('should render component with correct title', () => {
     render(
       <SearchBar
-        filterValue=''
-        movie=''
+        filterValue=""
+        movie=""
         onSubmit={jest.fn()}
         onSearchMovie={jest.fn()}
-        onFilter={jest.fn()}/>
+        onFilter={jest.fn()}
+      />
     );
     expect(screen.getByText('Movie Finder')).toBeInTheDocument();
   });
 
   it('should have query text in input', () => {
-    const onSearchMovie = jest.fn()
+    const onSearchMovie = jest.fn();
     render(
       <SearchBar
-        filterValue=''
-        movie=''
+        filterValue=""
+        movie=""
         onSubmit={jest.fn()}
         onSearchMovie={onSearchMovie}
-        onFilter={jest.fn()}/>
-        );
-    userEvent.type(screen.getByPlaceholderText('Search...'), 'pulp fiction')
-    expect(onSearchMovie).toHaveBeenCalled()
+        onFilter={jest.fn()}
+      />
+    );
+    userEvent.type(screen.getByPlaceholderText('Search...'), 'pulp fiction');
+    expect(onSearchMovie).toHaveBeenCalled();
   });
 
   it('filter value with title should be defaultChecked', () => {
     render(
       <SearchBar
-        filterValue='title'
-        movie=''
+        filterValue="title"
+        movie=""
         onSubmit={jest.fn()}
         onSearchMovie={jest.fn()}
-        onFilter={jest.fn()}/>
+        onFilter={jest.fn()}
+      />
     );
     expect(screen.getByLabelText('title')).toBeChecked();
   });
@@ -45,40 +48,43 @@ describe('Searchbar module', () => {
   it('genre should not to be checked by default', () => {
     render(
       <SearchBar
-        filterValue='title'
-        movie=''
+        filterValue="title"
+        movie=""
         onSubmit={jest.fn()}
         onSearchMovie={jest.fn()}
-        onFilter={jest.fn()}/>
+        onFilter={jest.fn()}
+      />
     );
     expect(screen.getByLabelText('genre')).not.toBeChecked();
   });
 
   it('method onChange should be called on click', () => {
-    const onFilter = jest.fn()
+    const onFilter = jest.fn();
     render(
       <SearchBar
-        filterValue='title'
-        movie=''
+        filterValue="title"
+        movie=""
         onSubmit={jest.fn()}
         onSearchMovie={jest.fn()}
-        onFilter={onFilter}/>
+        onFilter={onFilter}
+      />
     );
     userEvent.click(screen.getAllByRole('radio')[1]);
     expect(onFilter).toHaveBeenCalled();
   });
 
   it('onSubmit should be called on click', () => {
-    const onSubmit = jest.fn(event => event.preventDefault())
+    const onSubmit = jest.fn((event) => event.preventDefault());
     render(
       <SearchBar
-        filterValue=''
-        movie=''
+        filterValue=""
+        movie=""
         onSubmit={onSubmit}
         onSearchMovie={jest.fn()}
-        onFilter={jest.fn()}/>
+        onFilter={jest.fn()}
+      />
     );
-      userEvent.click(screen.getByText('Search'));
-      expect(onSubmit).toHaveBeenCalled();
+    userEvent.click(screen.getByText('Search'));
+    expect(onSubmit).toHaveBeenCalled();
   });
 });

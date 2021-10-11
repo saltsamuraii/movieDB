@@ -1,48 +1,45 @@
 import React, { ChangeEvent, FormEvent } from 'react';
+import {
+  SearchFormButton,
+  SearchFormFilters,
+  SearchFormInput,
+  SearchFormLegendText,
+} from './search-bar.styled';
 import { RadioButton } from '../radio-button';
-import './search-bar.css';
 
 interface SearchBarProps {
-  filterValue: string,
-  movie: string,
-  onSubmit: (event: FormEvent<HTMLFormElement>) => void,
-  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => void,
-  onFilter: (event: ChangeEvent<HTMLInputElement>) => void
+  filterValue: string;
+  movie: string;
+  onSubmit: (event: FormEvent<HTMLFormElement>) => void;
+  onSearchMovie: (event: ChangeEvent<HTMLInputElement>) => void;
+  onFilter: (event: ChangeEvent<HTMLInputElement>) => void;
 }
 
-export default function SearchBar({ filterValue, movie, onSubmit, onSearchMovie, onFilter }: SearchBarProps) {
+export default function SearchBar({
+  filterValue,
+  movie,
+  onSubmit,
+  onSearchMovie,
+  onFilter,
+}: SearchBarProps) {
   return (
     <>
       <h1>Movie Finder</h1>
       <form onSubmit={onSubmit}>
-        <input
-          className="search-form__input"
+        <SearchFormInput
           value={movie}
           type="text"
           placeholder="Search..."
           onChange={onSearchMovie}
         />
-        <div className="search-form__filters">
+        <SearchFormFilters>
           <fieldset>
-            <legend className="search-form__legend-text">Search by</legend>
-            <RadioButton
-              className="search-form__radio__button"
-              value="title"
-              checked={filterValue === 'title'}
-              onChange={onFilter}
-            />
-            <RadioButton
-              className="search-form__radio__button"
-              value="genre"
-              checked={filterValue === 'genre'}
-              onChange={onFilter}
-            />
+            <SearchFormLegendText>Search by</SearchFormLegendText>
+            <RadioButton value="title" checked={filterValue === 'title'} onChange={onFilter} />
+            <RadioButton value="genre" checked={filterValue === 'genre'} onChange={onFilter} />
           </fieldset>
-          <button type="submit"
-                  className="search-form__button">
-            Search
-          </button>
-        </div>
+          <SearchFormButton type="submit">Search</SearchFormButton>
+        </SearchFormFilters>
       </form>
     </>
   );

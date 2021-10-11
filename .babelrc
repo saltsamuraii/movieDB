@@ -1,4 +1,29 @@
 {
+  "env": {
+    "development": {
+      "plugins": [
+        [
+          "babel-plugin-styled-components",
+          {
+            "displayName": true,
+            "minify": false
+          }
+        ]
+      ]
+    },
+    "production": {
+      "plugins": [
+        [
+          "babel-plugin-styled-components",
+          {
+            "displayName": false,
+            "minify": true,
+            "pure": true
+          }
+        ]
+      ]
+    }
+  },
   "presets": [
     "@babel/preset-env",
     "@babel/preset-react",

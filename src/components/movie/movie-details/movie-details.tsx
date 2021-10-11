@@ -1,11 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Redirect, useParams } from 'react-router-dom';
-import './movie-details.css';
-import { MoviesState } from '../../../redux/store/store';
 import { loadMovie } from '../../../redux/redux-helpers/load-movie';
 import { movieResetAction } from '../../../redux/action-creators/movie-action-creators';
 import { ROUTE } from '../../../enums/enum-routes';
+import { getMovie } from '../../../redux/selectors/movie-selector';
+import {
+  MovieDetailsContainer,
+  MovieDetailsPoster,
+  MovieDetailsContent,
+  MovieDetailsTitle,
+  MovieDetailsRating,
+  MovieDetailsGenre,
+  MovieDetailsYear,
+  MovieDetailsDuration,
+  MovieDetailsDescription,
+  MovieDetailsButton,
+} from './movie-details.styled';
 
 interface MovieId {
   movieId?: string;
@@ -17,7 +28,7 @@ interface MovieDetailsProps {
 
 export default function MovieDetails({ onBack }: MovieDetailsProps) {
   const [imageError, setImageError] = useState(true);
-  const movie = useSelector(({ movie: { data } }: MoviesState) => data);
+  const movie = useSelector(getMovie);
   const { movieId } = useParams<MovieId>();
   const dispatch = useDispatch();
 
@@ -58,25 +69,19 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
   const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 
   return (
-    <div className="movie-details__container">
-      <img
-        className="movie-details__poster"
-        src={imgSrc}
-        onError={handleErrorImage}
-        alt=""
-        role="presentation"
-      />
-      <div className="movie-details__content">
-        <span className="movie-details__title">{title}</span>
-        <span className="movie-details__rating">{voteAverage}</span>
-        <p className="movie-details__genre">{genres[0]}</p>
-        <span className="movie-details__year">{releaseDate.slice(0, 4)}</span>
-        <span className="movie-details__duration">{runtime} min</span>
-        <p className="movie-details__description">{overview}</p>
-        <button type="button" className="movie-details__button" onClick={onBack}>
+    <MovieDetailsContainer>
+      <MovieDetailsPoster src={imgSrc} onError={handleErrorImage} alt="" role="presentation" />
+      <MovieDetailsContent>
+        <MovieDetailsTitle>{title}</MovieDetailsTitle>
+        <MovieDetailsRating>{voteAverage}</MovieDetailsRating>
+        <MovieDetailsGenre>{genres[0]}</MovieDetailsGenre>
+        <MovieDetailsYear>{releaseDate.slice(0, 4)}</MovieDetailsYear>
+        <MovieDetailsDuration>{runtime} min</MovieDetailsDuration>
+        <MovieDetailsDescription>{overview}</MovieDetailsDescription>
+        <MovieDetailsButton type="button" onClick={onBack}>
           Return
-        </button>
-      </div>
-    </div>
+        </MovieDetailsButton>
+      </MovieDetailsContent>
+    </MovieDetailsContainer>
   );
 }
