@@ -12,9 +12,9 @@ export const parameters = {
   }
 };
 
-addDecorator((story) => (
+addDecorator((Story) => (
   <>
     <GlobalStyles/>
-    {story()}
+    <Story />
   </>
 ));
