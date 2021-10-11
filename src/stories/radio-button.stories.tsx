@@ -1,7 +1,6 @@
 import { Story } from '@storybook/react';
 import React from 'react';
 import { RadioButton } from '../components/radio-button';
-import { GlobalStyles } from '../components/app/app.styled';
 
 interface RadioButtonProps {
   value: string;
@@ -16,12 +15,7 @@ export default {
   },
 };
 
-const Template: Story<RadioButtonProps> = (args) => (
-  <>
-    <GlobalStyles />
-    <RadioButton {...args} />
-  </>
-);
+const Template: Story<RadioButtonProps> = (args) => <RadioButton {...args} />;
 
 export const RadioButtonComponent = Template.bind(RadioButton);
 

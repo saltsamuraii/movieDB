@@ -1,6 +1,5 @@
 import { Story } from '@storybook/react';
 import React, { ChangeEvent, FormEvent } from 'react';
-import { GlobalStyles } from '../components/app/app.styled';
 import { SearchBar } from '../components/search-bar';
 
 interface SearchBarProps {
@@ -19,12 +18,7 @@ export default {
   },
 };
 
-const Template: Story<SearchBarProps> = (args) => (
-  <>
-    <GlobalStyles />
-    <SearchBar {...args} />
-  </>
-);
+const Template: Story<SearchBarProps> = (args) => <SearchBar {...args} />;
 
 export const SearchBarInput = Template.bind(SearchBar);
 
