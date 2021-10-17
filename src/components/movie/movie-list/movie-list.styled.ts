@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 
 const Movies = styled.ul`
   display: flex;
@@ -21,4 +21,8 @@ const MovieCardLink = styled(Link)`
   color: inherit;
 `;
 
-export { Movies, MovieCardList, MovieCardLink };
+const MovieCardAnchor = styled.a`
+  text-decoration: none;
+`;
+
+export { Movies, MovieCardList, MovieCardLink, MovieCardAnchor };

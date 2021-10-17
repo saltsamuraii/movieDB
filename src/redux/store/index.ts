@@ -1,1 +1,1 @@
-export { moviesInitialState, movieInitialState } from './store';
+export { moviesInitialState, movieInitialState, store } from './store';

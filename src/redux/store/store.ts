@@ -3,6 +3,7 @@ import thunk from 'redux-thunk';
 import { Movie } from '../../components/movie/movie';
 import { movieLoadReducer, moviesReducer } from '../reducers';
 import { loggerMiddleware } from '../middleware/logger';
+import { movieInitialState, moviesInitialState } from '../initial-state';
 
 export interface MoviesState {
   movies: {
@@ -16,18 +17,6 @@ export interface MoviesState {
     data?: Movie;
   };
 }
-
-export const moviesInitialState = {
-  isLoading: false,
-  error: false,
-  data: [],
-};
-
-export const movieInitialState = {
-  isLoading: false,
-  error: false,
-  data: undefined,
-};
 
 const initialState: MoviesState = {
   movies: moviesInitialState,

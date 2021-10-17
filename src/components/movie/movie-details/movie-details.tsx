@@ -1,35 +1,28 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Redirect, useParams } from 'react-router-dom';
+import { useRouter } from 'next/router';
 import { loadMovie } from '../../../redux/redux-helpers/load-movie';
 import { movieResetAction } from '../../../redux/action-creators/movie-action-creators';
 import { ROUTE } from '../../../enums/enum-routes';
 import { getMovie } from '../../../redux/selectors/movie-selector';
 import {
-  MovieDetailsContainer,
-  MovieDetailsPoster,
-  MovieDetailsContent,
-  MovieDetailsTitle,
-  MovieDetailsRating,
-  MovieDetailsGenre,
-  MovieDetailsYear,
-  MovieDetailsDuration,
-  MovieDetailsDescription,
   MovieDetailsButton,
+  MovieDetailsContainer,
+  MovieDetailsContent,
+  MovieDetailsDescription,
+  MovieDetailsDuration,
+  MovieDetailsGenre,
+  MovieDetailsPoster,
+  MovieDetailsRating,
+  MovieDetailsTitle,
+  MovieDetailsYear,
 } from './movie-details.styled';
 
-interface MovieId {
-  movieId?: string;
-}
-
-interface MovieDetailsProps {
-  onBack: () => void;
-}
-
-export default function MovieDetails({ onBack }: MovieDetailsProps) {
+export default function MovieDetails() {
   const [imageError, setImageError] = useState(true);
   const movie = useSelector(getMovie);
-  const { movieId } = useParams<MovieId>();
+  const router = useRouter();
+  const { movieId } = router.query;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -47,12 +40,21 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
     setImageError(false);
   };
 
+  const handleBack = (): void => {
+    router.back();
+  };
+
+  useEffect(() => {
+    if (!movieId) {
+      router.push(ROUTE.NOT_FOUND);
+    }
+  }, [router, movieId]);
+
   if (!movie) {
     return null;
   }
 
   const {
-    id,
     poster_path: poster,
     vote_average: voteAverage,
     release_date: releaseDate,
@@ -61,10 +63,6 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
     runtime,
     overview,
   } = movie;
-
-  if (!id) {
-    return <Redirect to={ROUTE.NOT_FOUND} />;
-  }
 
   const imgSrc = !imageError ? 'https://allmovies.tube/assets/img/no-poster.png' : poster;
 
@@ -78,7 +76,7 @@ export default function MovieDetails({ onBack }: MovieDetailsProps) {
         <MovieDetailsYear>{releaseDate.slice(0, 4)}</MovieDetailsYear>
         <MovieDetailsDuration>{runtime} min</MovieDetailsDuration>
         <MovieDetailsDescription>{overview}</MovieDetailsDescription>
-        <MovieDetailsButton type="button" onClick={onBack}>
+        <MovieDetailsButton type="button" onClick={handleBack}>
           Return
         </MovieDetailsButton>
       </MovieDetailsContent>
