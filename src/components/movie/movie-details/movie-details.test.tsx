@@ -10,6 +10,13 @@ jest.mock('../../../helpers/resourсe', () => ({
   loadData: jest.fn(),
 }));
 
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    query: { movieId: 'Movie1' },
+    back: jest.fn(),
+  }),
+}));
+
 describe('MovieDetails component', () => {
   const mockedLoadData = mocked(loadData);
   mockedLoadData.mockImplementation(() =>
@@ -25,22 +32,22 @@ describe('MovieDetails component', () => {
     })
   );
 
-  it('should click button onBack if MovieDetails was called', async () => {
+  it('should click button onBack if MovieDetails was called', () => {
     const onBack = jest.fn();
-    renderWithStore(<MovieDetails onBack={onBack} />);
-    await waitFor(() => {
+    renderWithStore(<MovieDetails />);
+    waitFor(() => {
       userEvent.click(screen.getByText('Return'));
       expect(onBack).toHaveBeenCalled();
     });
   });
 
   it('MovieDetails not have been called if movieId undefined', () => {
-    const { container } = renderWithStore(<MovieDetails onBack={jest.fn()} />);
+    const { container } = renderWithStore(<MovieDetails />);
     expect(container).toBeEmptyDOMElement();
   });
 
   it('Movie poster have an errorImage backup url attribute', () => {
-    renderWithStore(<MovieDetails onBack={jest.fn()} />);
+    renderWithStore(<MovieDetails />);
     waitFor(() => {
       expect(screen.getByRole('img')).toHaveAttribute(
         'src',
