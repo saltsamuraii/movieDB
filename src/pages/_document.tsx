@@ -35,6 +35,7 @@ export default class MyDocument extends Document {
         <Head>
           <title>Movie Finder</title>
           <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+          <base href="/" />
         </Head>
         <body>
           <Main />
