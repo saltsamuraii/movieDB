@@ -15,10 +15,12 @@
       "plugins": [
         [
           "babel-plugin-styled-components",
+
           {
             "displayName": false,
             "minify": true,
-            "pure": true
+            "pure": true,
+            "ssr": true
           }
         ]
       ]

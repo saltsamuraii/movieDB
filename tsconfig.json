@@ -3,14 +3,29 @@
     "allowJs": false,
     "esModuleInterop": true,
     "moduleResolution": "Node",
-    "jsx": "react",
+    "jsx": "preserve",
     "strict": true,
-    "module": "es6",
+    "module": "esnext",
     "target": "es5",
-    "sourceMap": true
+    "sourceMap": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true
   },
   "exclude": [
     "coverage",
     "node_modules"
+  ],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx"
   ]
 }

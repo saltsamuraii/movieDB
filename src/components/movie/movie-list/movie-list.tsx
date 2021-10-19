@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { generatePath } from 'react-router-dom';
 import { MovieCard } from '../movie-card';
 import { ROUTE } from '../../../enums/enum-routes';
 import { getMovies, loading } from '../../../redux/selectors/movies-selector';
-import { Movies, MovieCardList, MovieCardLink } from './movie-list.styled';
+import { Movies, MovieCardList, MovieCardLink, MovieCardAnchor } from './movie-list.styled';
 
 export default function MovieList() {
   const movies = useSelector(getMovies);
@@ -17,8 +16,10 @@ export default function MovieList() {
     <Movies>
       {movies.map((movie) => (
         <MovieCardList key={movie.id}>
-          <MovieCardLink to={generatePath(ROUTE.MOVIE_DETAILS, { movieId: movie.id })}>
-            <MovieCard data={movie} />
+          <MovieCardLink href={{ pathname: ROUTE.MOVIE_DETAILS, query: { movieId: movie.id } }}>
+            <MovieCardAnchor>
+              <MovieCard data={movie} />
+            </MovieCardAnchor>
           </MovieCardLink>
         </MovieCardList>
       ))}

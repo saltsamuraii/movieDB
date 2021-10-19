@@ -1,6 +1,6 @@
 import { AnyAction } from 'redux';
 import { MOVIE_ERROR, MOVIE_LOAD, MOVIE_RESET, MOVIE_START } from '../action-creators';
-import { movieInitialState } from '../store';
+import { movieInitialState } from '../initial-state';
 
 export const movieLoadReducer = (state = movieInitialState, action: AnyAction) => {
   switch (action.type) {
