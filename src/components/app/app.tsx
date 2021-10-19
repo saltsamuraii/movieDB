@@ -37,12 +37,12 @@ export default function App() {
     setFilterValue(value);
   };
 
-  const handleSort = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
-    setSortValue(value);
-  };
-
   const handleSearchMovie = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
     setSearchMovie(value);
+  };
+
+  const handleSort = ({ target: { value } }: ChangeEvent<HTMLInputElement>): void => {
+    setSortValue(value);
   };
 
   return (
